@@ -9,7 +9,7 @@ public class Bot implements Serializable {
     private float activation_Time;
     private int company_id;
 
-    public Bot(int bot_id, float buy_Percentage, float activation_Time, int company_id) {
+    public Bot (int bot_id, float buy_Percentage, float activation_Time, int company_id) {
         this.bot_id = bot_id;
         this.buy_Percentage = buy_Percentage;
         this.activation_Time = activation_Time;
