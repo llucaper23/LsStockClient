@@ -3,22 +3,28 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
-public class LoginWindow extends JFrame {
+public class SignUpWindow extends JFrame {
 
-    private JLabel labelUsernameL = new JLabel("Username or email: ");
-    private JLabel labelPasswordL = new JLabel("Password: ");
-    private JLabel labelSignUp = new JLabel("Don't you have an account? ");
+    private JLabel labelUsernameS = new JLabel("Username: ");
+    private JLabel labelMailS = new JLabel("Email: ");
+    private JLabel labelPasswordS = new JLabel("Password: ");
+    private JLabel labelCheckPasswordS = new JLabel("Password confirmation: ");
 
     private JLabel logo ;
 
     private JTextField textUsernameL = new JTextField(20);
+    private JTextField textUsernameS = new JTextField(20);
+    private JTextField textMailS = new JTextField(20);
 
     private JPasswordField fieldPasswordL = new JPasswordField(20);
+    private JPasswordField fieldPasswordS = new JPasswordField(20);
+    private JPasswordField fieldCheckPasswordS = new JPasswordField(20);
+
 
     private JButton buttonLogin = new JButton("Log in");
-    private JButton buttonSignUp = new JButton("Sign up");
+    private JButton buttonSignup = new JButton("Sign up");
 
-    public LoginWindow () {
+    public SignUpWindow () {
 
         configureWindow();
 
@@ -33,17 +39,16 @@ public class LoginWindow extends JFrame {
         panelLogo.add(logo, BorderLayout.CENTER);
 
 
-        //####### LOGIN #################################################
+        //####### SIGNUP #################################################
 
         // create a new panel with GridBagLayout manager
-        JPanel panelLogin = new JPanel(new GridBagLayout());
+        JPanel panelSignup = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
         //constraints.insets = new Insets(10, 15, 10, 15);
 
-
-        //LOGIN
-        login(constraints, panelLogin);
+        //SIGN UP
+        signUp(constraints, panelSignup);
 
 
         //########################################################################
@@ -52,7 +57,7 @@ public class LoginWindow extends JFrame {
         Container contentBackground = getContentPane();
 
         contentBackground.add(panelLogo, BorderLayout.PAGE_START);
-        contentBackground.add(panelLogin, BorderLayout.CENTER);
+        contentBackground.add(panelSignup, BorderLayout.CENTER);
 
 
         pack();
@@ -71,48 +76,54 @@ public class LoginWindow extends JFrame {
 
     }
 
-    public void login (GridBagConstraints constraints, JPanel panelLogin) {
+
+    public void signUp (GridBagConstraints constraints, JPanel panelSignup) {
 
         constraints.insets = new Insets(20, 15, 10, 15);
 
         constraints.anchor = GridBagConstraints.WEST;
 
-        // add components to the panel
         constraints.gridx = 0;
-        constraints.gridy = 0;
-        panelLogin.add(labelUsernameL, constraints);
+        constraints.gridy = 1;
+        panelSignup.add(labelUsernameS, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 0;
-        panelLogin.add(textUsernameL, constraints);
+        constraints.gridy = 1;
+        panelSignup.add(textUsernameS, constraints);
 
         constraints.insets = new Insets(10, 15, 10, 15);
 
         constraints.gridx = 0;
-        constraints.gridy = 1;
-        panelLogin.add(labelPasswordL, constraints);
+        constraints.gridy = 2;
+        panelSignup.add(labelMailS, constraints);
 
         constraints.gridx = 1;
-        constraints.gridy = 1;
-        panelLogin.add(fieldPasswordL, constraints);
-
-        constraints.gridx = 0;
         constraints.gridy = 2;
-        constraints.gridwidth = 2;
-        constraints.anchor = GridBagConstraints.EAST;
-        panelLogin.add(buttonLogin, constraints);
+        panelSignup.add(textMailS, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
-        constraints.anchor = GridBagConstraints.CENTER;
-        panelLogin.add(labelSignUp, constraints);
+        panelSignup.add(labelPasswordS, constraints);
 
-        constraints.insets = new Insets(3, 15, 20, 15);
+        constraints.gridx = 1;
+        constraints.gridy = 3;
+        panelSignup.add(fieldPasswordS, constraints);
 
         constraints.gridx = 0;
         constraints.gridy = 4;
-        constraints.anchor = GridBagConstraints.CENTER;
-        panelLogin.add(buttonSignUp, constraints);
+        panelSignup.add(labelCheckPasswordS, constraints);
+
+        constraints.gridx = 1;
+        constraints.gridy = 4;
+        panelSignup.add(fieldCheckPasswordS, constraints);
+
+        constraints.insets = new Insets(10, 15, 20, 15);
+
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+        constraints.gridwidth = 5;
+        constraints.anchor = GridBagConstraints.EAST;
+        panelSignup.add(buttonSignup, constraints);
 
     }
 
@@ -128,7 +139,7 @@ public class LoginWindow extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new LoginWindow().setVisible(true);
+                new SignUpWindow().setVisible(true);
             }
         });
     }
