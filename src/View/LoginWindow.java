@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class LoginWindow extends JFrame {
 
-    private JLabel labelUsernameL = new JLabel("Username or email: ");
-    private JLabel labelPasswordL = new JLabel("Password: ");
+    private JLabel labelUsernameL = new JLabel("Username or email");
+    private JLabel labelPasswordL = new JLabel("Password");
     private JLabel labelSignUp = new JLabel("Don't you have an account? ");
 
     private JLabel logo ;
@@ -82,36 +82,40 @@ public class LoginWindow extends JFrame {
         constraints.gridy = 0;
         panelLogin.add(labelUsernameL, constraints);
 
-        constraints.gridx = 1;
-        constraints.gridy = 0;
+        constraints.insets = new Insets(0, 15, 5, 15);
+
+        constraints.gridx = 0;
+        constraints.gridy = 1;
         panelLogin.add(textUsernameL, constraints);
 
         constraints.insets = new Insets(10, 15, 10, 15);
 
         constraints.gridx = 0;
-        constraints.gridy = 1;
+        constraints.gridy = 2;
         panelLogin.add(labelPasswordL, constraints);
 
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        panelLogin.add(fieldPasswordL, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.gridwidth = 2;
-        constraints.anchor = GridBagConstraints.EAST;
-        panelLogin.add(buttonLogin, constraints);
+        constraints.insets = new Insets(0, 15, 5, 15);
 
         constraints.gridx = 0;
         constraints.gridy = 3;
-        constraints.anchor = GridBagConstraints.CENTER;
-        panelLogin.add(labelSignUp, constraints);
+        panelLogin.add(fieldPasswordL, constraints);
 
-        constraints.insets = new Insets(3, 15, 20, 15);
+        constraints.anchor = GridBagConstraints.CENTER;
+        constraints.insets = new Insets(10, 15, 10, 15);
 
         constraints.gridx = 0;
         constraints.gridy = 4;
-        constraints.anchor = GridBagConstraints.CENTER;
+        //constraints.gridwidth = 2;
+        panelLogin.add(buttonLogin, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 5;
+        panelLogin.add(labelSignUp, constraints);
+
+        constraints.insets = new Insets(3, 15, 30, 15);
+
+        constraints.gridx = 0;
+        constraints.gridy = 6;
         panelLogin.add(buttonSignUp, constraints);
 
     }

@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 import java.awt.*;
 
+//haurà de rebre el nom del usuari, el saldo actual i les accions que té de totes les empreses
 public class MyStocksWindow extends JFrame {
 
     private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
@@ -11,7 +12,7 @@ public class MyStocksWindow extends JFrame {
     private JLabel labelSaldoActual = new JLabel("Saldo actual : ");
     private JLabel labelAfegirSaldo = new JLabel("Afegir saldo : ");
 
-    private JLabel labelSaldo;
+    private JLabel labelTotalSaldo = new JLabel("12363");
 
     private JTextField textAfegirSaldo = new JTextField(20);
 
@@ -90,7 +91,7 @@ public class MyStocksWindow extends JFrame {
         panelInfo.add(panelTaula);
         panelInfo.add(panelProfile);
 
-        //
+
         panelMevaBorsa.add(panelInfo, BorderLayout.CENTER);
 
 
@@ -124,13 +125,11 @@ public class MyStocksWindow extends JFrame {
 
     private JLabel getSaldo () {
 
-        labelSaldo = new JLabel("12345");
+        Font font = labelTotalSaldo.getFont();
+        labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 16));
+        labelTotalSaldo.setForeground (Color.WHITE);
 
-        Font font = labelSaldo.getFont();
-        labelSaldo.setFont(font.deriveFont(Font.BOLD, 16));
-        labelSaldo.setForeground (Color.WHITE);
-
-        return labelSaldo;
+        return labelTotalSaldo;
     }
 
     private void saldoActual(GridBagConstraints constraints, JPanel panelSaldo) {
