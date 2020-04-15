@@ -1,9 +1,14 @@
-package view;
+package View;
+
+import Controller.LoginController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class LoginWindow extends JFrame {
+
+    private static String LOGIN = "LOGIN";
+    private static String GO_TO_REGISTER = "GO_TO_REGISTER";
 
     private JLabel labelUsernameL = new JLabel("Username or email");
     private JLabel labelPasswordL = new JLabel("Password");
@@ -26,7 +31,7 @@ public class LoginWindow extends JFrame {
 
         JPanel panelLogo = new JPanel(new BorderLayout());
 
-        ImageIcon iLogo = new ImageIcon("/Users/macbook/Documents/UNIVERSITAT/4T ENGINYERIA/DPO/S2 PROJECTE/LOGO.png");
+        ImageIcon iLogo = new ImageIcon("data/LOGO.png");
 
         logo = new JLabel(iLogo);
 
@@ -120,22 +125,11 @@ public class LoginWindow extends JFrame {
 
     }
 
-
-    public static void main(String[] args) {
-        // set look and feel to the system look and feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginWindow().setVisible(true);
-            }
-        });
+    public void registrarControlador(LoginController loginController) {
+        buttonLogin.setActionCommand(LOGIN);
+        buttonLogin.addActionListener(loginController);
+        buttonSignUp.setActionCommand(GO_TO_REGISTER);
+        buttonSignUp.addActionListener(loginController);
     }
-
 
 }

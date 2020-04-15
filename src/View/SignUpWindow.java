@@ -1,9 +1,13 @@
-package view;
+package View;
+
+import Controller.LoginController;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class SignUpWindow extends JFrame {
+
+    private static String REGISTER = "REGISTER";
 
     private JLabel labelUsernameS = new JLabel("Username");
     private JLabel labelMailS = new JLabel("Email");
@@ -12,16 +16,12 @@ public class SignUpWindow extends JFrame {
 
     private JLabel logo ;
 
-    private JTextField textUsernameL = new JTextField(20);
     private JTextField textUsernameS = new JTextField(20);
     private JTextField textMailS = new JTextField(20);
 
-    private JPasswordField fieldPasswordL = new JPasswordField(20);
     private JPasswordField fieldPasswordS = new JPasswordField(20);
     private JPasswordField fieldCheckPasswordS = new JPasswordField(20);
 
-
-    private JButton buttonLogin = new JButton("Log in");
     private JButton buttonSignup = new JButton("Sign up");
 
     public SignUpWindow () {
@@ -32,7 +32,7 @@ public class SignUpWindow extends JFrame {
 
         JPanel panelLogo = new JPanel(new BorderLayout());
 
-        ImageIcon iLogo = new ImageIcon("/Users/macbook/Documents/UNIVERSITAT/4T ENGINYERIA/DPO/S2 PROJECTE/LOGO.png");
+        ImageIcon iLogo = new ImageIcon("data/LOGO.png");
 
         logo = new JLabel(iLogo);
 
@@ -75,7 +75,6 @@ public class SignUpWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
-
 
     public void signUp (GridBagConstraints constraints, JPanel panelSignup) {
 
@@ -139,21 +138,22 @@ public class SignUpWindow extends JFrame {
 
     }
 
+    public void registrarControlador(LoginController loginController) {
+        buttonSignup.setActionCommand(REGISTER);
+        buttonSignup.addActionListener(loginController);
+    }
 
-    public static void main(String[] args) {
-        // set look and feel to the system look and feel
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new SignUpWindow().setVisible(true);
-            }
-        });
+    public String getName(){
+        return textUsernameS.getText();
+    }
+    public String getMail(){
+        return textMailS.getText();
+    }
+    public String getPassword(){
+        return String.valueOf(fieldPasswordS.getPassword());
+    }
+    public String getPasswordCheck(){
+        return String.valueOf(fieldCheckPasswordS.getPassword());
     }
 
 

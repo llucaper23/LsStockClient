@@ -9,13 +9,15 @@ public class User implements Serializable {
     private String email;
     private String password;
     private float money;
+    private boolean isLogged;
 
-    public User(int user_id, String nickName, String email, String password, float money) {
+    public User(int user_id, String nickName, String email, String password, float money, boolean isLogged) {
         this.user_id = user_id;
         this.nickName = nickName;
         this.email = email;
         this.password = password;
         this.money = money;
+        this.isLogged = isLogged;
     }
 
     public int getUser_id() {
@@ -58,12 +60,20 @@ public class User implements Serializable {
         this.money = money;
     }
 
+    public boolean isLogged() {
+        return isLogged;
+    }
+
+    public void setLogged(boolean logged) {
+        isLogged = logged;
+    }
+
     @Override
     public String toString() {
-        return user_id +
-                ", '" + nickName + '\'' +
-                ", '" + email + '\'' +
-                ", '" + password + '\'' +
-                ", " + money;
+        return nickName + '\'' +
+        ", '" + email + '\'' +
+        ", '" + password + '\'' +
+        ", " + money +
+        ", " + isLogged;
     }
 }
