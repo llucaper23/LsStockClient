@@ -29,8 +29,9 @@ public class LoginController implements ActionListener {
             case "LOGIN":
                 break;
             case "REGISTER":
-                if (signupView.getPassword().equals(signupView.getPasswordCheck()) && manager.comprovaPassword(signupView.getPassword())) {
-                    User user = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
+                User aux = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
+                if (manager.comprovaUser(aux)) {
+                    User user = aux;
                     //ok = network.registraUsuari(user); PROC PER REGISTRAR USUARI AMB EL SOCKET
                     if (ok) {
                         signupView.dispose();

@@ -13,7 +13,13 @@ public class Manager {
     public boolean comprovaPassword(String passwrod){
         Pattern p = Pattern.compile(regex, Pattern.MULTILINE);
         Matcher m = p.matcher(passwrod);
-        boolean ok = m.matches();
+        return m.matches();
+    }
+
+    public boolean comprovaUser(User user){
+        boolean ok = false;
+
+
         return ok;
     }
 
