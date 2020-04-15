@@ -2,7 +2,7 @@ package Controller;
 
 import Model.Manager;
 import Model.Network.Network;
-import Model.UserRegister;
+import Model.User;
 import View.LoginWindow;
 import View.SignUpWindow;
 
@@ -29,14 +29,14 @@ public class LoginController implements ActionListener {
             case "LOGIN":
                 break;
             case "REGISTER":
-                UserRegister userRegister = getInfoRegister();
-                System.out.print(userRegister.getName() + userRegister.getMail() + userRegister.getPassword());
-
-                if (userRegister != null){
-                    //ok = network.registraUsuari(userRegister); PROC PER REGISTRAR USUARI AMB EL SOCKET
+                if (signupView.getPassword().equals(signupView.getPasswordCheck()) && manager.comprovaPassword(signupView.getPassword())) {
+                    User user = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
+                    //ok = network.registraUsuari(user); PROC PER REGISTRAR USUARI AMB EL SOCKET
                     if (ok) {
                         signupView.dispose();
                         loginView.setVisible(true);
+                    } else {
+                        signupView.mostraMissatgeError("Error with the info introduced");
                     }
                 }
                 break;
@@ -48,19 +48,4 @@ public class LoginController implements ActionListener {
                 break;
         }
     }
-
-    private UserRegister getInfoRegister() {
-        UserRegister aux = new UserRegister();
-
-        aux.setName(signupView.getName());
-        aux.setMail(signupView.getMail());
-        aux.setPassword(signupView.getPassword());
-        aux.setPassword2(signupView.getPasswordCheck());
-
-        if (aux.getPassword().equals(aux.getPassword2()) && manager.comprovaPassword(aux.getPassword())){
-            return aux;
-        }
-        return null;
-    }
-
 }

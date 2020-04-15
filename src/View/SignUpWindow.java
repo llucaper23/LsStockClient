@@ -156,5 +156,7 @@ public class SignUpWindow extends JFrame {
         return String.valueOf(fieldCheckPasswordS.getPassword());
     }
 
-
+    public void mostraMissatgeError(String error){
+        JOptionPane.showMessageDialog(null, error);
+    }
 }
