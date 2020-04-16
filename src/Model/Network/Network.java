@@ -40,6 +40,7 @@ public class Network {
     public boolean registraUsuari(User user) {
         try {
             oos.write(REGISTER_REQUEST);
+            oos.flush();
             oos.writeObject(user);
             boolean infoOk = ois.readBoolean();
             if (!infoOk){

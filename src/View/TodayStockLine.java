@@ -58,7 +58,6 @@ public class TodayStockLine extends JFrame {
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(true);
-        setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }

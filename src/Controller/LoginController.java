@@ -50,8 +50,7 @@ public class LoginController implements ActionListener {
             case "REGISTER":
                 User aux1 = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
                 if (comprovaUser(aux1)) {
-                    User user1 = aux1;
-                    ok = network.registraUsuari(user1);
+                    ok = network.registraUsuari(aux1);
                     if (ok) {
                         signupView.dispose();
                         loginView.setVisible(true);
@@ -68,16 +67,11 @@ public class LoginController implements ActionListener {
     }
 
     public boolean comprovaUser(User user) {
-        boolean check = false;
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-        // El email a validar
-        String email = user.getEmail();
+        boolean check = true;
 
-        Matcher mather = pattern.matcher(email);
 
-        if (!mather.find()) {
+        if (!manager.checkEmail(user.getEmail())) {
             signupView.mostraMissatgeError("Mail not valid");
             check = false;
         }
@@ -94,7 +88,7 @@ public class LoginController implements ActionListener {
         if (check){
             user.setPassword(getMD5(signupView.getPassword()));
         }else{
-            signupView.mostraMissatgeError("Password not accomplish the requisits");
+            signupView.mostraMissatgeError("Password did not accomplish the requisits");
         }
         return check;
     }
