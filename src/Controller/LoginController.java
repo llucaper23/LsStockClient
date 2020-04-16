@@ -20,24 +20,32 @@ public class LoginController implements ActionListener {
     private SignUpWindow signupView;
     private LoginWindow loginView;
     private Manager manager;
-
     private boolean ok = true;
 
-    public LoginController(LoginWindow loginView, Manager manager) {
+    public LoginController(LoginWindow loginView, Manager manager, Network network) {
         this.loginView = loginView;
         this.manager = manager;
+        this.network = network;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
             case "LOGIN":
+                User aux = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
+                User user = network.loginUsuari(aux);
+                if (user != null) {
+                    loginView.dispose();
+                    //OBRIR FINESTRA PRINCIPAL
+                } else {
+
+                }
                 break;
             case "REGISTER":
-                User aux = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
-                if (comprovaUser(aux)) {
-                    User user = aux;
-                    //ok = network.registraUsuari(user); PROC PER REGISTRAR USUARI AMB EL SOCKET
+                User aux1 = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
+                if (comprovaUser(aux1)) {
+                    User user1 = aux1;
+                    ok = network.registraUsuari(user1);
                     if (ok) {
                         signupView.dispose();
                         loginView.setVisible(true);
@@ -82,7 +90,7 @@ public class LoginController implements ActionListener {
         if (check){
             user.setPassword(getMD5(signupView.getPassword()));
         }else{
-            signupView.mostraMissatgeError("Passwrod not accomplish the requisits");
+            signupView.mostraMissatgeError("Password not accomplish the requisits");
         }
         return check;
     }
