@@ -4,26 +4,18 @@ import java.io.Serializable;
 
 public class User implements Serializable {
     private static final long serialVersionUID = 12345L;
-    private int user_id;
     private String nickName;
     private String email;
     private String password;
     private float money;
+    private boolean isLogged;
 
-    public User(int user_id, String nickName, String email, String password, float money) {
-        this.user_id = user_id;
+    public User(String nickName, String email, String password, float money, boolean isLogged) {
         this.nickName = nickName;
         this.email = email;
         this.password = password;
         this.money = money;
-    }
-
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+        this.isLogged = isLogged;
     }
 
     public String getNickName() {
@@ -58,12 +50,20 @@ public class User implements Serializable {
         this.money = money;
     }
 
+    public boolean isLogged() {
+        return isLogged;
+    }
+
+    public void setLogged(boolean logged) {
+        isLogged = logged;
+    }
+
     @Override
     public String toString() {
-        return user_id +
-                ", '" + nickName + '\'' +
-                ", '" + email + '\'' +
-                ", '" + password + '\'' +
-                ", " + money;
+        return nickName + '\'' +
+        ", '" + email + '\'' +
+        ", '" + password + '\'' +
+        ", " + money +
+        ", " + isLogged;
     }
 }
