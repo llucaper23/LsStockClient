@@ -3,6 +3,7 @@ package Controller;
 import Model.Manager;
 import Model.Network.Network;
 import Model.User;
+import View.CompanyStocksWindow;
 import View.LoginWindow;
 import View.SignUpWindow;
 
@@ -18,12 +19,15 @@ public class LoginController implements ActionListener {
     private Network network;
 
     private SignUpWindow signupView;
+    private CompanyStocksWindow companyStocksView;
     private LoginWindow loginView;
     private Manager manager;
     private boolean ok = true;
 
-    public LoginController(LoginWindow loginView, Manager manager, Network network) {
+    public LoginController(SignUpWindow signUpWindow, LoginWindow loginView, CompanyStocksWindow companyStocksView, Manager manager, Network network) {
+        this.signupView = signUpWindow;
         this.loginView = loginView;
+        this.companyStocksView = companyStocksView;
         this.manager = manager;
         this.network = network;
     }
@@ -32,13 +36,15 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
             case "LOGIN":
-                User aux = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
+                User aux = new User(signupView.getName(), signupView.getMail(), getMD5(signupView.getPassword()), 0, false);
                 User user = network.loginUsuari(aux);
                 if (user != null) {
                     loginView.dispose();
                     //OBRIR FINESTRA PRINCIPAL
-                } else {
+                    companyStocksView.setVisible(true);
 
+                } else {
+                    System.out.println("error");
                 }
                 break;
             case "REGISTER":
@@ -56,8 +62,6 @@ public class LoginController implements ActionListener {
                 break;
             case "GO_TO_REGISTER":
                 loginView.dispose();
-                signupView = new SignUpWindow();
-                signupView.registrarControlador(this);
                 signupView.setVisible(true);
                 break;
         }

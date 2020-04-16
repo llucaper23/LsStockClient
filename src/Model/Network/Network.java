@@ -43,7 +43,7 @@ public class Network {
             oos.writeObject(user);
             boolean infoOk = ois.readBoolean();
             if (!infoOk){
-                String error = "Error to register";
+                System.out.println("Error to register");
                 return false;
             }else{
                 System.out.println("Register Succesful!");
@@ -62,7 +62,7 @@ public class Network {
             oos.writeObject(user);
             boolean loginOk = ois.readBoolean();
             if (!loginOk){
-                String error = "Error to login";
+                System.out.println("Error to login");
                 return null;
             }else{
                 try {
