@@ -36,11 +36,16 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
             case "LOGIN":
-                User aux = new User(loginView.getName(), "", getMD5(loginView.getPassword()), 0, false);
+                User aux;
+                if (loginView.isMail()){
+                    aux = new User("", loginView.getName(), getMD5(loginView.getPassword()), 0, false);
+
+                }else {
+                    aux = new User(loginView.getName(), "", getMD5(loginView.getPassword()), 0, false);
+                }
                 User user = network.loginUsuari(aux);
                 if (user != null) {
                     loginView.dispose();
-                    //OBRIR FINESTRA PRINCIPAL
                     companyStocksView.setVisible(true);
 
                 } else {

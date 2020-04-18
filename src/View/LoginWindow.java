@@ -124,6 +124,14 @@ public class LoginWindow extends JFrame {
 
     }
 
+    public boolean isMail(){
+        if(textUsernameL.getText().contains("@")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public String getName(){
         return textUsernameL.getText();
     }
