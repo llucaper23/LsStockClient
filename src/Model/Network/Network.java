@@ -60,17 +60,15 @@ public class Network {
     public User loginUsuari(User user){
         try {
             oos.write(LOGIN_REQUEST);
+            oos.flush();
             oos.writeObject(user);
+            oos.flush();
             boolean loginOk = ois.readBoolean();
             if (!loginOk){
                 System.out.println("Error to login");
                 return null;
             }else{
-                try {
-                    return (User) ois.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+                return user;
             }
         }catch (IOException e){
             e.printStackTrace();
