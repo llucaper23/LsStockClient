@@ -49,6 +49,7 @@ public class LoginController implements ActionListener {
                     companyStocksView.setVisible(true);
                 } else {
                     System.out.println("error");
+                    loginView.mostraMissatgeError("Error al fer el LogIn");
                 }
                 break;
             case "REGISTER":

@@ -147,4 +147,8 @@ public class LoginWindow extends JFrame {
         buttonSignUp.addActionListener(loginController);
     }
 
+    public void mostraMissatgeError(String error){
+        JOptionPane.showMessageDialog(null, error);
+    }
+
 }
