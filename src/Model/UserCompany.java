@@ -2,7 +2,7 @@ package Model;
 
 import java.io.Serializable;
 
-public class User_Company implements Serializable {
+public class UserCompany implements Serializable {
     private static final long serialVersionUID = 12345L;
     private int user_company_id;
     private int user_id;
@@ -10,7 +10,7 @@ public class User_Company implements Serializable {
     private int quantity;
     private float buy_price;
 
-    public User_Company(int user_company_id, int user_id, int company_id, int quantity, float buy_price) {
+    public UserCompany(int user_company_id, int user_id, int company_id, int quantity, float buy_price) {
         this.user_company_id = user_company_id;
         this.user_id = user_id;
         this.company_id = company_id;

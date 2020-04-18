@@ -10,7 +10,7 @@ public class LoginWindow extends JFrame {
     private static String LOGIN = "LOGIN";
     private static String GO_TO_REGISTER = "GO_TO_REGISTER";
 
-    private JLabel labelUsernameL = new JLabel("Username");
+    private JLabel labelUsernameL = new JLabel("Username or Email");
     private JLabel labelPasswordL = new JLabel("Password");
     private JLabel labelSignUp = new JLabel("Don't you have an account? ");
 
