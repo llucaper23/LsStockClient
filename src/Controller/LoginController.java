@@ -36,7 +36,7 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
             case "LOGIN":
-                User aux = new User(signupView.getName(), signupView.getMail(), getMD5(signupView.getPassword()), 0, false);
+                User aux = new User(loginView.getName(), "", getMD5(loginView.getPassword()), 0, false);
                 User user = network.loginUsuari(aux);
                 if (user != null) {
                     loginView.dispose();

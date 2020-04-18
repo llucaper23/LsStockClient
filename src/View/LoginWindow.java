@@ -124,6 +124,13 @@ public class LoginWindow extends JFrame {
 
     }
 
+    public String getName(){
+        return textUsernameL.getText();
+    }
+    public String getPassword(){
+        return String.valueOf(fieldPasswordL.getPassword());
+    }
+
     public void registrarControlador(LoginController loginController) {
         buttonLogin.setActionCommand(LOGIN);
         buttonLogin.addActionListener(loginController);
