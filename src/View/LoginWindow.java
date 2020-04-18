@@ -135,6 +135,7 @@ public class LoginWindow extends JFrame {
     public String getName(){
         return textUsernameL.getText();
     }
+
     public String getPassword(){
         return String.valueOf(fieldPasswordL.getPassword());
     }

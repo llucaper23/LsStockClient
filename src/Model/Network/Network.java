@@ -68,9 +68,9 @@ public class Network {
                 System.out.println("Error to login");
                 return null;
             }else{
-                return user;
+                return (User) ois.readObject();
             }
-        }catch (IOException e){
+        }catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
         return null;
