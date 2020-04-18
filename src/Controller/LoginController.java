@@ -47,7 +47,6 @@ public class LoginController implements ActionListener {
                 if (user != null) {
                     loginView.dispose();
                     companyStocksView.setVisible(true);
-
                 } else {
                     System.out.println("error");
                 }
@@ -74,7 +73,6 @@ public class LoginController implements ActionListener {
     public boolean comprovaUser(User user) {
 
         boolean check = true;
-
 
         if (!manager.checkEmail(user.getEmail())) {
             signupView.mostraMissatgeError("Mail not valid");
