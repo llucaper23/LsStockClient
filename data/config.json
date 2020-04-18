@@ -1,4 +1,4 @@
 {
-  "SERVER_IP": "localhost",
-  "SERVER_PORT": 34567
+  "serverIp": "localhost",
+  "serverPort": 34567
 }
