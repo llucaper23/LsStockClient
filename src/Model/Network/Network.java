@@ -2,7 +2,10 @@ package Model.Network;
 
 
 import Model.User;
+import com.google.gson.Gson;
+import com.google.gson.stream.JsonReader;
 
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -25,10 +28,22 @@ public class Network {
     private static final int LOGOUT = 9;
 
     private boolean running;
+    private NetworkConfiguration nc;
 
     public Network() {
+        Gson gson = new Gson();
+        String path = "data/config.json";
+
+        //llegim JSON
         try {
-            socket = new Socket("localhost", 34567);
+            JsonReader reader = new JsonReader(new FileReader(path));
+            this.nc = gson.fromJson(reader, NetworkConfiguration.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            socket = new Socket(nc.getServerIp(), nc.getServerPort());
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
@@ -40,10 +55,11 @@ public class Network {
     public boolean registraUsuari(User user) {
         try {
             oos.write(REGISTER_REQUEST);
+            oos.flush();
             oos.writeObject(user);
             boolean infoOk = ois.readBoolean();
             if (!infoOk){
-                String error = "Error to register";
+                System.out.println("Error to register");
                 return false;
             }else{
                 System.out.println("Register Succesful!");
@@ -59,19 +75,17 @@ public class Network {
     public User loginUsuari(User user){
         try {
             oos.write(LOGIN_REQUEST);
+            oos.flush();
             oos.writeObject(user);
+            oos.flush();
             boolean loginOk = ois.readBoolean();
             if (!loginOk){
-                String error = "Error to login";
+                System.out.println("Error to login");
                 return null;
             }else{
-                try {
-                    return (User) ois.readObject();
-                } catch (ClassNotFoundException e) {
-                    e.printStackTrace();
-                }
+                return (User) ois.readObject();
             }
-        }catch (IOException e){
+        }catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
         }
         return null;

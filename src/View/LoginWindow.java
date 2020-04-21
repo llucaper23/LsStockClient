@@ -10,7 +10,7 @@ public class LoginWindow extends JFrame {
     private static String LOGIN = "LOGIN";
     private static String GO_TO_REGISTER = "GO_TO_REGISTER";
 
-    private JLabel labelUsernameL = new JLabel("Username or email");
+    private JLabel labelUsernameL = new JLabel("Username or Email");
     private JLabel labelPasswordL = new JLabel("Password");
     private JLabel labelSignUp = new JLabel("Don't you have an account? ");
 
@@ -71,7 +71,6 @@ public class LoginWindow extends JFrame {
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(false);
-        setVisible(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
@@ -125,11 +124,31 @@ public class LoginWindow extends JFrame {
 
     }
 
+    public boolean isMail(){
+        if(textUsernameL.getText().contains("@")){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public String getName(){
+        return textUsernameL.getText();
+    }
+
+    public String getPassword(){
+        return String.valueOf(fieldPasswordL.getPassword());
+    }
+
     public void registrarControlador(LoginController loginController) {
         buttonLogin.setActionCommand(LOGIN);
         buttonLogin.addActionListener(loginController);
         buttonSignUp.setActionCommand(GO_TO_REGISTER);
         buttonSignUp.addActionListener(loginController);
+    }
+
+    public void mostraMissatgeError(String error){
+        JOptionPane.showMessageDialog(null, error);
     }
 
 }

@@ -3,6 +3,7 @@ package Controller;
 import Model.Manager;
 import Model.Network.Network;
 import Model.User;
+import View.CompanyStocksWindow;
 import View.LoginWindow;
 import View.SignUpWindow;
 
@@ -18,12 +19,15 @@ public class LoginController implements ActionListener {
     private Network network;
 
     private SignUpWindow signupView;
+    private CompanyStocksWindow companyStocksView;
     private LoginWindow loginView;
     private Manager manager;
     private boolean ok = true;
 
-    public LoginController(LoginWindow loginView, Manager manager, Network network) {
+    public LoginController(SignUpWindow signUpWindow, LoginWindow loginView, CompanyStocksWindow companyStocksView, Manager manager, Network network) {
+        this.signupView = signUpWindow;
         this.loginView = loginView;
+        this.companyStocksView = companyStocksView;
         this.manager = manager;
         this.network = network;
     }
@@ -32,20 +36,26 @@ public class LoginController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
             case "LOGIN":
-                User aux = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
+                User aux;
+                if (loginView.isMail()){
+                    aux = new User("", loginView.getName(), getMD5(loginView.getPassword()), 0, false);
+
+                }else {
+                    aux = new User(loginView.getName(), "", getMD5(loginView.getPassword()), 0, false);
+                }
                 User user = network.loginUsuari(aux);
                 if (user != null) {
                     loginView.dispose();
-                    //OBRIR FINESTRA PRINCIPAL
+                    companyStocksView.setVisible(true);
                 } else {
-
+                    System.out.println("error");
+                    loginView.mostraMissatgeError("Error al fer el LogIn");
                 }
                 break;
             case "REGISTER":
                 User aux1 = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
                 if (comprovaUser(aux1)) {
-                    User user1 = aux1;
-                    ok = network.registraUsuari(user1);
+                    ok = network.registraUsuari(aux1);
                     if (ok) {
                         signupView.dispose();
                         loginView.setVisible(true);
@@ -56,24 +66,16 @@ public class LoginController implements ActionListener {
                 break;
             case "GO_TO_REGISTER":
                 loginView.dispose();
-                signupView = new SignUpWindow();
-                signupView.registrarControlador(this);
                 signupView.setVisible(true);
                 break;
         }
     }
 
     public boolean comprovaUser(User user) {
-        boolean check = false;
-        Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
 
-        // El email a validar
-        String email = user.getEmail();
+        boolean check = true;
 
-        Matcher mather = pattern.matcher(email);
-
-        if (!mather.find()) {
+        if (!manager.checkEmail(user.getEmail())) {
             signupView.mostraMissatgeError("Mail not valid");
             check = false;
         }
@@ -90,7 +92,7 @@ public class LoginController implements ActionListener {
         if (check){
             user.setPassword(getMD5(signupView.getPassword()));
         }else{
-            signupView.mostraMissatgeError("Password not accomplish the requisits");
+            signupView.mostraMissatgeError("Password did not accomplish the requisits");
         }
         return check;
     }

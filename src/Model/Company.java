@@ -4,44 +4,44 @@ import java.io.Serializable;
 
 public class Company implements Serializable {
     private static final long serialVersionUID = 12345L;
-    private int company_id;
-    private String company_name;
-    private float share_price;
+    private int companyId;
+    private String companyName;
+    private float sharePrice;
 
-    public Company(int company_id, String company_name, float share_price) {
-        this.company_id = company_id;
-        this.company_name = company_name;
-        this.share_price = share_price;
+    public Company(int companyId, String companyName, float sharePrice) {
+        this.companyId = companyId;
+        this.companyName = companyName;
+        this.sharePrice = sharePrice;
     }
 
-    public int getCompany_id() {
-        return company_id;
+    public int getCompanyId() {
+        return companyId;
     }
 
-    public void setCompany_id(int company_id) {
-        this.company_id = company_id;
+    public void setCompanyId(int companyId) {
+        this.companyId = companyId;
     }
 
-    public String getCompany_name() {
-        return company_name;
+    public String getCompanyName() {
+        return companyName;
     }
 
-    public void setCompany_name(String company_name) {
-        this.company_name = company_name;
+    public void setCompanyName(String companyName) {
+        this.companyName = companyName;
     }
 
-    public float getShare_price() {
-        return share_price;
+    public float getSharePrice() {
+        return sharePrice;
     }
 
-    public void setShare_price(float share_price) {
-        this.share_price = share_price;
+    public void setSharePrice(float sharePrice) {
+        this.sharePrice = sharePrice;
     }
 
     @Override
     public String toString() {
-        return company_id +
-                ", '" + company_name + '\'' +
-                ", " + share_price;
+        return companyId +
+                ", '" + companyName + '\'' +
+                ", " + sharePrice;
     }
 }
