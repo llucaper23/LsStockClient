@@ -16,6 +16,7 @@ public class CompanyStocksWindow extends JFrame {
 
     private JButton buttonComprarAccions = new JButton("COMPRAR ACCIONS");
     private JButton buttonVendreAccions = new JButton("VENDRE ACCIONS");
+    private JButton buttonLogOut = new JButton("LOG OUT");
 
     private JTextField textComprarAccions = new JTextField(10);
     private JTextField textVendreAccions = new JTextField(10);
@@ -71,14 +72,24 @@ public class CompanyStocksWindow extends JFrame {
         panelSA.add(labelSaldoActual);
         panelSA.add(labelTotalSaldo);
 
+        panelShares.add(labelSharePrice);
+        panelShares.add(Box.createRigidArea(new Dimension(10,40)));
+        panelShares.add(panelCA);
+        panelShares.add(Box.createRigidArea(new Dimension(10,10)));
+        panelShares.add(panelVA);
+        panelShares.add(Box.createRigidArea(new Dimension(10,30)));
+
         panelShares.add(panelSA);
+        panelShares.add(buttonLogOut);
 
 
         //panelGraficEspelmes - ara mateix hi ha una taula que s'haura de canviar pel gràfic
 
         JPanel panelGraficEspelmes = new JPanel();
-        JScrollPane scrollPane = new JScrollPane(table);
+        panelGraficEspelmes.setLayout(new BoxLayout(panelGraficEspelmes, BoxLayout.X_AXIS));
+        panelGraficEspelmes.setBackground(Color.BLACK);
 
+        JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.getViewport().setBackground(Color.WHITE);
 
         panelGraficEspelmes.add(scrollPane);
@@ -86,8 +97,9 @@ public class CompanyStocksWindow extends JFrame {
 
         //panelInfo
 
-        JPanel panelInfo = new JPanel();
-        panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.X_AXIS));
+        JPanel panelInfo = new JPanel( new FlowLayout());
+
+        panelInfo.setBackground(Color.BLACK);
 
         panelInfo.add(panelGraficEspelmes);
         panelInfo.add(panelShares);
