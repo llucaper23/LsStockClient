@@ -16,7 +16,7 @@ public class MyStocksWindow extends JFrame {
     private JLabel labelSaldoActual = new JLabel("Saldo actual : ");
     private JLabel labelAfegirSaldo = new JLabel("Afegir saldo : ");
 
-    private JLabel labelTotalSaldo = new JLabel("12363");
+    private JLabel labelTotalSaldo = new JLabel(" ");
 
     private JTextField textAfegirSaldo = new JTextField(20);
 
@@ -182,6 +182,9 @@ public class MyStocksWindow extends JFrame {
 
     }
 
+    public float getSaldoAfegir(){
+        return Float.valueOf(textAfegirSaldo.getText());
+    }
 
     private void configureView () {
 

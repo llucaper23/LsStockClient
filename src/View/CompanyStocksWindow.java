@@ -118,6 +118,14 @@ public class CompanyStocksWindow extends JFrame {
 
     }
 
+    public int getNumAccionsComprar() {
+        return Integer.valueOf(textComprarAccions.getText());
+    }
+
+    public int getNumAccionsVendre() {
+        return Integer.valueOf(textVendreAccions.getText());
+    }
+
     private void configureView () {
 
         setSize(900,500);
