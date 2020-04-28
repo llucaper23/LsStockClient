@@ -9,6 +9,8 @@ import java.awt.*;
 public class MyStocksWindow extends JFrame {
 
     private static String LOGOUT = "LOGOUT";
+    private static String BACK = "BACKMYSTOCK";
+
 
     private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
@@ -206,5 +208,7 @@ public class MyStocksWindow extends JFrame {
     public void registraControlador(PrincipalController principalController) {
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);
+        buttonBack.setActionCommand(BACK);
+        buttonBack.addActionListener(principalController);
     }
 }
