@@ -6,6 +6,7 @@ import Model.User;
 import View.CompanyStocksWindow;
 import View.LoginWindow;
 import View.SignUpWindow;
+import View.TodayStockWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,15 +20,15 @@ public class LoginController implements ActionListener {
     private Network network;
 
     private SignUpWindow signupView;
-    private CompanyStocksWindow companyStocksView;
+    private TodayStockWindow todayStockWindow;
     private LoginWindow loginView;
     private Manager manager;
     private boolean ok = true;
 
-    public LoginController(SignUpWindow signUpWindow, LoginWindow loginView, CompanyStocksWindow companyStocksView, Manager manager, Network network) {
+    public LoginController(SignUpWindow signUpWindow, LoginWindow loginView, TodayStockWindow todayStockWindow, Manager manager, Network network) {
         this.signupView = signUpWindow;
         this.loginView = loginView;
-        this.companyStocksView = companyStocksView;
+        this.todayStockWindow = todayStockWindow;
         this.manager = manager;
         this.network = network;
     }
@@ -46,7 +47,7 @@ public class LoginController implements ActionListener {
                 User user = network.loginUsuari(aux);
                 if (user != null) {
                     loginView.dispose();
-                    companyStocksView.setVisible(true);
+                    todayStockWindow.setVisible(true);
                 } else {
                     System.out.println("error");
                     loginView.mostraMissatgeError("Error al fer el LogIn");

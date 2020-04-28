@@ -9,6 +9,7 @@ import java.awt.*;
 
 public class TodayStockWindow extends JFrame {
 
+    private static String MYACTIONS = "MYACTIONS";
     private static String LOGOUT = "LOGOUT";
 
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
@@ -72,5 +73,7 @@ public class TodayStockWindow extends JFrame {
     public void registraControlador(PrincipalController principalController) {
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);
+        buttonMevaBorsa.setActionCommand(MYACTIONS);
+        buttonMevaBorsa.addActionListener(principalController);
     }
 }

@@ -13,7 +13,7 @@ public class Main {
         TodayStockWindow todayStockWindow = new TodayStockWindow();
         Manager manager = new Manager();
         Network network = new Network();
-        LoginController loginController = new LoginController(signUpWindow, loginView, companyStocksView, manager, network);
+        LoginController loginController = new LoginController(signUpWindow, loginView, todayStockWindow, manager, network);
         PrincipalController principalController = new PrincipalController(network, loginView, companyStocksView, manager, myStocksWindow, todayStockWindow);
 
         signUpWindow.registrarControlador(loginController);
