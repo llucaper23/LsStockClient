@@ -1,10 +1,14 @@
 package View;
 
+import Controller.PrincipalController;
+
 import javax.swing.*;
 import java.awt.*;
 
 //haurà de rebre el nom del usuari, el saldo actual i les accions que té de totes les empreses
 public class MyStocksWindow extends JFrame {
+
+    private static String LOGOUT = "LOGOUT";
 
     private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
@@ -189,4 +193,8 @@ public class MyStocksWindow extends JFrame {
 
     }
 
+    public void registraControlador(PrincipalController principalController) {
+        buttonLogOut.setActionCommand(LOGOUT);
+        buttonLogOut.addActionListener(principalController);
+    }
 }

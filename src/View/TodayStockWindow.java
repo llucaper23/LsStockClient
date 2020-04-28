@@ -1,11 +1,15 @@
 package View;
 
+import Controller.PrincipalController;
+
 import javax.swing.*;
 import java.awt.*;
 
 //se li ha de passar tota la info de les diferents accions de totes les empreses, i també el saldo actual de l'usuari
 
 public class TodayStockWindow extends JFrame {
+
+    private static String LOGOUT = "LOGOUT";
 
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
     private JLabel labelTotalSaldo = new JLabel(" ");
@@ -65,4 +69,8 @@ public class TodayStockWindow extends JFrame {
 
     }
 
+    public void registraControlador(PrincipalController principalController) {
+        buttonLogOut.setActionCommand(LOGOUT);
+        buttonLogOut.addActionListener(principalController);
+    }
 }

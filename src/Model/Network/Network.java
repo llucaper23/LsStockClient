@@ -27,7 +27,6 @@ public class Network {
     private static final int COMPANY_DETAIL = 8;
     private static final int LOGOUT = 9;
 
-    private boolean running;
     private NetworkConfiguration nc;
 
     public Network() {
@@ -89,6 +88,15 @@ public class Network {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void logout(){
+        try {
+            oos.write(LOGOUT);
+            oos.flush();
+        }catch (IOException e){
+            e.printStackTrace();
+        }
     }
 
 }

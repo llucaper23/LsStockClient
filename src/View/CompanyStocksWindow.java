@@ -1,5 +1,7 @@
 package View;
 
+import Controller.PrincipalController;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -8,6 +10,7 @@ import java.awt.*;
 
 public class CompanyStocksWindow extends JFrame {
 
+    private static String LOGOUT = "LOGOUT";
 
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
@@ -113,7 +116,6 @@ public class CompanyStocksWindow extends JFrame {
 
         this.add(panelBackground);
 
-
     }
 
     private void configureView () {
@@ -126,5 +128,8 @@ public class CompanyStocksWindow extends JFrame {
 
     }
 
-
+    public void registraControlador(PrincipalController principalController){
+        buttonLogOut.setActionCommand(LOGOUT);
+        buttonLogOut.addActionListener(principalController);
+    }
 }
