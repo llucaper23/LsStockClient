@@ -141,5 +141,9 @@ public class CompanyStocksWindow extends JFrame {
     public void registraControlador(PrincipalController principalController){
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);
+        buttonComprarAccions.setActionCommand(COMPRARACCIONS);
+        buttonComprarAccions.addActionListener(principalController);
+        buttonVendreAccions.setActionCommand(VENDREACCIONS);
+        buttonVendreAccions.addActionListener(principalController);
     }
 }
