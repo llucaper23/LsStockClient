@@ -20,6 +20,7 @@ public class CompanyStocksWindow extends JFrame {
     private JButton buttonComprarAccions = new JButton("COMPRAR ACCIONS");
     private JButton buttonVendreAccions = new JButton("VENDRE ACCIONS");
     private JButton buttonLogOut = new JButton("LOG OUT");
+    private JButton buttonBack = new JButton("BACK");
 
     private JTextField textComprarAccions = new JTextField(10);
     private JTextField textVendreAccions = new JTextField(10);
@@ -84,6 +85,7 @@ public class CompanyStocksWindow extends JFrame {
 
         panelShares.add(panelSA);
         panelShares.add(buttonLogOut);
+        panelShares.add(buttonBack);
 
 
         //panelGraficEspelmes - ara mateix hi ha una taula que s'haura de canviar pel gràfic

@@ -22,6 +22,7 @@ public class MyStocksWindow extends JFrame {
 
     private JButton buttonAfegirSaldo = new JButton("Afegeix");
     private JButton buttonLogOut = new JButton("LOG OUT");
+    private JButton buttonBack = new JButton("BACK");
 
     JTable table = new JTable(4, 4);
 
@@ -177,6 +178,12 @@ public class MyStocksWindow extends JFrame {
         constraints.gridx = 0;
         constraints.gridy = 3;
         constraints.gridwidth = 3;
+        constraints.anchor = GridBagConstraints.CENTER;
+        panelSaldo.add(buttonBack, constraints);
+
+        constraints.gridx = 0;
+        constraints.gridy = 4;
+        constraints.gridwidth = 4;
         constraints.anchor = GridBagConstraints.CENTER;
         panelSaldo.add(buttonLogOut, constraints);
 

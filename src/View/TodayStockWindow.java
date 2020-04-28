@@ -17,6 +17,7 @@ public class TodayStockWindow extends JFrame {
 
     private JButton buttonMevaBorsa = new JButton("LA MEVA BORSA");
     private JButton buttonLogOut = new JButton("LOG OUT");
+    private JButton buttonBack = new JButton("BACK");
 
     JTable table = new JTable(2, 4);
 
@@ -48,6 +49,7 @@ public class TodayStockWindow extends JFrame {
         JPanel panelCentral = new JPanel();
         panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
 
+        panelCentral.add(buttonBack);
         panelCentral.add(panelShares);
         panelCentral.add(buttonMevaBorsa);
         panelCentral.add(panelSaldo);
