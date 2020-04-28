@@ -11,6 +11,8 @@ import java.awt.*;
 public class CompanyStocksWindow extends JFrame {
 
     private static String LOGOUT = "LOGOUT";
+    private static String COMPRARACCIONS = "COMPRARACCIONS";
+    private static String VENDREACCIONS = "VENDREACCIONS";
 
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
