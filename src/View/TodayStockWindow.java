@@ -10,7 +10,7 @@ public class TodayStockWindow extends JFrame {
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
     private JLabel labelTotalSaldo = new JLabel(" ");
 
-    private JButton buttonComprarAccions = new JButton("LA MEVA BORSA");
+    private JButton buttonMevaBorsa = new JButton("LA MEVA BORSA");
 
     JTable table = new JTable(2, 4);
 
@@ -41,7 +41,7 @@ public class TodayStockWindow extends JFrame {
         panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
 
         panelCentral.add(panelShares);
-        panelCentral.add(buttonComprarAccions);
+        panelCentral.add(buttonMevaBorsa);
         panelCentral.add(panelSaldo);
 
         //"COLLAGE"

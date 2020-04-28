@@ -8,7 +8,7 @@ public class MyStocksWindow extends JFrame {
 
     private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
-    private JLabel labelProfileName = new JLabel("USER ");
+    private JLabel labelProfileName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("Saldo actual : ");
     private JLabel labelAfegirSaldo = new JLabel("Afegir saldo : ");
 
@@ -45,7 +45,7 @@ public class MyStocksWindow extends JFrame {
         panelProfile.setLayout(new BoxLayout(panelProfile, BoxLayout.Y_AXIS));
         panelProfile.setBackground(Color.BLACK);
 
-        labelProfileName = new JLabel(getProfileName()) ;
+        labelProfileName.setText("USER");
         Font font = labelProfileName.getFont();
         labelProfileName.setFont(font.deriveFont(Font.BOLD, 20));
         labelProfileName.setForeground (Color.WHITE);
@@ -108,10 +108,6 @@ public class MyStocksWindow extends JFrame {
 
     }
 
-    private String getProfileName () {
-
-        return "USER";
-    }
 
     private ImageIcon getProfilePhoto () {
 
