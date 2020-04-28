@@ -17,6 +17,7 @@ public class MyStocksWindow extends JFrame {
     private JTextField textAfegirSaldo = new JTextField(20);
 
     private JButton buttonAfegirSaldo = new JButton("Afegeix");
+    private JButton buttonLogOut = new JButton("LOG OUT");
 
     JTable table = new JTable(4, 4);
 
@@ -169,7 +170,14 @@ public class MyStocksWindow extends JFrame {
         constraints.anchor = GridBagConstraints.EAST;
         panelSaldo.add(buttonAfegirSaldo, constraints);
 
+        constraints.gridx = 0;
+        constraints.gridy = 3;
+        constraints.gridwidth = 3;
+        constraints.anchor = GridBagConstraints.CENTER;
+        panelSaldo.add(buttonLogOut, constraints);
+
     }
+
 
     private void configureView () {
 
