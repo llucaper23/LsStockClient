@@ -10,6 +10,13 @@ public class UserCompany implements Serializable {
     private int quantity;
     private float buyPrice;
 
+    public UserCompany(int userId, int companyId, int quantity, float buyPrice) {
+        this.userId = userId;
+        this.companyId = companyId;
+        this.quantity = quantity;
+        this.buyPrice = buyPrice;
+    }
+
     public UserCompany(int userCompanyId, int userId, int companyId, int quantity, float buyPrice) {
         this.userCompanyId = userCompanyId;
         this.userId = userId;
@@ -60,8 +67,7 @@ public class UserCompany implements Serializable {
 
     @Override
     public String toString() {
-        return userCompanyId +
-                ", " + userId +
+        return userId +
                 ", " + companyId +
                 ", " + quantity +
                 ", " + buyPrice;
