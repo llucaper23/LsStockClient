@@ -125,6 +125,16 @@ public class CompanyStocksWindow extends JFrame {
 
     }
 
+    private void configureView () {
+
+        setSize(900,500);
+        setTitle("LS_STOCK");
+        setLocationRelativeTo(null);
+        setResizable(true);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+    }
+
     public int getNumAccionsComprar() {
         return Integer.valueOf(textComprarAccions.getText());
     }
@@ -134,17 +144,7 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public String saldoActualUser (/*saldo que te lusuari*/) { //es un setter
-       return String.valueOf("1234.5" /*el que ens passi la funcio*/);
-    }
-
-    private void configureView () {
-
-        setSize(900,500);
-        setTitle("LS_STOCK");
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+        return String.valueOf("1234.5" /*el que ens passi la funcio*/);
     }
 
     public void registraControlador(PrincipalController principalController){
