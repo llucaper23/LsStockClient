@@ -1,5 +1,6 @@
 package Controller;
 
+
 import Model.Manager;
 import Model.Network.Network;
 import View.CompanyStocksWindow;
@@ -55,15 +56,7 @@ public class PrincipalController implements ActionListener {
                 todayStockWindow.setVisible(true);
                 break;
 
-            case "COMPRARACCIONS":
 
-                companyStocksWindow.dispose();
-                break;
-
-            case "VENDREACCIONS":
-
-                companyStocksWindow.dispose();
-                break;
 
 
         }

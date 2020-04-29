@@ -10,7 +10,7 @@ public class MyStocksWindow extends JFrame {
 
     private static String LOGOUT = "LOGOUT";
     private static String BACK = "BACKMYSTOCK";
-
+    private static String AFEGIRSALDO = "AFEGIRSALDO";
 
     private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
@@ -166,5 +166,7 @@ public class MyStocksWindow extends JFrame {
         buttonLogOut.addActionListener(principalController);
         buttonBack.setActionCommand(BACK);
         buttonBack.addActionListener(principalController);
+        buttonAfegirSaldo.setActionCommand(AFEGIRSALDO);
+        buttonAfegirSaldo.addActionListener(principalController);
     }
 }

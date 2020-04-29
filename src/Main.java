@@ -16,6 +16,7 @@ public class Main {
         LoginController loginController = new LoginController(signUpWindow, loginView, todayStockWindow, manager, network);
         PrincipalController principalController = new PrincipalController(network, loginView, companyStocksView, manager, myStocksWindow, todayStockWindow);
 
+
         signUpWindow.registrarControlador(loginController);
         loginView.registrarControlador(loginController);
         companyStocksView.registraControlador(principalController);

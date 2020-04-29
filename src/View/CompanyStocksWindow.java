@@ -1,5 +1,6 @@
 package View;
 
+import Controller.BuySellSharesController;
 import Controller.PrincipalController;
 
 import javax.swing.*;
@@ -132,8 +133,8 @@ public class CompanyStocksWindow extends JFrame {
         return Integer.valueOf(textVendreAccions.getText());
     }
 
-    public String saldoActualUser (/*saldo que te lusuari*/) {
-       return String.valueOf("1234.5");
+    public String saldoActualUser (/*saldo que te lusuari*/) { //es un setter
+       return String.valueOf("1234.5" /*el que ens passi la funcio*/);
     }
 
     private void configureView () {
@@ -153,10 +154,10 @@ public class CompanyStocksWindow extends JFrame {
         buttonBack.setActionCommand(BACK);
         buttonBack.addActionListener(principalController);
 
-        buttonComprarAccions.setActionCommand(COMPRARACCIONS);
-        buttonComprarAccions.addActionListener(principalController);
+        /*buttonComprarAccions.setActionCommand(COMPRARACCIONS);
+        buttonComprarAccions.addActionListener(BuySellSharesController);
         buttonVendreAccions.setActionCommand(VENDREACCIONS);
-        buttonVendreAccions.addActionListener(principalController);
+        buttonVendreAccions.addActionListener(BuySellSharesController);*/
 
     }
 }
