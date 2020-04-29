@@ -40,7 +40,6 @@ public class LoginController implements ActionListener {
                 User aux;
                 if (loginView.isMail()){
                     aux = new User("", loginView.getName(), getMD5(loginView.getPassword()), 0, false);
-
                 }else {
                     aux = new User(loginView.getName(), "", getMD5(loginView.getPassword()), 0, false);
                 }

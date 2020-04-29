@@ -8,6 +8,11 @@ public class Company implements Serializable {
     private String companyName;
     private float sharePrice;
 
+    public Company(String companyName, float sharePrice) {
+        this.companyName = companyName;
+        this.sharePrice = sharePrice;
+    }
+
     public Company(int companyId, String companyName, float sharePrice) {
         this.companyId = companyId;
         this.companyName = companyName;
@@ -40,8 +45,7 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return companyId +
-                ", '" + companyName + '\'' +
+        return companyName + '\'' +
                 ", " + sharePrice;
     }
 }

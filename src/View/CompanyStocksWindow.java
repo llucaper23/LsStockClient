@@ -11,8 +11,8 @@ import java.awt.*;
 public class CompanyStocksWindow extends JFrame {
 
     private static String LOGOUT = "LOGOUT";
-    private static String COMPRARACCIONS = "COMPRARACCIONS";
-    private static String VENDREACCIONS = "VENDREACCIONS";
+    private static String BACK = "BACKCOMPANY";
+
 
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
@@ -143,9 +143,7 @@ public class CompanyStocksWindow extends JFrame {
     public void registraControlador(PrincipalController principalController){
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);
-        buttonComprarAccions.setActionCommand(COMPRARACCIONS);
-        buttonComprarAccions.addActionListener(principalController);
-        buttonVendreAccions.setActionCommand(VENDREACCIONS);
-        buttonVendreAccions.addActionListener(principalController);
+        buttonBack.setActionCommand(BACK);
+        buttonBack.addActionListener(principalController);
     }
 }

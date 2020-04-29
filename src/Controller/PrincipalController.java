@@ -44,14 +44,14 @@ public class PrincipalController implements ActionListener {
                 myStocksWindow.setVisible(true);
                 break;
 
-            case "COMPRARACCIONS":
-
-                companyStocksWindow.setVisible(true);
+            case "BACKMYSTOCK":
+                myStocksWindow.dispose();
+                todayStockWindow.setVisible(true);
                 break;
 
-            case "VENDREACCIONS":
-
-                companyStocksWindow.setVisible(true);
+            case "BACKCOMPANY":
+                companyStocksWindow.dispose();
+                todayStockWindow.setVisible(true);
                 break;
         }
     }
