@@ -143,21 +143,25 @@ public class CompanyStocksWindow extends JFrame {
         return Integer.valueOf(textVendreAccions.getText());
     }
 
-    public String saldoActualUser (/*saldo que te lusuari*/) { //es un setter
+    public String saldoActualUser () {
+
         return String.valueOf("1234.5" /*el que ens passi la funcio*/);
     }
 
-    public void registraControlador(PrincipalController principalController){
+    public void registraControlador(PrincipalController principalController) {
 
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);
         buttonBack.setActionCommand(BACK);
         buttonBack.addActionListener(principalController);
+    }
 
-        /*buttonComprarAccions.setActionCommand(COMPRARACCIONS);
-        buttonComprarAccions.addActionListener(BuySellSharesController);
+    public void registraControlador2(BuySellSharesController buySellSharesController) {
+
+        buttonComprarAccions.setActionCommand(COMPRARACCIONS);
+        buttonComprarAccions.addActionListener(buySellSharesController);
         buttonVendreAccions.setActionCommand(VENDREACCIONS);
-        buttonVendreAccions.addActionListener(BuySellSharesController);*/
+        buttonVendreAccions.addActionListener(buySellSharesController);
 
     }
 }

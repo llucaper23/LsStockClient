@@ -35,12 +35,12 @@ public class BuySellSharesController implements ActionListener{
     public void actionPerformed(ActionEvent e) {
 
         float moneyUser, sharePrice;
-        int sharesToBuy, sharesTosell, userSharesCompany;
+        int sharesToBuy, sharesToSell, userSharesCompany;
 
         moneyUser = user.getMoney();
         sharePrice = company.getSharePrice();
         sharesToBuy = companyStocksWindow.getNumAccionsComprar();
-        sharesTosell = companyStocksWindow.getNumAccionsVendre();
+        sharesToSell = companyStocksWindow.getNumAccionsVendre();
         userSharesCompany = userCompany.getQuantity();
 
         switch (e.getActionCommand()){
@@ -48,16 +48,16 @@ public class BuySellSharesController implements ActionListener{
             case "COMPRARACCIONS":
 
                 if (sharePrice*sharesToBuy < moneyUser) {
-                    //pot comprar-les
+                    //network.buyShares(sharesToBuy);
                 } else {
-                    //no te prou money
+                    //no te prou money. Missatge d'error
                 }
 
                 break;
 
             case "VENDREACCIONS":
 
-                if (sharesTosell < userSharesCompany) {
+                if (sharesToSell < userSharesCompany) {
                     // pot vendre accions
                 } else {
                     //no pot vendre accions perquè no en té

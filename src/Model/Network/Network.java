@@ -99,4 +99,18 @@ public class Network {
         }
     }
 
+    public void buyShares () {
+
+        try {
+            oos.write(BUY_SHARES);
+            oos.flush();
+            //oos.writeObject();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 }
