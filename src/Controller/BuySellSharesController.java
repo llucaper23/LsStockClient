@@ -4,6 +4,7 @@ import Model.Company;
 import Model.Manager;
 import Model.Network.Network;
 import Model.User;
+import Model.UserCompany;
 import View.CompanyStocksWindow;
 
 import java.awt.event.ActionEvent;
@@ -20,33 +21,47 @@ public class BuySellSharesController implements ActionListener{
     private CompanyStocksWindow companyStocksWindow;
     private Company company;
     private User user;
+    private UserCompany userCompany;
 
-    public BuySellSharesController (CompanyStocksWindow companyStocksWindow, Network network, User user, Company company) {
+    public BuySellSharesController (CompanyStocksWindow companyStocksWindow, Network network, User user, Company company, UserCompany userCompany) {
         this.companyStocksWindow = companyStocksWindow;
         this.user = user;
         this.network = network;
         this.company = company;
+        this.userCompany = userCompany;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         float moneyUser, sharePrice;
-        int numAccionsComprar, numAccionsVendre;
+        int sharesToBuy, sharesTosell, userSharesCompany;
 
         moneyUser = user.getMoney();
         sharePrice = company.getSharePrice();
-        numAccionsComprar = companyStocksWindow.getNumAccionsComprar();
-        numAccionsVendre = companyStocksWindow.getNumAccionsVendre();
+        sharesToBuy = companyStocksWindow.getNumAccionsComprar();
+        sharesTosell = companyStocksWindow.getNumAccionsVendre();
+        userSharesCompany = userCompany.getQuantity();
 
         switch (e.getActionCommand()){
 
             case "COMPRARACCIONS":
 
+                if (sharePrice*sharesToBuy < moneyUser) {
+                    //pot comprar-les
+                } else {
+                    //no te prou money
+                }
 
                 break;
 
             case "VENDREACCIONS":
+
+                if (sharesTosell < userSharesCompany) {
+                    // pot vendre accions
+                } else {
+                    //no pot vendre accions perquè no en té
+                }
 
 
                 break;
