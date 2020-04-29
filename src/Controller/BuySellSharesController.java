@@ -48,7 +48,7 @@ public class BuySellSharesController implements ActionListener{
             case "COMPRARACCIONS":
 
                 if (sharePrice*sharesToBuy < moneyUser) {
-                    //network.buyShares(sharesToBuy);
+                    //network.buyShares();
                 } else {
                     //no te prou money. Missatge d'error
                 }
