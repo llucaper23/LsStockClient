@@ -12,6 +12,8 @@ public class CompanyStocksWindow extends JFrame {
 
     private static String LOGOUT = "LOGOUT";
     private static String BACK = "BACKCOMPANY";
+    private static String COMPRARACCIONS = "COMPRARACCIONS";
+    private static String VENDREACCIONS = "VENDREACCIONS";
 
 
     private JLabel labelCompanyName = new JLabel(" ");
@@ -48,7 +50,7 @@ public class CompanyStocksWindow extends JFrame {
         buttonComprarAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
         buttonVendreAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
 
-        labelTotalSaldo.setText("1234.56" + " €");
+        labelTotalSaldo.setText(saldoActualUser() + "€");
         labelSharePrice.setText("321.98"+ " €");
 
         JPanel panelShares = new JPanel();
@@ -130,6 +132,10 @@ public class CompanyStocksWindow extends JFrame {
         return Integer.valueOf(textVendreAccions.getText());
     }
 
+    public String saldoActualUser (/*saldo que te lusuari*/) {
+       return String.valueOf("1234.5");
+    }
+
     private void configureView () {
 
         setSize(900,500);
@@ -141,9 +147,16 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public void registraControlador(PrincipalController principalController){
+
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);
         buttonBack.setActionCommand(BACK);
         buttonBack.addActionListener(principalController);
+
+        buttonComprarAccions.setActionCommand(COMPRARACCIONS);
+        buttonComprarAccions.addActionListener(principalController);
+        buttonVendreAccions.setActionCommand(VENDREACCIONS);
+        buttonVendreAccions.addActionListener(principalController);
+
     }
 }

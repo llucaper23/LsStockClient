@@ -31,6 +31,7 @@ public class PrincipalController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()){
+
             case "LOGOUT":
                 network.logout();
                 companyStocksWindow.dispose();
@@ -53,6 +54,18 @@ public class PrincipalController implements ActionListener {
                 companyStocksWindow.dispose();
                 todayStockWindow.setVisible(true);
                 break;
+
+            case "COMPRARACCIONS":
+
+                companyStocksWindow.dispose();
+                break;
+
+            case "VENDREACCIONS":
+
+                companyStocksWindow.dispose();
+                break;
+
+
         }
     }
 }

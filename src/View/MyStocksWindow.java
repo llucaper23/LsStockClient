@@ -69,19 +69,41 @@ public class MyStocksWindow extends JFrame {
         panelProfile.add(labelProfileName);
 
 
-        //Saldo i saldo actual
-        JPanel panelSaldo = new JPanel( new GridBagLayout());
-        GridBagConstraints constraints = new GridBagConstraints();
-        panelSaldo.setBackground(Color.BLACK);
+        //PanelSaldoActual
+        JPanel panelSaldoAct = new JPanel();
+        panelSaldoAct.setLayout(new BoxLayout(panelSaldoAct, BoxLayout.X_AXIS));
+        panelSaldoAct.setBackground(Color.BLACK);
 
-        //constraints.insets = new Insets(10, 20, 10, 20);
+        labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
+        labelSaldoActual.setForeground (Color.GRAY);
 
-        saldoActual(constraints, panelSaldo);
-        afegirSaldo(constraints, panelSaldo);
+        labelTotalSaldo.setText("1234.56" + " €");
+        labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
+        labelTotalSaldo.setForeground (Color.WHITE);
+
+        panelSaldoAct.add(labelSaldoActual);
+        panelSaldoAct.add(labelTotalSaldo);
+
+
+        //PanelAfegirSaldo
+        JPanel panelAfegirS = new JPanel();
+        panelAfegirS.setLayout(new BoxLayout(panelAfegirS, BoxLayout.X_AXIS));
+        panelAfegirS.setBackground(Color.BLACK);
+
+        labelAfegirSaldo.setFont(font.deriveFont(Font.BOLD, 12));
+        labelAfegirSaldo.setForeground (Color.GRAY);
+
+        panelAfegirS.add(labelAfegirSaldo);
+        panelAfegirS.add(textAfegirSaldo);
+
 
         //Afegim al panelProfile
+        panelProfile.add(panelSaldoAct);
+        panelProfile.add(panelAfegirS);
+        panelProfile.add(buttonAfegirSaldo);
+        panelProfile.add(buttonBack);
+        panelProfile.add(buttonLogOut);
 
-        panelProfile.add(panelSaldo);
 
         //############ TAULA ############
 
@@ -108,9 +130,6 @@ public class MyStocksWindow extends JFrame {
         labelTitleMB.setForeground (Color.WHITE);
         panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
 
-        //############ "COLLAGE" ############
-
-        constraints.insets = new Insets(10, 20, 10, 20);
         this.add(panelMevaBorsa);
 
 
@@ -127,69 +146,6 @@ public class MyStocksWindow extends JFrame {
 
     }
 
-    private JLabel getSaldo () {
-
-        Font font = labelTotalSaldo.getFont();
-        labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 16));
-        labelTotalSaldo.setForeground (Color.WHITE);
-
-        return labelTotalSaldo;
-    }
-
-    private void saldoActual(GridBagConstraints constraints, JPanel panelSaldo) {
-
-        constraints.insets = new Insets(40, 20, 10, 20);
-
-        constraints.anchor = GridBagConstraints.CENTER;
-
-        constraints.gridx = 0;
-        constraints.gridy = 0;
-        labelSaldoActual.setForeground (Color.GRAY);
-        panelSaldo.add(labelSaldoActual, constraints);
-
-        constraints.gridx = 1;
-        constraints.gridy = 0;
-        panelSaldo.add(getSaldo(), constraints);
-
-
-    }
-
-    private void afegirSaldo(GridBagConstraints constraints, JPanel panelSaldo) {
-
-        constraints.insets = new Insets(10, 20, 10, 20);
-
-        constraints.anchor = GridBagConstraints.CENTER;
-
-        constraints.gridx = 0;
-        constraints.gridy = 1;
-        labelAfegirSaldo.setForeground (Color.GRAY);
-        panelSaldo.add(labelAfegirSaldo, constraints);
-
-        constraints.gridx = 1;
-        constraints.gridy = 1;
-        panelSaldo.add(textAfegirSaldo, constraints);
-
-        constraints.insets = new Insets(10, 20, 30, 20);
-
-        constraints.gridx = 0;
-        constraints.gridy = 2;
-        constraints.gridwidth = 2;
-        constraints.anchor = GridBagConstraints.EAST;
-        panelSaldo.add(buttonAfegirSaldo, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy = 3;
-        constraints.gridwidth = 3;
-        constraints.anchor = GridBagConstraints.CENTER;
-        panelSaldo.add(buttonBack, constraints);
-
-        constraints.gridx = 0;
-        constraints.gridy = 4;
-        constraints.gridwidth = 4;
-        constraints.anchor = GridBagConstraints.CENTER;
-        panelSaldo.add(buttonLogOut, constraints);
-
-    }
 
     public float getSaldoAfegir(){
         return Float.valueOf(textAfegirSaldo.getText());
