@@ -47,6 +47,7 @@ public class LoginController implements ActionListener {
                 if (user != null) {
                     loginView.dispose();
                     todayStockWindow.setVisible(true);
+                    network.startClientNetwork();
                 } else {
                     System.out.println("error");
                     loginView.mostraMissatgeError("Error al fer el LogIn");

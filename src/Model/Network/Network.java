@@ -155,4 +155,13 @@ public class Network extends Thread {
         }
 
     }
+
+    public void logout() {
+        try {
+            oos.write(LOGOUT);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
