@@ -31,6 +31,8 @@ public class PrincipalController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        float usersMoney = 0;
+
         switch (e.getActionCommand()){
 
             case "LOGOUT":
@@ -44,19 +46,41 @@ public class PrincipalController implements ActionListener {
             case "MYACTIONS":
                 todayStockWindow.dispose();
                 myStocksWindow.setVisible(true);
+
+                usersMoney = manager.getActualUser().getMoney();
+                myStocksWindow.setSaldoActualUser(usersMoney);
+                todayStockWindow.setSaldoActualUser(usersMoney);
+                companyStocksWindow.setSaldoActualUser(usersMoney);
+
                 break;
 
             case "BACKMYSTOCK":
                 myStocksWindow.dispose();
                 todayStockWindow.setVisible(true);
+
+                usersMoney = manager.getActualUser().getMoney();
+                myStocksWindow.setSaldoActualUser(usersMoney);
+                todayStockWindow.setSaldoActualUser(usersMoney);
+                companyStocksWindow.setSaldoActualUser(usersMoney);
+
                 break;
 
             case "BACKCOMPANY":
                 companyStocksWindow.dispose();
                 todayStockWindow.setVisible(true);
+
+                usersMoney = manager.getActualUser().getMoney();
+                myStocksWindow.setSaldoActualUser(usersMoney);
+                todayStockWindow.setSaldoActualUser(usersMoney);
+                companyStocksWindow.setSaldoActualUser(usersMoney);
+
                 break;
 
 
         }
     }
+
+
+
+
 }

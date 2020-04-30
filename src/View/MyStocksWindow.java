@@ -12,6 +12,8 @@ public class MyStocksWindow extends JFrame {
     private static String BACK = "BACKMYSTOCK";
     private static String AFEGIRSALDO = "AFEGIRSALDO";
 
+    private float actualUserMoney;
+
     private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
     private JLabel labelProfileName = new JLabel(" ");
@@ -77,7 +79,7 @@ public class MyStocksWindow extends JFrame {
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
         labelSaldoActual.setForeground (Color.GRAY);
 
-        labelTotalSaldo.setText("1234.56" + " €");
+        labelTotalSaldo.setText(actualUserMoney + " €");
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
         labelTotalSaldo.setForeground (Color.WHITE);
 
@@ -151,6 +153,10 @@ public class MyStocksWindow extends JFrame {
         return Float.valueOf(textAfegirSaldo.getText());
     }
 
+    public void setSaldoActualUser (float money) {
+        actualUserMoney = money;
+    }
+
     private void configureView () {
 
         setSize(900,500);
@@ -160,6 +166,8 @@ public class MyStocksWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
+
+
 
     public void registraControlador(PrincipalController principalController) {
         buttonLogOut.setActionCommand(LOGOUT);

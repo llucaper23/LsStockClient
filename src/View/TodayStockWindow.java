@@ -12,6 +12,8 @@ public class TodayStockWindow extends JFrame {
     private static String MYACTIONS = "MYACTIONS";
     private static String LOGOUT = "LOGOUT";
 
+    private float actualUserMoney;
+
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
     private JLabel labelTotalSaldo = new JLabel(" ");
 
@@ -60,6 +62,10 @@ public class TodayStockWindow extends JFrame {
 
 
 
+    }
+
+    public void setSaldoActualUser (float money) {
+        actualUserMoney = money;
     }
 
     private void configureView () {

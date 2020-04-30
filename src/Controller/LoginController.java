@@ -48,11 +48,17 @@ public class LoginController implements ActionListener {
                     loginView.dispose();
                     todayStockWindow.setVisible(true);
                     network.startClientNetwork();
+
+                    manager.setActualUser(user);
+                    float usersMoney = manager.getActualUser().getMoney();
+                    todayStockWindow.setSaldoActualUser(usersMoney);
+
                 } else {
                     System.out.println("error");
                     loginView.mostraMissatgeError("Error al fer el LogIn");
                 }
                 break;
+
             case "REGISTER":
                 User aux1 = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
                 if (comprovaUser(aux1)) {
@@ -65,6 +71,7 @@ public class LoginController implements ActionListener {
                     }
                 }
                 break;
+
             case "GO_TO_REGISTER":
                 loginView.dispose();
                 signupView.setVisible(true);

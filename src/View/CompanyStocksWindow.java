@@ -16,6 +16,7 @@ public class CompanyStocksWindow extends JFrame {
     private static String COMPRARACCIONS = "COMPRARACCIONS";
     private static String VENDREACCIONS = "VENDREACCIONS";
 
+    private float actualUserMoney, priceShareActualUser;
 
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
@@ -51,8 +52,8 @@ public class CompanyStocksWindow extends JFrame {
         buttonComprarAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
         buttonVendreAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
 
-        labelTotalSaldo.setText(saldoActualUser() + "€");
-        labelSharePrice.setText("321.98"+ " €");
+        labelTotalSaldo.setText(actualUserMoney + "€");
+        labelSharePrice.setText(priceShareActualUser+ " €");
 
         JPanel panelShares = new JPanel();
         panelShares.setLayout(new BoxLayout(panelShares, BoxLayout.Y_AXIS));
@@ -143,10 +144,14 @@ public class CompanyStocksWindow extends JFrame {
         return Integer.valueOf(textVendreAccions.getText());
     }
 
-    public String saldoActualUser () {
-
-        return String.valueOf("1234.5" /*el que ens passi la funcio*/);
+    public void setSaldoActualUser (float money) {
+        actualUserMoney = money;
     }
+
+    public void setPriceShare (float priceShare) {
+        priceShareActualUser = priceShare;
+    }
+
 
     public void registraControlador(PrincipalController principalController) {
 
