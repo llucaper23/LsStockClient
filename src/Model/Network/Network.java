@@ -144,7 +144,7 @@ public class Network extends Thread {
     }
 
 
-    public void buyShares () {
+    public void buyShares (int sharesToBuy) {
         try {
             oos.write(BUY_SHARES);
             oos.flush();
@@ -163,7 +163,7 @@ public class Network extends Thread {
             int size = ois.readInt();
             if (size == -1){
                 return null;
-            }else{
+            } else{
                 ArrayList<Company> companies = new ArrayList<>();
                 for (int i = 0; i < size; i++) {
                     companies.add((Company) ois.readObject());

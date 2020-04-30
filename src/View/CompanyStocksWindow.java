@@ -169,4 +169,8 @@ public class CompanyStocksWindow extends JFrame {
         buttonVendreAccions.addActionListener(buySellSharesController);
 
     }
+
+    public void mostraMissatgeError(String error){
+        JOptionPane.showMessageDialog(null, error);
+    }
 }

@@ -42,10 +42,12 @@ public class BuySellSharesController implements ActionListener{
 
                 //if (sharePrice * sharesToBuy) < moneyUser
                 if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
-                    //network.buyShares();
+                    network.buyShares(companyStocksWindow.getNumAccionsComprar());
+                    //actualitzar money
 
                 } else {
-                    //no te prou money. Missatge d'error
+                    System.out.println("Not enough money");
+                    companyStocksWindow.mostraMissatgeError("Error. No es disposa de sufient saldo");
 
                 }
 
