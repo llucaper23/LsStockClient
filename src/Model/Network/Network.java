@@ -156,6 +156,26 @@ public class Network extends Thread {
 
     }
 
+    public ArrayList<Company> getAllCompanies(){
+        try {
+            oos.writeInt(ALL_COMPANIES);
+            oos.flush();
+            int size = ois.readInt();
+            if (size == -1){
+                return null;
+            }else{
+                ArrayList<Company> companies = new ArrayList<>();
+                for (int i = 0; i < size; i++) {
+                    companies.add((Company) ois.readObject());
+                }
+                return companies;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public void logout() {
         try {
             oos.write(LOGOUT);
