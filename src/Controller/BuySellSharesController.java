@@ -22,32 +22,26 @@ public class BuySellSharesController implements ActionListener{
     private Company company;
     private User user;
     private UserCompany userCompany;
+    private Manager manager;
 
-    public BuySellSharesController (CompanyStocksWindow companyStocksWindow, Network network, User user, Company company, UserCompany userCompany) {
+    public BuySellSharesController (CompanyStocksWindow companyStocksWindow, Network network, User user, Company company, UserCompany userCompany, Manager manager) {
         this.companyStocksWindow = companyStocksWindow;
         this.user = user;
         this.network = network;
         this.company = company;
         this.userCompany = userCompany;
+        this.manager = manager;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        float moneyUser, sharePrice;
-        int sharesToBuy, sharesToSell, userSharesCompany;
-
-        moneyUser = user.getMoney();
-        sharePrice = company.getSharePrice();
-        sharesToBuy = companyStocksWindow.getNumAccionsComprar();
-        sharesToSell = companyStocksWindow.getNumAccionsVendre();
-        userSharesCompany = userCompany.getQuantity();
-
         switch (e.getActionCommand()) {
 
             case "COMPRARACCIONS":
 
-                if (sharePrice*sharesToBuy < moneyUser) {
+                //if (sharePrice * sharesToBuy) < moneyUser
+                if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
                     //network.buyShares();
 
                 } else {
@@ -59,7 +53,8 @@ public class BuySellSharesController implements ActionListener{
 
             case "VENDREACCIONS":
 
-                if (sharesToSell < userSharesCompany) {
+                //if (sharesToSell < userSharesActualCompany)
+                if ((companyStocksWindow.getNumAccionsVendre()) < (userCompany.getQuantity())) {
                     //pot vendre accions
 
                 } else {

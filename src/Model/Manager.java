@@ -10,6 +10,7 @@ public class Manager {
     private Pattern patterPass;
     private Pattern patternMail;
     private User actualUser;
+    private Company actualCompany;
 
     public Manager() {
 
@@ -32,6 +33,7 @@ public class Manager {
         return ok;
     }
 
+    //ActualUser -> treballem amb el usuari que ha fet el login
     public void setActualUser(User user) {
         this.actualUser = user;
     }
@@ -39,6 +41,16 @@ public class Manager {
     public User getActualUser() {
         return actualUser;
     }
+
+    //ActualCompany -> companyia amb la que treballem a CompanyStocksWindow
+    public void setActualCompany(Company company) {
+        actualCompany = company;
+    }
+
+    public Company getActualCompany (){
+        return actualCompany;
+    }
+
 
 
 
