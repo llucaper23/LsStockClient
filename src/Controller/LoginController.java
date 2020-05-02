@@ -50,6 +50,7 @@ public class LoginController implements ActionListener {
                     network.startClientNetwork();
 
                     manager.setActualUser(user);
+
                     float usersMoney = manager.getActualUser().getMoney();
                     todayStockWindow.setSaldoActualUser(usersMoney);
 

@@ -148,7 +148,19 @@ public class Network extends Thread {
         try {
             oos.write(BUY_SHARES);
             oos.flush();
-            //oos.writeObject();
+            //oos.writeObject(sharesToBuy);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void sellShares (int sharesToSell) {
+        try {
+            oos.write(SELL_SHARES);
+            oos.flush();
+            //oos.writeObject(sharesToSell);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -173,6 +185,18 @@ public class Network extends Thread {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public void setUpdateMoney (float updatedMoney) {
+        try {
+            oos.write(UPDATE_MONEY);
+            oos.flush();
+
+            //escriure serv-bbdd el nou valor dels diners
+
+        } catch (IOException e) {
+
         }
     }
 

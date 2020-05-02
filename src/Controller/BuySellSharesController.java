@@ -42,8 +42,10 @@ public class BuySellSharesController implements ActionListener{
 
                 //if (sharePrice * sharesToBuy) < moneyUser
                 if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
+
                     network.buyShares(companyStocksWindow.getNumAccionsComprar());
-                    //actualitzar money
+                    float updatedMoney = manager.getActualUser().getMoney() - (companyStocksWindow.getNumAccionsComprar()*manager.getActualCompany().getSharePrice());
+                    network.setUpdateMoney(updatedMoney);
 
                 } else {
                     System.out.println("Not enough money");
@@ -57,10 +59,13 @@ public class BuySellSharesController implements ActionListener{
 
                 //if (sharesToSell < userSharesActualCompany)
                 if ((companyStocksWindow.getNumAccionsVendre()) < (userCompany.getQuantity())) {
-                    //pot vendre accions
+                    network.sellShares(companyStocksWindow.getNumAccionsVendre());
+                    float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
+                    network.setUpdateMoney(updatedMoney);
 
                 } else {
-                    //no pot vendre accions perquè no en té
+                    System.out.println("No shares");
+                    companyStocksWindow.mostraMissatgeError("Error. Estàs intentant vendre més accions de les que disposes");
 
                 }
 
