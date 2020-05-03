@@ -2,10 +2,7 @@ package Model.Network;
 
 
         import Controller.LoginController;
-        import Model.Company;
-        import Model.Manager;
-        import Model.User;
-        import Model.UserCompany;
+        import Model.*;
         import com.google.gson.Gson;
         import com.google.gson.stream.JsonReader;
 
@@ -127,16 +124,15 @@ public class Network extends Thread {
 
     public User loginUsuari(User user) {
         try {
-            oos.write(LOGIN_REQUEST);
+            Message message = new Message(LOGIN_REQUEST, null, user, false);
+            oos.writeObject(message);
             oos.flush();
-            oos.writeObject(user);
-            oos.flush();
-            boolean loginOk = ois.readBoolean();
-            if (!loginOk) {
+            message = (Message) ois.readObject();
+            if (!message.isOk()) {
                 System.out.println("Error to login");
                 return null;
             } else {
-                return (User) ois.readObject();
+                return message.getUser();
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
