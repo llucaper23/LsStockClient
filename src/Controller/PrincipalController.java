@@ -31,7 +31,7 @@ public class PrincipalController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        float usersMoney = 0;
+        float usersMoney;
 
         switch (e.getActionCommand()){
 
@@ -76,6 +76,39 @@ public class PrincipalController implements ActionListener {
 
                 break;
 
+            case "COMPRARACCIONS":
+
+                //if (sharePrice * sharesToBuy) < moneyUser
+                if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
+
+                    network.buyShares(companyStocksWindow.getNumAccionsComprar());
+                    float updatedMoney = manager.getActualUser().getMoney() - (companyStocksWindow.getNumAccionsComprar()*manager.getActualCompany().getSharePrice());
+                    network.setUpdateMoney(updatedMoney, manager.getActualUser());
+
+                } else {
+                    System.out.println("Not enough money");
+                    companyStocksWindow.mostraMissatgeError("Error. No es disposa de sufient saldo");
+
+                }
+
+                break;
+
+            case "VENDREACCIONS":
+
+                //if (sharesToSell < userSharesActualCompany)
+                if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompanyShares().getQuantity())) {
+
+                    network.sellShares(companyStocksWindow.getNumAccionsVendre());
+                    float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
+                    network.setUpdateMoney(updatedMoney, manager.getActualUser());
+
+                } else {
+                    System.out.println("No shares");
+                    companyStocksWindow.mostraMissatgeError("Error. Estàs intentant vendre més accions de les que disposes");
+
+                }
+
+                break;
 
         }
     }

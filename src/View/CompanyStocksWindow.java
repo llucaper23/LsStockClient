@@ -1,6 +1,5 @@
 package View;
 
-import Controller.BuySellSharesController;
 import Controller.PrincipalController;
 
 import javax.swing.*;
@@ -137,11 +136,11 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public int getNumAccionsComprar() {
-        return Integer.valueOf(textComprarAccions.getText());
+        return Integer.parseInt(textComprarAccions.getText());
     }
 
     public int getNumAccionsVendre() {
-        return Integer.valueOf(textVendreAccions.getText());
+        return Integer.parseInt(textVendreAccions.getText());
     }
 
     public void setSaldoActualUser (float money) {
@@ -159,15 +158,6 @@ public class CompanyStocksWindow extends JFrame {
         buttonLogOut.addActionListener(principalController);
         buttonBack.setActionCommand(BACK);
         buttonBack.addActionListener(principalController);
-    }
-
-    public void registraControlador2(BuySellSharesController buySellSharesController) {
-
-        buttonComprarAccions.setActionCommand(COMPRARACCIONS);
-        buttonComprarAccions.addActionListener(buySellSharesController);
-        buttonVendreAccions.setActionCommand(VENDREACCIONS);
-        buttonVendreAccions.addActionListener(buySellSharesController);
-
     }
 
     public void mostraMissatgeError(String error){
