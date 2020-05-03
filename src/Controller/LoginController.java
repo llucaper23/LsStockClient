@@ -25,13 +25,15 @@ public class LoginController implements ActionListener {
     private LoginWindow loginView;
     private Manager manager;
     private boolean ok = true;
+    private PrincipalController principalController;
 
-    public LoginController(SignUpWindow signUpWindow, LoginWindow loginView, TodayStockWindow todayStockWindow, Manager manager, Network network) {
+    public LoginController(SignUpWindow signUpWindow, LoginWindow loginView, TodayStockWindow todayStockWindow, Manager manager, Network network, PrincipalController principalController) {
         this.signupView = signUpWindow;
         this.loginView = loginView;
         this.todayStockWindow = todayStockWindow;
         this.manager = manager;
         this.network = network;
+        this.principalController = principalController;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class LoginController implements ActionListener {
                     network.startClientNetwork();
 
                     manager.setActualUser(user);
+                    principalController.setManager(manager);
                     todayStockWindow.setSaldoActualUser(manager.getActualUser().getMoney());
 
                 } else {

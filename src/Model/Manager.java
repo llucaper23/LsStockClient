@@ -1,5 +1,6 @@
 package Model;
 
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ public class Manager {
     private Pattern patternMail;
     private User actualUser;
     private Company actualCompany;
+    private ArrayList<Company> companies;
     private UserCompany actualCompanyUserShares;
 
     public Manager() {
@@ -43,15 +45,13 @@ public class Manager {
         return actualUser;
     }
 
-    //ActualCompany -> companyia amb la que treballem a CompanyStocksWindow
-    public void setActualCompany(Company company) {
-        actualCompany = company;
+    public ArrayList<Company> getCompanies() {
+        return companies;
     }
 
-    public Company getActualCompany (){
-        return actualCompany;
+    public void setCompanies(ArrayList<Company> companies) {
+        this.companies = companies;
     }
-
 
     public void setActualUserCompanyShares(UserCompany actualCompanyShares) {
         this.actualCompanyUserShares = actualCompanyUserShares;
@@ -61,6 +61,11 @@ public class Manager {
         return actualCompanyUserShares;
     }
 
+    public Company getActualCompany() {
+        return actualCompany;
+    }
 
-
+    public void setActualCompany(Company actualCompany) {
+        this.actualCompany = actualCompany;
+    }
 }

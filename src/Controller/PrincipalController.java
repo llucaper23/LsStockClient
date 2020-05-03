@@ -3,6 +3,7 @@ package Controller;
 
 import Model.Manager;
 import Model.Network.Network;
+import Model.UserCompany;
 import View.CompanyStocksWindow;
 import View.LoginWindow;
 import View.MyStocksWindow;
@@ -80,10 +81,11 @@ public class PrincipalController implements ActionListener {
 
                 //if (sharePrice * sharesToBuy) < moneyUser
                 if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
-
-                    network.buyShares(companyStocksWindow.getNumAccionsComprar());
+                    UserCompany userCompany = new UserCompany(manager.getActualUser().getUser_id(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsComprar(), manager.getActualCompany().getSharePrice());
+                    network.buyShares(userCompany);
                     float updatedMoney = manager.getActualUser().getMoney() - (companyStocksWindow.getNumAccionsComprar()*manager.getActualCompany().getSharePrice());
-                    network.setUpdateMoney(updatedMoney, manager.getActualUser());
+                    manager.getActualUser().setMoney(updatedMoney);
+                    network.setUpdateMoney(manager.getActualUser());
 
                 } else {
                     System.out.println("Not enough money");
@@ -97,10 +99,11 @@ public class PrincipalController implements ActionListener {
 
                 //if (sharesToSell < userSharesActualCompany)
                 if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompanyShares().getQuantity())) {
-
-                    network.sellShares(companyStocksWindow.getNumAccionsVendre());
+                    UserCompany userCompany = new UserCompany(manager.getActualUser().getUser_id(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsVendre(), manager.getActualCompany().getSharePrice());
+                    network.sellShares(userCompany);
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
-                    network.setUpdateMoney(updatedMoney, manager.getActualUser());
+                    manager.getActualUser().setMoney(updatedMoney);
+                    network.setUpdateMoney(manager.getActualUser());
 
                 } else {
                     System.out.println("No shares");
@@ -114,6 +117,11 @@ public class PrincipalController implements ActionListener {
     }
 
 
+    public Manager getManager() {
+        return manager;
+    }
 
-
+    public void setManager(Manager manager) {
+        this.manager = manager;
+    }
 }

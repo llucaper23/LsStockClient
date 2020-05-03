@@ -90,7 +90,7 @@ public class Network extends Thread {
 
     public boolean registraUsuari(User user) {
         try {
-            Message message = new Message(REGISTER_REQUEST, null, user, false);
+            Message message = new Message(REGISTER_REQUEST, null, user, false, null, null, null);
             oos.writeObject(message);
             message = (Message) ois.readObject();
             if (message.isOk()) {
@@ -109,7 +109,7 @@ public class Network extends Thread {
 
     public User loginUsuari(User user) {
         try {
-            Message message = new Message(LOGIN_REQUEST, null, user, false);
+            Message message = new Message(LOGIN_REQUEST, null, user, false, null, null, null);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -126,25 +126,33 @@ public class Network extends Thread {
     }
 
 
-    public void buyShares (int sharesToBuy) {
+    public void buyShares (UserCompany userCompany) {
         try {
-            oos.write(BUY_SHARES);
+            Message message = new Message(BUY_SHARES, null, null, false, null, userCompany, null);
+            oos.writeObject(message);
             oos.flush();
-            //oos.writeObject(sharesToBuy);
+            message = (Message) ois.readObject();
+            if (!message.isOk()) {
+                System.out.println("Error to buy shares");
+            }
 
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
     }
 
-    public void sellShares (int sharesToSell) {
+    public void sellShares (UserCompany userCompany) {
         try {
-            oos.write(SELL_SHARES);
+            Message message = new Message(SELL_SHARES, null, null, false, null, userCompany, null);
+            oos.writeObject(message);
             oos.flush();
-            //oos.writeObject(sharesToSell);
+            message = (Message) ois.readObject();
+            if (!message.isOk()) {
+                System.out.println("Error to sell shares");
+            }
 
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
@@ -152,17 +160,15 @@ public class Network extends Thread {
 
     public ArrayList<Company> getAllCompanies(){
         try {
-            oos.writeInt(ALL_COMPANIES);
+            Message message = new Message(ALL_COMPANIES, null, null, false, null, null,null);
+            oos.writeObject(message);
             oos.flush();
-            int size = ois.readInt();
-            if (size == -1){
+            message = (Message) ois.readObject();
+            if (!message.isOk()) {
+                System.out.println("Error getting the user companies");
                 return null;
-            } else{
-                ArrayList<Company> companies = new ArrayList<>();
-                for (int i = 0; i < size; i++) {
-                    companies.add((Company) ois.readObject());
-                }
-                return companies;
+            } else {
+                return message.getCompanyList();
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
@@ -170,42 +176,42 @@ public class Network extends Thread {
         }
     }
 
-    public ArrayList<UserCompany> getUserCompanies() {
+   public ArrayList<UserCompany> getUserCompanies() {
 
+       try {
+           Message message = new Message(USER_COMPANIES, null, null, false, null, null,null);
+           oos.writeObject(message);
+           oos.flush();
+           message = (Message) ois.readObject();
+           if (!message.isOk()) {
+               System.out.println("Error getting the user companies");
+               return null;
+           } else {
+               return message.getUserCompanies();
+           }
+       } catch (IOException | ClassNotFoundException e) {
+           e.printStackTrace();
+           return null;
+       }
+   }
+
+    public void setUpdateMoney (User actualUser) {
         try {
-            oos.writeInt(USER_COMPANIES);
+            Message message = new Message(UPDATE_MONEY, null, actualUser, false, null, null, null);
+            oos.writeObject(message);
             oos.flush();
-            int size = ois.readInt();
-            if (size == -1){
-                return null;
-            } else{
-                ArrayList<UserCompany> userCompanies = new ArrayList<>();
-                for (int i = 0; i < size; i++) {
-                    userCompanies.add((UserCompany) ois.readObject());
-                }
-                return userCompanies;
+            message = (Message) ois.readObject();
+            if (!message.isOk()) {
+                System.out.println("Error updating the money");
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
-    public void setUpdateMoney (float updatedMoney, User actualUser) {
-        try {
-            oos.writeFloat(UPDATE_MONEY);
-            oos.flush();
-
-            //escriure serv-bbdd el nou valor dels diners al usuari actual que es amb el que estem treballant
-
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void logout() {
         try {
-            Message message = new Message(LOGIN_REQUEST, null, null, false);
+            Message message = new Message(LOGOUT, null, null, false, null, null, null);
             oos.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
