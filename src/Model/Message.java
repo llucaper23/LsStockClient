@@ -1,7 +1,5 @@
 package Model;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -10,13 +8,15 @@ public class Message implements Serializable {
     private int requestType;
     private ArrayList<Company> companyList;
     private User user;
+    private Company company;
     private boolean ok;
 
-    public Message(int requestType, ArrayList<Company> companyList, User user, boolean ok) {
+    public Message(int requestType, ArrayList<Company> companyList, User user, boolean ok, Company company) {
         this.requestType = requestType;
         this.companyList = companyList;
         this.user = user;
         this.ok = ok;
+        this.company = company;
     }
 
     public int getRequestType() {
@@ -49,5 +49,13 @@ public class Message implements Serializable {
 
     public void setOk(boolean ok) {
         this.ok = ok;
+    }
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
     }
 }
