@@ -11,6 +11,7 @@ package Model.Network;
         import java.io.ObjectInputStream;
         import java.io.ObjectOutputStream;
         import java.net.Socket;
+        import java.rmi.registry.Registry;
         import java.util.ArrayList;
 
 public class Network extends Thread {
@@ -70,13 +71,14 @@ public class Network extends Thread {
     public void run() {
         while (isOn) {
             try {
-                int opt = ois.readInt();
-                switch (opt) {
+                Message message = (Message) ois.readObject();
+                switch (message.getRequestType()) {
                     case ALL_COMPANIES:
-                        updateAllCompanies();
+                        ArrayList<Company> updatedCompanies = message.getCompanyList();
+                        System.out.println("");
                 }
 
-            } catch (IOException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
                 // si hi ha algun problema satura la comunicacio amb el servidor
                 stopClientNetwork();
@@ -85,37 +87,20 @@ public class Network extends Thread {
         stopClientNetwork();
     }
 
-    private void updateAllCompanies() {
-
-        try {
-            ArrayList<Company> updatedCompanies = new ArrayList<>();
-            int size = ois.readInt();
-            for (int i = 0; i < size; i++) {
-                updatedCompanies.add((Company) ois.readObject());
-            }
-            //aqui ja tens una arraylist de companyies actualitzades
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     public boolean registraUsuari(User user) {
         try {
-            oos.write(REGISTER_REQUEST);
-            oos.flush();
-            oos.writeObject(user);
-            boolean infoOk = ois.readBoolean();
-            if (!infoOk) {
+            Message message = new Message(REGISTER_REQUEST, null, user, false);
+            oos.writeObject(message);
+            message = (Message) ois.readObject();
+            if (message.isOk()) {
                 System.out.println("Error to register");
                 return false;
             } else {
                 System.out.println("Register Succesful!");
                 return true;
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
         return false;
@@ -220,8 +205,8 @@ public class Network extends Thread {
 
     public void logout() {
         try {
-            oos.write(LOGOUT);
-            oos.flush();
+            Message message = new Message(LOGIN_REQUEST, null, null, false);
+            oos.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
         }
