@@ -45,7 +45,7 @@ public class BuySellSharesController implements ActionListener{
 
                     network.buyShares(companyStocksWindow.getNumAccionsComprar());
                     float updatedMoney = manager.getActualUser().getMoney() - (companyStocksWindow.getNumAccionsComprar()*manager.getActualCompany().getSharePrice());
-                    network.setUpdateMoney(updatedMoney);
+                    network.setUpdateMoney(updatedMoney, manager.getActualUser());
 
                 } else {
                     System.out.println("Not enough money");
@@ -58,10 +58,11 @@ public class BuySellSharesController implements ActionListener{
             case "VENDREACCIONS":
 
                 //if (sharesToSell < userSharesActualCompany)
-                if ((companyStocksWindow.getNumAccionsVendre()) < (userCompany.getQuantity())) {
+                if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompanyShares().getQuantity())) {
+
                     network.sellShares(companyStocksWindow.getNumAccionsVendre());
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
-                    network.setUpdateMoney(updatedMoney);
+                    network.setUpdateMoney(updatedMoney, manager.getActualUser());
 
                 } else {
                     System.out.println("No shares");

@@ -30,8 +30,18 @@ public class TodayStockWindow extends JFrame {
         //panelSaldo
         JPanel panelSaldo = new JPanel();
         panelSaldo.setLayout(new BoxLayout(panelSaldo, BoxLayout.X_AXIS));
+        panelSaldo.setBackground(Color.BLACK);
 
         labelTotalSaldo.setText("1234.56" + " €");
+        Font font = labelTotalSaldo.getFont();
+        labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 16));
+        labelTotalSaldo.setForeground (Color.WHITE);
+        labelTotalSaldo.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        //Font font = labelSaldoActual.getFont();
+        labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
+        labelSaldoActual.setForeground (Color.GRAY);
+        labelSaldoActual.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         panelSaldo.add(labelSaldoActual);
         panelSaldo.add(labelTotalSaldo);
@@ -40,22 +50,20 @@ public class TodayStockWindow extends JFrame {
 
         JPanel panelShares = new JPanel();
         JScrollPane scrollPane = new JScrollPane(table);
+        panelShares.setBackground(Color.BLACK);
 
         scrollPane.getViewport().setBackground(Color.WHITE);
 
         panelShares.add(scrollPane);
 
-
         //panelCentral
-
         JPanel panelCentral = new JPanel();
         panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
+        panelCentral.setBackground(Color.BLACK);
 
-        panelCentral.add(buttonBack);
         panelCentral.add(panelShares);
         panelCentral.add(buttonMevaBorsa);
         panelCentral.add(panelSaldo);
-        panelCentral.add(buttonLogOut);
 
         //"COLLAGE"
         this.add(panelCentral);

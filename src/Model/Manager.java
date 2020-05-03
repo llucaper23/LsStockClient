@@ -11,6 +11,7 @@ public class Manager {
     private Pattern patternMail;
     private User actualUser;
     private Company actualCompany;
+    private UserCompany actualCompanyUserShares;
 
     public Manager() {
 
@@ -52,6 +53,13 @@ public class Manager {
     }
 
 
+    public void setActualUserCompanyShares(UserCompany actualCompanyShares) {
+        this.actualCompanyUserShares = actualCompanyUserShares;
+    }
+
+    public UserCompany getActualUserCompanyShares() {
+        return actualCompanyUserShares;
+    }
 
 
 

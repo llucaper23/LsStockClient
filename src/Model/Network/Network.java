@@ -5,6 +5,7 @@ package Model.Network;
         import Model.Company;
         import Model.Manager;
         import Model.User;
+        import Model.UserCompany;
         import com.google.gson.Gson;
         import com.google.gson.stream.JsonReader;
 
@@ -188,15 +189,36 @@ public class Network extends Thread {
         }
     }
 
-    public void setUpdateMoney (float updatedMoney) {
+    public ArrayList<UserCompany> getUserCompanies() {
+
         try {
-            oos.write(UPDATE_MONEY);
+            oos.writeInt(USER_COMPANIES);
+            oos.flush();
+            int size = ois.readInt();
+            if (size == -1){
+                return null;
+            } else{
+                ArrayList<UserCompany> userCompanies = new ArrayList<>();
+                for (int i = 0; i < size; i++) {
+                    userCompanies.add((UserCompany) ois.readObject());
+                }
+                return userCompanies;
+            }
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public void setUpdateMoney (float updatedMoney, User actualUser) {
+        try {
+            oos.writeFloat(UPDATE_MONEY);
             oos.flush();
 
-            //escriure serv-bbdd el nou valor dels diners
+            //escriure serv-bbdd el nou valor dels diners al usuari actual que es amb el que estem treballant
 
         } catch (IOException e) {
-
+            e.printStackTrace();
         }
     }
 

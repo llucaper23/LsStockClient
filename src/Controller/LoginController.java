@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -50,9 +51,7 @@ public class LoginController implements ActionListener {
                     network.startClientNetwork();
 
                     manager.setActualUser(user);
-
-                    float usersMoney = manager.getActualUser().getMoney();
-                    todayStockWindow.setSaldoActualUser(usersMoney);
+                    todayStockWindow.setSaldoActualUser(manager.getActualUser().getMoney());
 
                 } else {
                     System.out.println("error");
