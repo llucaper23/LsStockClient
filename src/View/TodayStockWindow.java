@@ -62,7 +62,7 @@ public class TodayStockWindow extends JFrame {
         panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
 
         for (int i = 0; i < companies.size(); i++) {
-            TodayStockLine line = new TodayStockLine();
+            TodayStockLine line = new TodayStockLine(companies.get(i));
             panelLines.add(line);
         }
 

@@ -1,5 +1,7 @@
 package View;
 
+import Model.Company;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -14,16 +16,18 @@ public class TodayStockLine extends JPanel {
     private JLabel labelChange = new JLabel(" ");
     private JLabel labelChangePercentage = new JLabel(" ");
 
+    private JButton buttonSee = new JButton("SEE");
 
-    public TodayStockLine() {
+
+    public TodayStockLine(Company company) {
 
         JPanel panelBackground = new JPanel(new FlowLayout());
         panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         panelBackground.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
         //Dins dels setText hi aniran les variables del que ens passin per la funció
-        labelCompanyName.setText("COMPANY NAME");
-        labelSharePrice.setText("321.98"+ " €");
+        labelCompanyName.setText(company.getCompanyName());
+        labelSharePrice.setText(company.getSharePrice() + " €");
         labelChange.setText(" +0.08 " + "€");
         labelChangePercentage.setText(" ( " + "+0.08" + " % )");
 
@@ -49,6 +53,7 @@ public class TodayStockLine extends JPanel {
         //panelBackground
         panelBackground.add(panelCompanyName);
         panelBackground.add(panelShareInfo);
+        panelBackground.add(buttonSee);
 
         //"COLLAGE"
         this.add(panelBackground);
