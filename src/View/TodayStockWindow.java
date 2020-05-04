@@ -1,9 +1,13 @@
 package View;
 
 import Controller.PrincipalController;
+import Model.Company;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 //se li ha de passar tota la info de les diferents accions de totes les empreses, i també el saldo actual de l'usuari
 
@@ -12,7 +16,11 @@ public class TodayStockWindow extends JFrame {
     private static String MYACTIONS = "MYACTIONS";
     private static String LOGOUT = "LOGOUT";
 
+    final int MAX_HEIGHT_SHARES = 700;
+    final int MAX_WIDTH_SHARES = 400;
+
     private float actualUserMoney;
+    private ArrayList<Company> companies = new ArrayList<Company>();
 
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
     private JLabel labelTotalSaldo = new JLabel(" ");
@@ -20,8 +28,6 @@ public class TodayStockWindow extends JFrame {
     private JButton buttonMevaBorsa = new JButton("LA MEVA BORSA");
     private JButton buttonLogOut = new JButton("LOG OUT");
     private JButton buttonBack = new JButton("BACK");
-
-    JTable table = new JTable(2, 4);
 
     public TodayStockWindow () {
 
@@ -46,13 +52,28 @@ public class TodayStockWindow extends JFrame {
         panelSaldo.add(labelSaldoActual);
         panelSaldo.add(labelTotalSaldo);
 
-        //panelShares
+        //panelShares - llistat accions
 
         JPanel panelShares = new JPanel();
-        JScrollPane scrollPane = new JScrollPane(table);
         panelShares.setBackground(Color.BLACK);
 
-        scrollPane.getViewport().setBackground(Color.WHITE);
+        JScrollPane scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+
+        scrollPane.setBackground(Color.BLACK);
+        scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+        scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),"TODAY SHARES");
+        title.setTitleJustification(TitledBorder.CENTER);
+        title.setTitlePosition(TitledBorder.ABOVE_TOP);
+        scrollPane.setBorder(title);
+
+
+        for (int i = 0; i < companies.size(); i++) {
+            TodayStockLine line = new TodayStockLine();
+            scrollPane.add(line);
+        }
 
         panelShares.add(scrollPane);
 
@@ -76,9 +97,13 @@ public class TodayStockWindow extends JFrame {
         actualUserMoney = money;
     }
 
+    public void setCompanies (ArrayList<Company> companies) {
+        this.companies = companies;
+    }
+
     private void configureView () {
 
-        setSize(900,500);
+        setSize(900,600);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(true);

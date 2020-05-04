@@ -3,7 +3,10 @@ package View;
 import javax.swing.*;
 import java.awt.*;
 
-public class TodayStockLine extends JFrame {
+public class TodayStockLine extends JPanel {
+
+    final int MAX_HEIGHT_SHARES = 700;
+    final int MAX_WIDTH_SHARES = 50;
 
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSharePrice = new JLabel(" ");
@@ -14,9 +17,9 @@ public class TodayStockLine extends JFrame {
 
     public TodayStockLine() {
 
-        configureView();
-
         JPanel panelBackground = new JPanel(new FlowLayout());
+        panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+        panelBackground.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
         //Dins dels setText hi aniran les variables del que ens passin per la funció
         labelCompanyName.setText("COMPANY NAME");
@@ -52,12 +55,5 @@ public class TodayStockLine extends JFrame {
 
     }
 
-    private void configureView () {
 
-        setSize(500,500);
-        setTitle("LS_STOCK");
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-    }
 }

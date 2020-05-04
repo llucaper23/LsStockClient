@@ -55,6 +55,7 @@ public class LoginController implements ActionListener {
                     manager.setActualUser(user);
                     principalController.setManager(manager);
                     todayStockWindow.setSaldoActualUser(manager.getActualUser().getMoney());
+                    todayStockWindow.setCompanies(network.getAllCompanies()); //passem les companyies a la vista
 
                 } else {
                     System.out.println("error");
