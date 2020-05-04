@@ -27,7 +27,7 @@ public class TodayStockWindow extends JFrame {
 
     private JButton buttonMevaBorsa = new JButton("LA MEVA BORSA");
     private JButton buttonLogOut = new JButton("LOG OUT");
-    private JButton buttonBack = new JButton("BACK");
+    //private JButton buttonBack = new JButton("BACK");
 
     public TodayStockWindow () {
 
@@ -38,7 +38,8 @@ public class TodayStockWindow extends JFrame {
         panelSaldo.setLayout(new BoxLayout(panelSaldo, BoxLayout.X_AXIS));
         panelSaldo.setBackground(Color.BLACK);
 
-        labelTotalSaldo.setText("1234.56" + " €");
+        labelTotalSaldo.setText(actualUserMoney + " €");
+
         Font font = labelTotalSaldo.getFont();
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 16));
         labelTotalSaldo.setForeground (Color.WHITE);
@@ -57,7 +58,18 @@ public class TodayStockWindow extends JFrame {
         JPanel panelShares = new JPanel();
         panelShares.setBackground(Color.BLACK);
 
-        JScrollPane scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JPanel panelLines = new JPanel();
+        panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < companies.size(); i++) {
+            TodayStockLine line = new TodayStockLine();
+            panelLines.add(line);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(panelLines);
+
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 
         scrollPane.setBackground(Color.BLACK);
         scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -69,13 +81,8 @@ public class TodayStockWindow extends JFrame {
         title.setTitlePosition(TitledBorder.ABOVE_TOP);
         scrollPane.setBorder(title);
 
-
-        for (int i = 0; i < companies.size(); i++) {
-            TodayStockLine line = new TodayStockLine();
-            scrollPane.add(line);
-        }
-
         panelShares.add(scrollPane);
+
 
         //panelCentral
         JPanel panelCentral = new JPanel();
