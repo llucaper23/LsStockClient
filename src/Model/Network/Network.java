@@ -93,7 +93,7 @@ public class Network extends Thread {
             Message message = new Message(REGISTER_REQUEST, null, user, false, null, null, null);
             oos.writeObject(message);
             message = (Message) ois.readObject();
-            if (message.isOk()) {
+            if (!message.isOk()) {
                 System.out.println("Error to register");
                 return false;
             } else {

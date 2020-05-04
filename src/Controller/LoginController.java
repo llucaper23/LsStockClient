@@ -48,6 +48,7 @@ public class LoginController implements ActionListener {
                 }
                 User user = network.loginUsuari(aux);
                 if (user != null) {
+                    System.out.println("entro login");
                     loginView.dispose();
                     todayStockWindow.setVisible(true);
                     network.startClientNetwork();
