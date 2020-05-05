@@ -61,10 +61,15 @@ public class TodayStockWindow extends JFrame {
         JPanel panelLines = new JPanel();
         panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
 
-        for (int i = 0; i < companies.size(); i++) {
+        /*for (int i = 0; i < companies.size(); i++) {
             TodayStockLine line = new TodayStockLine(companies.get(i));
             panelLines.add(line);
-        }
+        }*/
+
+
+        TodayStockLine line = new TodayStockLine();
+        panelLines.add(line);
+
 
         JScrollPane scrollPane = new JScrollPane(panelLines);
 
