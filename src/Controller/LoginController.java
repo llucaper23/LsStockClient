@@ -54,7 +54,6 @@ public class LoginController implements ActionListener {
                     todayStockWindow.setCompanies(network.getAllCompanies());
                     todayStockWindow.updateTodayStock();
                     todayStockWindow.setVisible(true);
-                    network.startClientNetwork();
 
                     manager.setActualUser(user);
                     principalController.setManager(manager);

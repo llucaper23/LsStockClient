@@ -43,7 +43,6 @@ public class PrincipalController implements ActionListener {
                 myStocksWindow.dispose();
                 todayStockWindow.dispose();
                 loginWindow.setVisible(true);
-                network.stopClientNetwork();
                 break;
 
             case "MYACTIONS":

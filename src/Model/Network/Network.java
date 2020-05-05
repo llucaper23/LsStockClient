@@ -1,7 +1,5 @@
 package Model.Network;
 
-
-        import Controller.LoginController;
         import Model.*;
         import com.google.gson.Gson;
         import com.google.gson.stream.JsonReader;
@@ -11,15 +9,14 @@ package Model.Network;
         import java.io.ObjectInputStream;
         import java.io.ObjectOutputStream;
         import java.net.Socket;
-        import java.rmi.registry.Registry;
         import java.util.ArrayList;
 
-public class Network extends Thread {
+public class Network {
 
     private Socket socket;
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
-    private boolean isOn;
+
 
     private static final int REGISTER_REQUEST = 1;
     private static final int LOGIN_REQUEST = 2;
@@ -31,6 +28,7 @@ public class Network extends Thread {
     private static final int COMPANY_DETAIL = 8;
     private static final int LOGOUT = 9;
 
+    private int port;
     private NetworkConfiguration nc;
 
     public Network() {
@@ -55,40 +53,22 @@ public class Network extends Thread {
 
     }
 
-    public boolean isOn() {
-        return isOn;
-    }
+    /**
+     * Funcio que envia el port que usara l'usuari
+     */
 
-    public void startClientNetwork() {
-        // iniciem la comunicacio amb el servidor
-        isOn = true;
-        this.start();
-    }
-
-    public void stopClientNetwork() {
-        // aturem la comunicacio amb el servidor
-        this.isOn = false;
-        this.interrupt();
-    }
-
-    public void run() {
-        while (isOn) {
-            /*try {
-                Message message = (Message) ois.readObject();
-                switch (message.getRequestType()) {
-                    case ALL_COMPANIES:
-                        ArrayList<Company> updatedCompanies = message.getCompanyList();
-                        System.out.println("");
-                }
-
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-                // si hi ha algun problema satura la comunicacio amb el servidor
-                stopClientNetwork();
-            }
+    public void sendPort() {
+        try {
+            port = 10000 + (int)(Math.random() * ((65535 - 10000) + 1));
+            oos.writeInt(port);
+            oos.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        stopClientNetwork();*/
-        }
+    }
+
+    public int getPort() {
+        return port;
     }
 
     public boolean registraUsuari(User user) {

@@ -2,6 +2,7 @@ import Controller.LoginController;
 import Controller.PrincipalController;
 import Model.Manager;
 import Model.Network.Network;
+import Model.Network.NetworkListen;
 import View.*;
 
 public class Main {
@@ -23,6 +24,9 @@ public class Main {
         companyStocksView.registraControlador(principalController);
         myStocksWindow.registraControlador(principalController);
         todayStockWindow.registraControlador(principalController);
+        network.sendPort();
+        NetworkListen networkListen = new NetworkListen(principalController, loginController, network.getPort());
+        networkListen.startClientNetwork();
         loginView.setVisible(true);
 
     }
