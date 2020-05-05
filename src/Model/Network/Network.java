@@ -31,7 +31,6 @@ public class Network extends Thread {
     private static final int COMPANY_DETAIL = 8;
     private static final int LOGOUT = 9;
 
-    private boolean running;
     private NetworkConfiguration nc;
 
     public Network() {
@@ -54,6 +53,10 @@ public class Network extends Thread {
             e.printStackTrace();
         }
 
+    }
+
+    public boolean isOn() {
+        return isOn;
     }
 
     public void startClientNetwork() {

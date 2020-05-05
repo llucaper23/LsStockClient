@@ -15,8 +15,6 @@ public class Main {
         Manager manager = new Manager();
         Network network = new Network();
 
-
-
         PrincipalController principalController = new PrincipalController(network, loginView, companyStocksView, manager, myStocksWindow, todayStockWindow);
         LoginController loginController = new LoginController(signUpWindow, loginView, todayStockWindow, manager, network, principalController);
 
