@@ -68,4 +68,8 @@ public class Manager {
     public void setActualCompany(Company actualCompany) {
         this.actualCompany = actualCompany;
     }
+
+    public void updateCompanies(ArrayList<Company> companiesList) {
+        this.companies = companiesList;
+    }
 }

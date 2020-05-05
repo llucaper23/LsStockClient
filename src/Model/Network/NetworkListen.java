@@ -28,19 +28,17 @@ public class NetworkListen extends Thread {
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
     private boolean isOn;
+    private PrincipalController pc;
 
     public NetworkListen(PrincipalController pc, LoginController lc, int port) {
         try {
             ServerSocket socket1 = new ServerSocket(port);
             socket = socket1.accept();
             ois = new ObjectInputStream(socket.getInputStream());
+            this.pc = pc;
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public boolean isOn() {
-        return isOn;
     }
 
     public void startClientNetwork() {
@@ -62,8 +60,7 @@ public class NetworkListen extends Thread {
                 switch (message.getRequestType()) {
                     case ALL_COMPANIES:
                         ArrayList<Company> updatedCompanies = message.getCompanyList();
-                        System.out.println("");
-                        //cridar pc per actualitzar vista
+                        pc.updateCompanies(updatedCompanies);
                         break;
                     case LOGOUT:
                         stopClientNetwork();

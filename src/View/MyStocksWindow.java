@@ -46,9 +46,9 @@ public class MyStocksWindow extends JFrame {
         //JPanel panelBackground = new JPanel(new BorderLayout());
         //panelBackground.setBackground(Color.BLACK);
 
-        panelMevaBorsa.setBackground(Color.BLACK);
+        //panelMevaBorsa.setBackground(Color.BLACK);
 
-        panelInfo.setBackground(Color.BLACK);
+        //panelInfo.setBackground(Color.BLACK);
 
         //JPanel panelInfo = new JPanel();
         //panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.X_AXIS));
@@ -59,12 +59,12 @@ public class MyStocksWindow extends JFrame {
 
         //Profile photo & user name
         panelProfile.setLayout(new BoxLayout(panelProfile, BoxLayout.Y_AXIS));
-        panelProfile.setBackground(Color.BLACK);
+        //panelProfile.setBackground(Color.BLACK);
 
         labelProfileName.setText("USER");
         font = labelProfileName.getFont();
         labelProfileName.setFont(font.deriveFont(Font.BOLD, 20));
-        labelProfileName.setForeground (Color.WHITE);
+        labelProfileName.setForeground (Color.BLACK);
         labelProfileName.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
@@ -79,16 +79,16 @@ public class MyStocksWindow extends JFrame {
         //PabelSaldoActual
 
         panelSaldoAct.setLayout(new BoxLayout(panelSaldoAct, BoxLayout.X_AXIS));
-        panelSaldoAct.setBackground(Color.BLACK);
+        //panelSaldoAct.setBackground(Color.BLACK);
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
         labelSaldoActual.setForeground (Color.GRAY);
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
-        labelTotalSaldo.setForeground (Color.WHITE);
+        labelTotalSaldo.setForeground (Color.BLACK);
 
 
         //PanelAfegirSaldo
         panelAfegirS.setLayout(new BoxLayout(panelAfegirS, BoxLayout.X_AXIS));
-        panelAfegirS.setBackground(Color.BLACK);
+        //panelAfegirS.setBackground(Color.BLACK);
 
         labelAfegirSaldo.setFont(font.deriveFont(Font.BOLD, 12));
         labelAfegirSaldo.setForeground (Color.GRAY);
@@ -108,7 +108,7 @@ public class MyStocksWindow extends JFrame {
 
         JPanel panelTaula = new JPanel();
         panelTaula.setLayout(new BoxLayout(panelTaula, BoxLayout.X_AXIS));
-        panelTaula.setBackground(Color.BLACK);
+        //panelTaula.setBackground(Color.BLACK);
 
         JScrollPane scrollPane = new JScrollPane(table);
         //table.setFillsViewportHeight(true);
@@ -126,7 +126,7 @@ public class MyStocksWindow extends JFrame {
 
         //############ TÍTOL ############
         labelTitleMB.setFont(font.deriveFont(Font.BOLD, 40));
-        labelTitleMB.setForeground (Color.WHITE);
+        labelTitleMB.setForeground (Color.BLACK);
         panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
 
         this.add(panelMevaBorsa);

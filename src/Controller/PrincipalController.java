@@ -1,6 +1,7 @@
 package Controller;
 
 
+import Model.Company;
 import Model.Manager;
 import Model.Network.Network;
 import Model.User;
@@ -12,6 +13,7 @@ import View.TodayStockWindow;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class PrincipalController implements ActionListener {
 
@@ -133,6 +135,11 @@ public class PrincipalController implements ActionListener {
 
     public Manager getManager() {
         return manager;
+    }
+
+    public void updateCompanies(ArrayList<Company> companiesList) {
+        manager.updateCompanies(companiesList);
+
     }
 
     public void setManager(Manager manager) {
