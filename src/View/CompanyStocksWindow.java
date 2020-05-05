@@ -157,6 +157,10 @@ public class CompanyStocksWindow extends JFrame {
         buttonLogOut.addActionListener(principalController);
         buttonBack.setActionCommand(BACK);
         buttonBack.addActionListener(principalController);
+        buttonComprarAccions.setActionCommand(COMPRARACCIONS);
+        buttonComprarAccions.addActionListener(principalController);
+        buttonVendreAccions.setActionCommand(VENDREACCIONS);
+        buttonVendreAccions.addActionListener(principalController);
     }
 
     public void mostraMissatgeError(String error){
