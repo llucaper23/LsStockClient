@@ -7,7 +7,7 @@ import java.awt.*;
 
 public class TodayStockLine extends JPanel {
 
-    final int MAX_HEIGHT_SHARES = 700;
+    final int MAX_HEIGHT_SHARES = 600;
     final int MAX_WIDTH_SHARES = 50;
 
     private JLabel labelCompanyName = new JLabel(" ");
@@ -19,17 +19,14 @@ public class TodayStockLine extends JPanel {
     private JButton buttonSee = new JButton("SEE");
 
 
-    public TodayStockLine(/*Company company*/) {
+    public TodayStockLine(Company company) {
 
         JPanel panelBackground = new JPanel(new FlowLayout());
         panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         panelBackground.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
-        //Dins dels setText hi aniran les variables del que ens passin per la funció
-        //labelCompanyName.setText(company.getCompanyName());
-        //labelSharePrice.setText(company.getSharePrice() + " €");
-        labelCompanyName.setText("company.getCompanyName()");
-        labelSharePrice.setText("getSharePrice" + " €");
+        labelCompanyName.setText(company.getCompanyName());
+        labelSharePrice.setText(company.getSharePrice() + " €");
         labelChange.setText(" +0.08 " + "€");
         labelChangePercentage.setText(" ( " + "+0.08" + " % )");
 
@@ -56,6 +53,8 @@ public class TodayStockLine extends JPanel {
         panelBackground.add(panelCompanyName);
         panelBackground.add(panelShareInfo);
         panelBackground.add(buttonSee);
+
+        panelBackground.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         //"COLLAGE"
         this.add(panelBackground);

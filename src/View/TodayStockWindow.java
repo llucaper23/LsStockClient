@@ -22,6 +22,11 @@ public class TodayStockWindow extends JFrame {
     private float actualUserMoney;
     private ArrayList<Company> companies = new ArrayList<Company>();
 
+    JPanel panelLines = new JPanel();
+    JPanel panelShares = new JPanel();
+    JPanel panelCentral = new JPanel();
+    JPanel panelSaldo = new JPanel();
+
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
     private JLabel labelTotalSaldo = new JLabel(" ");
 
@@ -34,7 +39,6 @@ public class TodayStockWindow extends JFrame {
         configureView();
 
         //panelSaldo
-        JPanel panelSaldo = new JPanel();
         panelSaldo.setLayout(new BoxLayout(panelSaldo, BoxLayout.X_AXIS));
         panelSaldo.setBackground(Color.BLACK);
 
@@ -52,54 +56,6 @@ public class TodayStockWindow extends JFrame {
 
         panelSaldo.add(labelSaldoActual);
         panelSaldo.add(labelTotalSaldo);
-
-        //panelShares - llistat accions
-
-        JPanel panelShares = new JPanel();
-        panelShares.setBackground(Color.BLACK);
-
-        JPanel panelLines = new JPanel();
-        panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
-
-        /*for (int i = 0; i < companies.size(); i++) {
-            TodayStockLine line = new TodayStockLine(companies.get(i));
-            panelLines.add(line);
-        }*/
-
-
-        TodayStockLine line = new TodayStockLine();
-        panelLines.add(line);
-
-
-        JScrollPane scrollPane = new JScrollPane(panelLines);
-
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-
-        scrollPane.setBackground(Color.BLACK);
-        scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
-        scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
-
-        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),"TODAY SHARES");
-        title.setTitleJustification(TitledBorder.CENTER);
-        title.setTitlePosition(TitledBorder.ABOVE_TOP);
-        scrollPane.setBorder(title);
-
-        panelShares.add(scrollPane);
-
-
-        //panelCentral
-        JPanel panelCentral = new JPanel();
-        panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
-        panelCentral.setBackground(Color.BLACK);
-
-        panelCentral.add(panelShares);
-        panelCentral.add(buttonMevaBorsa);
-        panelCentral.add(panelSaldo);
-
-        //"COLLAGE"
-        this.add(panelCentral);
 
     }
 
@@ -119,6 +75,45 @@ public class TodayStockWindow extends JFrame {
         setResizable(true);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
+    }
+
+    public void updateTodayStock(){
+        panelShares.setBackground(Color.BLACK);
+        panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
+
+        for (int i = 0; i < companies.size(); i++) {
+            TodayStockLine line = new TodayStockLine(companies.get(i));
+            panelLines.add(line);
+        }
+
+        JScrollPane scrollPane = new JScrollPane(panelLines);
+
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        scrollPane.setBackground(Color.BLACK);
+        scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+        scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),"TODAY SHARES");
+        title.setTitleJustification(TitledBorder.CENTER);
+        title.setTitlePosition(TitledBorder.ABOVE_TOP);
+        scrollPane.setBorder(title);
+
+        panelShares.add(scrollPane);
+
+        //panelCentral
+        panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
+        panelCentral.setBackground(Color.BLACK);
+
+        panelCentral.add(panelShares);
+        panelCentral.add(buttonMevaBorsa);
+        panelCentral.add(buttonLogOut);
+        panelCentral.add(panelSaldo);
+
+        //"COLLAGE"
+        this.add(panelCentral);
     }
 
     public void registraControlador(PrincipalController principalController) {
