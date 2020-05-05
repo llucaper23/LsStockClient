@@ -148,7 +148,6 @@ public class MyStocksWindow extends JFrame {
 
     }
 
-
     public float getSaldoAfegir(){
         return Float.valueOf(textAfegirSaldo.getText());
     }

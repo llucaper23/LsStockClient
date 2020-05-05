@@ -3,6 +3,7 @@ package Controller;
 
 import Model.Manager;
 import Model.Network.Network;
+import Model.User;
 import Model.UserCompany;
 import View.CompanyStocksWindow;
 import View.LoginWindow;
@@ -115,9 +116,13 @@ public class PrincipalController implements ActionListener {
 
             case "AFEGIRSALDO":
                 float saldo = myStocksWindow.getSaldoAfegir();
-                manager.getActualUser().setMoney(saldo + manager.getActualUser().getMoney());
-                network.setUpdateMoney(manager.getActualUser());
-                //todayStockWindow.setSaldoActualUser(manager.getActualUser().getMoney());
+                User user = manager.getActualUser();
+                user.setMoney(user.getMoney() + saldo);
+                boolean ok = network.setUpdateMoney(user);
+                if(ok){
+                    manager.setActualUser(user);
+                    todayStockWindow.setSaldoActualUser(manager.getActualUser().getMoney());
+                }
                 break;
 
 

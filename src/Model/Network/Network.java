@@ -88,7 +88,6 @@ public class Network extends Thread {
         }
     }
 
-
     public boolean registraUsuari(User user) {
         try {
             Message message = new Message(REGISTER_REQUEST, null, user, false, null, null, null);
@@ -196,7 +195,7 @@ public class Network extends Thread {
        }
    }
 
-    public void setUpdateMoney (User actualUser) {
+   public boolean setUpdateMoney (User actualUser) {
         try {
             Message message = new Message(UPDATE_MONEY, null, actualUser, false, null, null, null);
             oos.writeObject(message);
@@ -204,11 +203,15 @@ public class Network extends Thread {
             message = (Message) ois.readObject();
             if (!message.isOk()) {
                 System.out.println("Error updating the money");
+                return false;
+            }else {
+                return true;
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-    }
+        return false;
+   }
 
     public void logout() {
         try {

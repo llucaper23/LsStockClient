@@ -42,8 +42,6 @@ public class TodayStockWindow extends JFrame {
         panelSaldo.setLayout(new BoxLayout(panelSaldo, BoxLayout.X_AXIS));
         panelSaldo.setBackground(Color.BLACK);
 
-        labelTotalSaldo.setText(actualUserMoney + " €");
-
         Font font = labelTotalSaldo.getFont();
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 16));
         labelTotalSaldo.setForeground (Color.WHITE);
@@ -54,13 +52,15 @@ public class TodayStockWindow extends JFrame {
         labelSaldoActual.setForeground (Color.GRAY);
         labelSaldoActual.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panelSaldo.add(labelSaldoActual);
-        panelSaldo.add(labelTotalSaldo);
-
+        setSaldoActualUser(actualUserMoney);
+        updateTodayStock();
     }
 
     public void setSaldoActualUser (float money) {
         actualUserMoney = money;
+        labelTotalSaldo.setText(actualUserMoney + " €");
+        panelSaldo.add(labelSaldoActual);
+        panelSaldo.add(labelTotalSaldo);
     }
 
     public void setCompanies (ArrayList<Company> companies) {

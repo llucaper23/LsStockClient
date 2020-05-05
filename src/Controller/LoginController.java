@@ -52,7 +52,6 @@ public class LoginController implements ActionListener {
                     loginView.dispose();
                     todayStockWindow.setSaldoActualUser(user.getMoney());
                     todayStockWindow.setCompanies(network.getAllCompanies());
-                    todayStockWindow.updateTodayStock();
                     todayStockWindow.setVisible(true);
                     network.startClientNetwork();
 
