@@ -53,7 +53,6 @@ public class TodayStockWindow extends JFrame {
         labelSaldoActual.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         setSaldoActualUser(actualUserMoney);
-        updateTodayStock();
     }
 
     public void setSaldoActualUser (float money) {
