@@ -72,4 +72,13 @@ public class Manager {
     public void updateCompanies(ArrayList<Company> companiesList) {
         this.companies = companiesList;
     }
+
+    public Company getCompanieFromId(int id) {
+        for (Company c : companies) {
+            if (c.getCompanyId() == id) {
+                return c;
+            }
+        }
+        return null;
+    }
 }

@@ -1,12 +1,13 @@
 package View;
 
+import Controller.PrincipalController;
 import Model.Company;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class TodayStockLine extends JPanel {
-
+    private static String SEE = "SEE";
     final int MAX_HEIGHT_SHARES = 600;
     final int MAX_WIDTH_SHARES = 50;
 
@@ -49,6 +50,7 @@ public class TodayStockLine extends JPanel {
         panelShareInfo.add(labelSharePrice);
         panelShareInfo.add(panelChange);
 
+        buttonSee.putClientProperty("company_id", company.getCompanyId());
         //panelBackground
         panelBackground.add(panelCompanyName);
         panelBackground.add(panelShareInfo);
@@ -59,6 +61,11 @@ public class TodayStockLine extends JPanel {
         //"COLLAGE"
         this.add(panelBackground);
 
+    }
+
+    public void registraControlador(PrincipalController principalController) {
+        buttonSee.setActionCommand(SEE);
+        buttonSee.addActionListener(principalController);
     }
 
 

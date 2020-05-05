@@ -15,8 +15,6 @@ public class CompanyStocksWindow extends JFrame {
     private static String COMPRARACCIONS = "COMPRARACCIONS";
     private static String VENDREACCIONS = "VENDREACCIONS";
 
-    private float actualUserMoney, priceShareActualUser;
-
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
     private JLabel labelTotalSaldo = new JLabel(" ");
@@ -40,7 +38,6 @@ public class CompanyStocksWindow extends JFrame {
 
 
         //CAPÇELERA
-        labelCompanyName.setText("COMPANY NAME");
 
         panelBackground.add(labelCompanyName, BorderLayout.NORTH);
 
@@ -51,8 +48,6 @@ public class CompanyStocksWindow extends JFrame {
         buttonComprarAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
         buttonVendreAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
 
-        labelTotalSaldo.setText(actualUserMoney + "€");
-        labelSharePrice.setText(priceShareActualUser+ " €");
 
         JPanel panelShares = new JPanel();
         panelShares.setLayout(new BoxLayout(panelShares, BoxLayout.Y_AXIS));
@@ -97,7 +92,7 @@ public class CompanyStocksWindow extends JFrame {
 
         JPanel panelGraficEspelmes = new JPanel();
         panelGraficEspelmes.setLayout(new BoxLayout(panelGraficEspelmes, BoxLayout.X_AXIS));
-        panelGraficEspelmes.setBackground(Color.BLACK);
+        //panelGraficEspelmes.setBackground(Color.BLACK);
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.getViewport().setBackground(Color.WHITE);
@@ -109,7 +104,7 @@ public class CompanyStocksWindow extends JFrame {
 
         JPanel panelInfo = new JPanel( new FlowLayout());
 
-        panelInfo.setBackground(Color.BLACK);
+        //panelInfo.setBackground(Color.BLACK);
 
         panelInfo.add(panelGraficEspelmes);
         panelInfo.add(panelShares);
@@ -144,13 +139,17 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public void setSaldoActualUser (float money) {
-        actualUserMoney = money;
+        labelSaldoActual.setText(money + " €");
     }
 
-    public void setPriceShare (float priceShare) {
-        priceShareActualUser = priceShare;
+    public void setCompanyName (String companyName) {
+        labelCompanyName.setText(companyName);
     }
 
+    public void updateCompany(float money, float priceShare) {
+        labelSaldoActual.setText(money + " €");
+        labelSharePrice.setText(priceShare + "€");
+    }
 
     public void registraControlador(PrincipalController principalController) {
 

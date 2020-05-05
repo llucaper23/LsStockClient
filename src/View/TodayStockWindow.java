@@ -68,7 +68,7 @@ public class TodayStockWindow extends JFrame {
 
     }
 
-    public void updateTodayStock(ArrayList<Company> companies){
+    public void updateTodayStock(ArrayList<Company> companies, PrincipalController principalController){
         panelShares.removeAll();
         panelLines.removeAll();
 
@@ -77,6 +77,7 @@ public class TodayStockWindow extends JFrame {
 
         for (int i = 0; i < companies.size(); i++) {
             TodayStockLine line = new TodayStockLine(companies.get(i));
+            line.registraControlador(principalController);
             panelLines.add(line);
         }
 

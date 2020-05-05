@@ -6,11 +6,9 @@ import Model.Manager;
 import Model.Network.Network;
 import Model.User;
 import Model.UserCompany;
-import View.CompanyStocksWindow;
-import View.LoginWindow;
-import View.MyStocksWindow;
-import View.TodayStockWindow;
+import View.*;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -50,7 +48,6 @@ public class PrincipalController implements ActionListener {
             case "MYACTIONS":
                 todayStockWindow.dispose();
                 myStocksWindow.setVisible(true);
-
                 usersMoney = manager.getActualUser().getMoney();
                 myStocksWindow.setSaldoActualUser(usersMoney);
                 todayStockWindow.setSaldoActualUser(usersMoney);
@@ -128,7 +125,14 @@ public class PrincipalController implements ActionListener {
                 }
                 break;
 
-
+            case "SEE":
+                int auxId = Integer.parseInt (((JButton)e.getSource()).getClientProperty("company_id").toString());
+                Company company = manager.getCompanieFromId(auxId);
+                manager.setActualCompany(company);
+                companyStocksWindow.setCompanyName(company.getCompanyName());
+                companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());
+                todayStockWindow.dispose();
+                companyStocksWindow.setVisible(true);
         }
     }
 
@@ -139,7 +143,8 @@ public class PrincipalController implements ActionListener {
 
     public void updateCompanies(ArrayList<Company> companiesList) {
         manager.updateCompanies(companiesList);
-
+        Company company = manager.getActualCompany();
+        companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());
     }
 
     public void setManager(Manager manager) {

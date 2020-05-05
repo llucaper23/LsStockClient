@@ -51,7 +51,8 @@ public class LoginController implements ActionListener {
                     System.out.println("entro login");
                     loginView.dispose();
                     todayStockWindow.setSaldoActualUser(user.getMoney());
-                    todayStockWindow.updateTodayStock(manager.getCompanies());
+                    manager.updateCompanies(network.getAllCompanies());
+                    todayStockWindow.updateTodayStock(manager.getCompanies(), this.principalController);
                     todayStockWindow.setVisible(true);
 
                     manager.setActualUser(user);
