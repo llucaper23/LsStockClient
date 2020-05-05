@@ -125,7 +125,6 @@ public class Network extends Thread {
         return null;
     }
 
-
     public void buyShares (UserCompany userCompany) {
         try {
             Message message = new Message(BUY_SHARES, null, null, false, null, userCompany, null);

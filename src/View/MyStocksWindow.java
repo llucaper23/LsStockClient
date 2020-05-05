@@ -14,6 +14,15 @@ public class MyStocksWindow extends JFrame {
 
     private float actualUserMoney;
 
+    JPanel panelProfile = new JPanel();
+    JPanel panelMevaBorsa = new JPanel(new BorderLayout());
+    JPanel panelInfo = new JPanel( new FlowLayout());
+    JPanel panelAfegirS = new JPanel();
+    JPanel panelSaldoAct = new JPanel();
+
+
+    Font font;
+
     private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
     private JLabel labelProfileName = new JLabel(" ");
@@ -37,10 +46,8 @@ public class MyStocksWindow extends JFrame {
         //JPanel panelBackground = new JPanel(new BorderLayout());
         //panelBackground.setBackground(Color.BLACK);
 
-        JPanel panelMevaBorsa = new JPanel(new BorderLayout());
         panelMevaBorsa.setBackground(Color.BLACK);
 
-        JPanel panelInfo = new JPanel( new FlowLayout());
         panelInfo.setBackground(Color.BLACK);
 
         //JPanel panelInfo = new JPanel();
@@ -51,12 +58,11 @@ public class MyStocksWindow extends JFrame {
         //############ USER PROFILE ############
 
         //Profile photo & user name
-        JPanel panelProfile = new JPanel();
         panelProfile.setLayout(new BoxLayout(panelProfile, BoxLayout.Y_AXIS));
         panelProfile.setBackground(Color.BLACK);
 
         labelProfileName.setText("USER");
-        Font font = labelProfileName.getFont();
+        font = labelProfileName.getFont();
         labelProfileName.setFont(font.deriveFont(Font.BOLD, 20));
         labelProfileName.setForeground (Color.WHITE);
         labelProfileName.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -70,25 +76,17 @@ public class MyStocksWindow extends JFrame {
         panelProfile.add(Box.createRigidArea(new Dimension(10,20)));
         panelProfile.add(labelProfileName);
 
+        //PabelSaldoActual
 
-        //PanelSaldoActual
-        JPanel panelSaldoAct = new JPanel();
         panelSaldoAct.setLayout(new BoxLayout(panelSaldoAct, BoxLayout.X_AXIS));
         panelSaldoAct.setBackground(Color.BLACK);
-
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
         labelSaldoActual.setForeground (Color.GRAY);
-
-        labelTotalSaldo.setText(actualUserMoney + " €");
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
         labelTotalSaldo.setForeground (Color.WHITE);
 
-        panelSaldoAct.add(labelSaldoActual);
-        panelSaldoAct.add(labelTotalSaldo);
-
 
         //PanelAfegirSaldo
-        JPanel panelAfegirS = new JPanel();
         panelAfegirS.setLayout(new BoxLayout(panelAfegirS, BoxLayout.X_AXIS));
         panelAfegirS.setBackground(Color.BLACK);
 
@@ -100,7 +98,6 @@ public class MyStocksWindow extends JFrame {
 
 
         //Afegim al panelProfile
-        panelProfile.add(panelSaldoAct);
         panelProfile.add(panelAfegirS);
         panelProfile.add(buttonAfegirSaldo);
         panelProfile.add(buttonBack);
@@ -154,6 +151,13 @@ public class MyStocksWindow extends JFrame {
 
     public void setSaldoActualUser (float money) {
         actualUserMoney = money;
+        labelTotalSaldo.setText(actualUserMoney + " €");
+
+        panelSaldoAct.add(labelSaldoActual);
+        panelSaldoAct.add(labelTotalSaldo);
+
+        panelProfile.add(panelSaldoAct);
+        textAfegirSaldo.setText("");
     }
 
     private void configureView () {
@@ -165,8 +169,6 @@ public class MyStocksWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
-
-
 
     public void registraControlador(PrincipalController principalController) {
         buttonLogOut.setActionCommand(LOGOUT);

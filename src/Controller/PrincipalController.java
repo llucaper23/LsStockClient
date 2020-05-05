@@ -122,6 +122,7 @@ public class PrincipalController implements ActionListener {
                 if(ok){
                     manager.setActualUser(user);
                     todayStockWindow.setSaldoActualUser(manager.getActualUser().getMoney());
+                    myStocksWindow.setSaldoActualUser(manager.getActualUser().getMoney());
                 }
                 break;
 
