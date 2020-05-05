@@ -87,4 +87,15 @@ public class History implements Serializable {
     public void setCompany_id(int company_id) {
         this.company_id = company_id;
     }
+
+    @Override
+    public String toString() {
+        return history_id +
+                ", " + max_share_price +
+                ", " + min_share_price +
+                ", " + open_share_price +
+                ", " + close_share_price +
+                ", '" + datetime + '\'' +
+                ", " + company_id;
+    }
 }

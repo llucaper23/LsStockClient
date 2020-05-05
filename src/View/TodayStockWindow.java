@@ -9,7 +9,7 @@ import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-//se li ha de passar tota la info de les diferents accions de totes les empreses, i també el saldo actual de l'usuari
+//se li ha de passar tota la info de les diferents accions de totes les empreses
 
 public class TodayStockWindow extends JFrame {
 
@@ -95,8 +95,6 @@ public class TodayStockWindow extends JFrame {
 
         //"COLLAGE"
         this.add(panelCentral);
-
-
 
     }
 

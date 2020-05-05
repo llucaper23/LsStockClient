@@ -113,6 +113,14 @@ public class PrincipalController implements ActionListener {
 
                 break;
 
+            case "AFEGIRSALDO":
+                float saldo = myStocksWindow.getSaldoAfegir();
+                manager.getActualUser().setMoney(saldo + manager.getActualUser().getMoney());
+                network.setUpdateMoney(manager.getActualUser());
+                //todayStockWindow.setSaldoActualUser(manager.getActualUser().getMoney());
+                break;
+
+
         }
     }
 

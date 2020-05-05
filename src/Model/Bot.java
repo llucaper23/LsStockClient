@@ -8,12 +8,14 @@ public class Bot implements Serializable {
     private float buyPercentage;
     private float activationTime;
     private int companyId;
+    private boolean isActive;
 
-    public Bot (int botId, float buyPercentage, float activationTime, int companyId) {
+    public Bot (int botId, float buyPercentage, float activationTime, int companyId, boolean isActive) {
         this.botId = botId;
         this.buyPercentage = buyPercentage;
         this.activationTime = activationTime;
         this.companyId = companyId;
+        this.isActive = isActive;
     }
 
     public int getBotId() {
@@ -48,11 +50,19 @@ public class Bot implements Serializable {
         this.companyId = companyId;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     @Override
     public String toString() {
-        return botId +
-                ", " + buyPercentage +
+        return buyPercentage +
                 ", " + activationTime +
-                ", " + companyId;
+                ", " + companyId +
+                ", " + isActive;
     }
 }

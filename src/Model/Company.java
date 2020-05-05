@@ -45,7 +45,7 @@ public class Company implements Serializable {
 
     @Override
     public String toString() {
-        return companyName + '\'' +
+        return "'" + companyName + '\'' +
                 ", " + sharePrice;
     }
 }
