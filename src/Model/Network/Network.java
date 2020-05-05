@@ -70,7 +70,7 @@ public class Network extends Thread {
 
     public void run() {
         while (isOn) {
-            try {
+            /*try {
                 Message message = (Message) ois.readObject();
                 switch (message.getRequestType()) {
                     case ALL_COMPANIES:
@@ -84,7 +84,8 @@ public class Network extends Thread {
                 stopClientNetwork();
             }
         }
-        stopClientNetwork();
+        stopClientNetwork();*/
+        }
     }
 
 
