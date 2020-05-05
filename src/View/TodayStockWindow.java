@@ -8,6 +8,7 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collection;
 
 //se li ha de passar tota la info de les diferents accions de totes les empreses
 
@@ -77,6 +78,9 @@ public class TodayStockWindow extends JFrame {
     }
 
     public void updateTodayStock(){
+        panelShares.removeAll();
+        panelLines.removeAll();
+
         panelShares.setBackground(Color.BLACK);
         panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
 
