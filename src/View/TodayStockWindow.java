@@ -106,9 +106,12 @@ public class TodayStockWindow extends JFrame {
         panelCentral.add(buttonMevaBorsa);
         panelCentral.add(buttonLogOut);
         panelCentral.add(panelSaldo);
-
+        panelCentral.revalidate();
+        panelCentral.repaint();
         //"COLLAGE"
         this.add(panelCentral);
+        this.revalidate();
+        this.repaint();
     }
 
     public void registraControlador(PrincipalController principalController) {

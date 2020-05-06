@@ -81,7 +81,7 @@ public class PrincipalController implements ActionListener {
 
                 //if (sharePrice * sharesToBuy) < moneyUser
                 if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
-                    UserCompany userCompany = new UserCompany(manager.getActualUser().getUser_id(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsComprar(), manager.getActualCompany().getSharePrice());
+                    UserCompany userCompany = new UserCompany(manager.getActualUser().getUserId(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsComprar(), manager.getActualCompany().getSharePrice());
                     network.buyShares(userCompany);
                     float updatedMoney = manager.getActualUser().getMoney() - (companyStocksWindow.getNumAccionsComprar()*manager.getActualCompany().getSharePrice());
                     manager.getActualUser().setMoney(updatedMoney);
@@ -99,7 +99,7 @@ public class PrincipalController implements ActionListener {
 
                 //if (sharesToSell < userSharesActualCompany)
                 if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompanyShares().getQuantity())) {
-                    UserCompany userCompany = new UserCompany(manager.getActualUser().getUser_id(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsVendre(), manager.getActualCompany().getSharePrice());
+                    UserCompany userCompany = new UserCompany(manager.getActualUser().getUserId(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsVendre(), manager.getActualCompany().getSharePrice());
                     network.sellShares(userCompany);
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
                     manager.getActualUser().setMoney(updatedMoney);
@@ -143,8 +143,13 @@ public class PrincipalController implements ActionListener {
 
     public void updateCompanies(ArrayList<Company> companiesList) {
         manager.updateCompanies(companiesList);
-        Company company = manager.getActualCompany();
-        companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());
+
+        if (companyStocksWindow.isVisible()) {
+            manager.updateActualComapny();
+            Company company = manager.getActualCompany();
+            companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());
+        }
+        todayStockWindow.updateTodayStock(companiesList, this);
     }
 
     public void setManager(Manager manager) {

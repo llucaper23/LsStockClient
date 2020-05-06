@@ -149,6 +149,7 @@ public class CompanyStocksWindow extends JFrame {
     public void updateCompany(float money, float priceShare) {
         labelSaldoActual.setText(money + " €");
         labelSharePrice.setText(priceShare + "€");
+
     }
 
     public void registraControlador(PrincipalController principalController) {

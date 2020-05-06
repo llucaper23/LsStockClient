@@ -81,4 +81,12 @@ public class Manager {
         }
         return null;
     }
+
+    public void updateActualComapny() {
+        for (Company c : companies) {
+            if (c.getCompanyId() == actualCompany.getCompanyId()) {
+                actualCompany = c;
+            }
+        }
+    }
 }
