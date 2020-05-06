@@ -1,9 +1,13 @@
 package View;
 
 import Controller.PrincipalController;
+import Model.User;
+import Model.UserCompany;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 //haurà de rebre el nom del usuari, el saldo actual i les accions que té de totes les empreses
 public class MyStocksWindow extends JFrame {
@@ -14,12 +18,16 @@ public class MyStocksWindow extends JFrame {
 
     private float actualUserMoney;
 
+    final int MAX_HEIGHT_SHARES = 700;
+    final int MAX_WIDTH_SHARES = 400;
+
     JPanel panelProfile = new JPanel();
     JPanel panelMevaBorsa = new JPanel(new BorderLayout());
     JPanel panelInfo = new JPanel( new FlowLayout());
     JPanel panelAfegirS = new JPanel();
     JPanel panelSaldoAct = new JPanel();
-
+    JPanel panelShares = new JPanel();
+    JPanel panelLines = new JPanel();
 
     Font font;
 
@@ -43,31 +51,21 @@ public class MyStocksWindow extends JFrame {
 
         configureView();
 
-        //JPanel panelBackground = new JPanel(new BorderLayout());
-        //panelBackground.setBackground(Color.BLACK);
+        //############ TÍTOL ############
+        font = labelTitleMB.getFont();
+        labelTitleMB.setFont(font.deriveFont(Font.BOLD, 40));
+        labelTitleMB.setForeground (Color.BLACK);
 
-        //panelMevaBorsa.setBackground(Color.BLACK);
+        //############ USER PROFILE  - part dreta ############
 
-        //panelInfo.setBackground(Color.BLACK);
-
-        //JPanel panelInfo = new JPanel();
-        //panelInfo.setLayout(new BoxLayout(panelInfo, BoxLayout.X_AXIS));
-        //panelInfo.setBackground(Color.BLACK);
-
-
-        //############ USER PROFILE ############
-
-        //Profile photo & user name
-        panelProfile.setLayout(new BoxLayout(panelProfile, BoxLayout.Y_AXIS));
-        //panelProfile.setBackground(Color.BLACK);
-
-        labelProfileName.setText("USER");
+        //Profile name
         font = labelProfileName.getFont();
         labelProfileName.setFont(font.deriveFont(Font.BOLD, 20));
         labelProfileName.setForeground (Color.BLACK);
         labelProfileName.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
+        //Profile photo
+        panelProfile.setLayout(new BoxLayout(panelProfile, BoxLayout.Y_AXIS));
         labelProfilePhoto = new JLabel(getProfilePhoto());
         labelProfilePhoto.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -76,10 +74,9 @@ public class MyStocksWindow extends JFrame {
         panelProfile.add(Box.createRigidArea(new Dimension(10,20)));
         panelProfile.add(labelProfileName);
 
-        //PabelSaldoActual
 
+        //PabelSaldoActual
         panelSaldoAct.setLayout(new BoxLayout(panelSaldoAct, BoxLayout.X_AXIS));
-        //panelSaldoAct.setBackground(Color.BLACK);
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
         labelSaldoActual.setForeground (Color.GRAY);
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
@@ -88,7 +85,6 @@ public class MyStocksWindow extends JFrame {
 
         //PanelAfegirSaldo
         panelAfegirS.setLayout(new BoxLayout(panelAfegirS, BoxLayout.X_AXIS));
-        //panelAfegirS.setBackground(Color.BLACK);
 
         labelAfegirSaldo.setFont(font.deriveFont(Font.BOLD, 12));
         labelAfegirSaldo.setForeground (Color.GRAY);
@@ -104,33 +100,47 @@ public class MyStocksWindow extends JFrame {
         panelProfile.add(buttonLogOut);
 
 
-        //############ TAULA ############
+    }
 
-        JPanel panelTaula = new JPanel();
-        panelTaula.setLayout(new BoxLayout(panelTaula, BoxLayout.X_AXIS));
-        //panelTaula.setBackground(Color.BLACK);
+    public void updateMyStocks(ArrayList<UserCompany> companies, PrincipalController principalController){
+        panelShares.removeAll();
+        panelLines.removeAll();
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        //table.setFillsViewportHeight(true);
-        scrollPane.getViewport().setBackground(Color.WHITE);
-        panelTaula.add(scrollPane);
+        panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
 
+        for (int i = 0; i < companies.size(); i++) {
+            MyStocksLine line = new MyStocksLine(companies.get(i));
+            line.registraControlador(principalController);
+            panelLines.add(line);
+        }
 
-        //Afegim al panelInfo
-        panelInfo.add(panelTaula);
+        JScrollPane scrollPane = new JScrollPane(panelLines);
+
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+        scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(),"MY SHARES");
+        title.setTitleJustification(TitledBorder.CENTER);
+        title.setTitlePosition(TitledBorder.ABOVE_TOP);
+        scrollPane.setBorder(title);
+
+        panelShares.add(scrollPane);
+
+        panelInfo.add(panelShares);
         panelInfo.add(panelProfile);
 
-
+        panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
         panelMevaBorsa.add(panelInfo, BorderLayout.CENTER);
 
 
-        //############ TÍTOL ############
-        labelTitleMB.setFont(font.deriveFont(Font.BOLD, 40));
-        labelTitleMB.setForeground (Color.BLACK);
-        panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
-
+        //"COLLAGE"
         this.add(panelMevaBorsa);
-
+        this.revalidate();
+        this.repaint();
 
     }
 
@@ -160,9 +170,13 @@ public class MyStocksWindow extends JFrame {
         textAfegirSaldo.setText("");
     }
 
+    public void setUserName (User user) {
+        labelProfileName.setText(user.getNickName());
+    }
+
     private void configureView () {
 
-        setSize(900,500);
+        setSize(900,600);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(true);
@@ -179,3 +193,4 @@ public class MyStocksWindow extends JFrame {
         buttonAfegirSaldo.addActionListener(principalController);
     }
 }
+

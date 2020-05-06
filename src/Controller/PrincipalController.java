@@ -53,6 +53,9 @@ public class PrincipalController implements ActionListener {
                 todayStockWindow.setSaldoActualUser(usersMoney);
                 companyStocksWindow.setSaldoActualUser(usersMoney);
 
+                myStocksWindow.setUserName(manager.getActualUser());
+                myStocksWindow.updateMyStocks(network.getUserCompanies(), this);
+
                 break;
 
             case "BACKMYSTOCK":

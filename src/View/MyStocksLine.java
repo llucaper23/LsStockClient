@@ -1,10 +1,18 @@
 package View;
 
+import Controller.PrincipalController;
+import Model.UserCompany;
+
 import javax.swing.*;
 import java.awt.*;
 
 //A aquesta classe se li passara tota la info, i crearà una "línia" cada cop que se la cridi
-public class MyStocksLine extends JFrame {
+public class MyStocksLine extends JPanel {
+
+    private static String SELL = "SELL";
+
+    final int MAX_HEIGHT_SHARES = 600;
+    final int MAX_WIDTH_SHARES = 50;
 
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSharePrice = new JLabel(" ");
@@ -15,18 +23,18 @@ public class MyStocksLine extends JFrame {
 
     private JButton buttonSell =  new JButton("SELL");
 
-    public MyStocksLine () {
-
-        configureView();
+    public MyStocksLine (UserCompany company) {
 
         JPanel panelBackground = new JPanel(new FlowLayout());
+        panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+        panelBackground.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
         //Dins dels setText hi aniran les variables del que ens passin per la funció
-        labelCompanyName.setText("COMPANY NAME");
-        labelSharePrice.setText("321.98"+ " €");
+        labelCompanyName.setText("COMPANY NAME hardcoded");
+        labelSharePrice.setText(String.valueOf(company.getBuyPrice()) + " €");
         labelProfitLoss.setText("Profit/Loss: ");
-        labelPLValue.setText("-11.45");
-        labelNumShares.setText("14 ");
+        labelPLValue.setText("-11.45 hardcoded");
+        labelNumShares.setText(String.valueOf(company.getQuantity()));
 
         //panelCompanyName
         JPanel panelCompanyName = new JPanel();
@@ -54,6 +62,8 @@ public class MyStocksLine extends JFrame {
         panelNumShares.add(labelNumShares);
         panelNumShares.add(labelShares);
 
+        buttonSell.putClientProperty("company_id", company.getCompanyId());
+
         //panelBackground
         panelBackground.add(panelCompanyName);
         panelBackground.add(panelInfoShares);
@@ -63,16 +73,11 @@ public class MyStocksLine extends JFrame {
         //"COLLAGE"
         this.add(panelBackground);
 
-
     }
 
-    private void configureView () {
-
-        setSize(500,500);
-        setTitle("LS_STOCK");
-        setLocationRelativeTo(null);
-        setResizable(true);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
+    public void registraControlador(PrincipalController principalController) {
+        buttonSell.setActionCommand(SELL);
+        buttonSell.addActionListener(principalController);
     }
+
 }
