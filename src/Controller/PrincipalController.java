@@ -47,7 +47,7 @@ public class PrincipalController implements ActionListener {
 
             case "MYACTIONS":
                 todayStockWindow.dispose();
-                myStocksWindow.setVisible(true);
+
                 usersMoney = manager.getActualUser().getMoney();
                 myStocksWindow.setSaldoActualUser(usersMoney);
                 todayStockWindow.setSaldoActualUser(usersMoney);
@@ -55,6 +55,8 @@ public class PrincipalController implements ActionListener {
 
                 myStocksWindow.setUserName(manager.getActualUser());
                 myStocksWindow.updateMyStocks(network.getUserCompanies(), this);
+
+                myStocksWindow.setVisible(true);
 
                 break;
 

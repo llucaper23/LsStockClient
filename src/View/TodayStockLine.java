@@ -28,8 +28,8 @@ public class TodayStockLine extends JPanel {
 
         labelCompanyName.setText(company.getCompanyName());
         labelSharePrice.setText(company.getSharePrice() + " €");
-        labelChange.setText(" +0.08 " + "€");
-        labelChangePercentage.setText(" ( " + "+0.08" + " % )");
+        labelChange.setText(" +0.08 " + "€ hardcoded");
+        labelChangePercentage.setText(" ( " + "+0.08" + " % ) hardcoded");
 
         //panelCompanyName
         JPanel panelCompanyName = new JPanel();

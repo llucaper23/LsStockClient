@@ -45,11 +45,11 @@ public class MyStocksWindow extends JFrame {
     private JButton buttonLogOut = new JButton("LOG OUT");
     private JButton buttonBack = new JButton("BACK");
 
-    JTable table = new JTable(4, 4);
-
     public MyStocksWindow () {
 
         configureView();
+
+        System.out.println("Hola");
 
         //############ TÍTOL ############
         font = labelTitleMB.getFont();
@@ -135,7 +135,8 @@ public class MyStocksWindow extends JFrame {
 
         panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
         panelMevaBorsa.add(panelInfo, BorderLayout.CENTER);
-
+        panelMevaBorsa.revalidate();
+        panelMevaBorsa.repaint();
 
         //"COLLAGE"
         this.add(panelMevaBorsa);
