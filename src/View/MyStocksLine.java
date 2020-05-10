@@ -41,7 +41,7 @@ public class MyStocksLine extends JPanel {
         labelSharePrice.setText(String.valueOf(company.getBuyPrice()) + " €");
         labelProfitLoss.setText("Profit/Loss: ");
         labelPLValue.setText("-11.45 hardcoded");
-        labelNumShares.setText(String.valueOf(company.getQuantity()));
+        labelNumShares.setText(String.valueOf(company.getQuantity()) + " ");
 
         //panelCompanyName
         JPanel panelCompanyName = new JPanel();
