@@ -99,10 +99,8 @@ public class PrincipalController implements ActionListener {
 
                 break;
 
-            case "SELL":
-                int ucId = Integer.parseInt (((JButton)e.getSource()).getClientProperty("usercompany_id").toString());
-                UserCompany aux = manager.findUserCompanyById(ucId);
-                manager.setActualUserCompany(aux);
+            case "VENDREACCIONS":
+
                 if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompany().getQuantity())) {
                     network.sellShares(manager.getActualUserCompany());
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
@@ -115,6 +113,18 @@ public class PrincipalController implements ActionListener {
 
                 }
 
+                break;
+
+            case "SELL":
+                int ucId = Integer.parseInt (((JButton)e.getSource()).getClientProperty("usercompany_id").toString());
+                UserCompany aux = manager.findUserCompanyById(ucId);
+                manager.setActualUserCompany(aux);
+                network.sellShares(aux);
+                float updatedMoney = manager.getActualUser().getMoney() + (manager.getActualUserCompany().getQuantity() * manager.getActualCompany().getSharePrice());
+                manager.getActualUser().setMoney(updatedMoney);
+                network.setUpdateMoney(manager.getActualUser());
+                //manager.updateUserCompanies(network.getUserCompanies());
+                //myStocksWindow.updateMyStocks(manager.getUserCompanies(), manager.getCompanies(), this);
                 break;
 
             case "AFEGIRSALDO":
