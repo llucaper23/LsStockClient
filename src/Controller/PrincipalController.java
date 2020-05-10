@@ -106,7 +106,7 @@ public class PrincipalController implements ActionListener {
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
                     manager.getActualUser().setMoney(updatedMoney);
                     network.setUpdateMoney(manager.getActualUser());
-
+                    manager.updateUserCompanies(network.getUserCompanies());
                 } else {
                     System.out.println("No shares");
                     companyStocksWindow.mostraMissatgeError("Error. Estàs intentant vendre més accions de les que disposes");
@@ -120,11 +120,13 @@ public class PrincipalController implements ActionListener {
                 UserCompany aux = manager.findUserCompanyById(ucId);
                 manager.setActualUserCompany(aux);
                 network.sellShares(aux);
-                float updatedMoney = manager.getActualUser().getMoney() + (manager.getActualUserCompany().getQuantity() * manager.getActualCompany().getSharePrice());
+
+                float updatedMoney = manager.getActualUser().getMoney() + (manager.getActualUserCompany().getQuantity() * manager.getCompanieFromId(aux.getCompanyId()).getSharePrice());
                 manager.getActualUser().setMoney(updatedMoney);
                 network.setUpdateMoney(manager.getActualUser());
-                //manager.updateUserCompanies(network.getUserCompanies());
-                //myStocksWindow.updateMyStocks(manager.getUserCompanies(), manager.getCompanies(), this);
+                manager.updateUserCompanies(network.getUserCompanies());
+                myStocksWindow.setSaldoActualUser(updatedMoney);
+                myStocksWindow.updateMyStocks(manager.getUserCompanies(), manager.getCompanies(), this);
                 break;
 
             case "AFEGIRSALDO":
