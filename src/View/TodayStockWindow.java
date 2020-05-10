@@ -60,7 +60,7 @@ public class TodayStockWindow extends JFrame {
 
     private void configureView () {
 
-        setSize(900,600);
+        setSize(1100,500);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(true);

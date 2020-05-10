@@ -1,10 +1,12 @@
 package View;
 
 import Controller.PrincipalController;
+import Model.Company;
 import Model.UserCompany;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 //A aquesta classe se li passara tota la info, i crearà una "línia" cada cop que se la cridi
 public class MyStocksLine extends JPanel {
@@ -23,14 +25,19 @@ public class MyStocksLine extends JPanel {
 
     private JButton buttonSell =  new JButton("SELL");
 
-    public MyStocksLine (UserCompany company) {
+    public MyStocksLine (UserCompany company, ArrayList<Company> allCompanies) {
 
         JPanel panelBackground = new JPanel(new FlowLayout());
         panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         panelBackground.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
-        //Dins dels setText hi aniran les variables del que ens passin per la funció
-        labelCompanyName.setText("COMPANY NAME hardcoded");
+
+        for (int i = 0; i < allCompanies.size(); i++) {
+            if (company.getCompanyId() == allCompanies.get(i).getCompanyId()) {
+                labelCompanyName.setText(allCompanies.get(i).getCompanyName());
+            }
+        }
+
         labelSharePrice.setText(String.valueOf(company.getBuyPrice()) + " €");
         labelProfitLoss.setText("Profit/Loss: ");
         labelPLValue.setText("-11.45 hardcoded");

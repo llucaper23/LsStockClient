@@ -1,6 +1,7 @@
 package View;
 
 import Controller.PrincipalController;
+import Model.Company;
 import Model.User;
 import Model.UserCompany;
 
@@ -31,7 +32,7 @@ public class MyStocksWindow extends JFrame {
 
     Font font;
 
-    private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
+    //private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
     private JLabel labelProfileName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("Saldo actual : ");
@@ -48,13 +49,6 @@ public class MyStocksWindow extends JFrame {
     public MyStocksWindow () {
 
         configureView();
-
-        System.out.println("Hola");
-
-        //############ TÍTOL ############
-        font = labelTitleMB.getFont();
-        labelTitleMB.setFont(font.deriveFont(Font.BOLD, 40));
-        labelTitleMB.setForeground (Color.BLACK);
 
         //############ USER PROFILE  - part dreta ############
 
@@ -78,7 +72,7 @@ public class MyStocksWindow extends JFrame {
         //PabelSaldoActual
         panelSaldoAct.setLayout(new BoxLayout(panelSaldoAct, BoxLayout.X_AXIS));
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
-        labelSaldoActual.setForeground (Color.GRAY);
+        labelSaldoActual.setForeground (Color.BLACK);
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
         labelTotalSaldo.setForeground (Color.BLACK);
 
@@ -102,14 +96,14 @@ public class MyStocksWindow extends JFrame {
 
     }
 
-    public void updateMyStocks(ArrayList<UserCompany> companies, PrincipalController principalController){
+    public void updateMyStocks(ArrayList<UserCompany> companies, ArrayList<Company> allCompanies, PrincipalController principalController){
         panelShares.removeAll();
         panelLines.removeAll();
 
         panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
 
         for (int i = 0; i < companies.size(); i++) {
-            MyStocksLine line = new MyStocksLine(companies.get(i));
+            MyStocksLine line = new MyStocksLine(companies.get(i), allCompanies);
             line.registraControlador(principalController);
             panelLines.add(line);
         }
@@ -133,7 +127,7 @@ public class MyStocksWindow extends JFrame {
         panelInfo.add(panelShares);
         panelInfo.add(panelProfile);
 
-        panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
+        //panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
         panelMevaBorsa.add(panelInfo, BorderLayout.CENTER);
         panelMevaBorsa.revalidate();
         panelMevaBorsa.repaint();
@@ -177,7 +171,7 @@ public class MyStocksWindow extends JFrame {
 
     private void configureView () {
 
-        setSize(900,600);
+        setSize(1100,500);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(true);
