@@ -135,7 +135,11 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public int getNumAccionsVendre() {
-        return Integer.parseInt(textVendreAccions.getText());
+        if (textVendreAccions.getText().equalsIgnoreCase("")){
+            return 0;
+        }else{
+            return Integer.parseInt(textVendreAccions.getText());
+        }
     }
 
     public void setSaldoActualUser (float money) {

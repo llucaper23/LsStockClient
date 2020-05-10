@@ -100,7 +100,7 @@ public class PrincipalController implements ActionListener {
 
                 break;
 
-            case "VENDREACCIONS":
+            case "SELL":
 
                 //if (sharesToSell < userSharesActualCompany)
                 if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompanyShares().getQuantity())) {
