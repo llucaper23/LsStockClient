@@ -3,6 +3,7 @@ package View;
 import Controller.PrincipalController;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 //haurà de rebre el nom de la companya, el preu de les accions i el saldo actual
@@ -10,13 +11,26 @@ import java.awt.*;
 
 public class CompanyStocksWindow extends JFrame {
 
+    final int MAX_HEIGHT_SHARES = 700;
+    final int MAX_WIDTH_SHARES = 400;
+
     private static String LOGOUT = "LOGOUT";
     private static String BACK = "BACKCOMPANY";
     private static String COMPRARACCIONS = "COMPRARACCIONS";
     private static String VENDREACCIONS = "VENDREACCIONS";
 
+    JPanel panelBackground = new JPanel(new BorderLayout());
+    JPanel panelShares = new JPanel();
+    JPanel panelCA = new JPanel();
+    JPanel panelVA = new JPanel();
+    JPanel panelSA = new JPanel();
+    JPanel panelGraficEspelmes = new JPanel();
+    JPanel panelInfo = new JPanel(new FlowLayout());
+
+    Font font;
+
     private JLabel labelCompanyName = new JLabel(" ");
-    private JLabel labelSaldoActual = new JLabel("SALDO ACTUAL: ");
+    private JLabel labelSaldoActual = new JLabel("Saldo actual : ");
     private JLabel labelTotalSaldo = new JLabel(" ");
     private JLabel labelSharePrice = new JLabel(" ");
 
@@ -28,14 +42,9 @@ public class CompanyStocksWindow extends JFrame {
     private JTextField textComprarAccions = new JTextField(10);
     private JTextField textVendreAccions = new JTextField(10);
 
-    JTable table = new JTable(4, 4);
-
     public CompanyStocksWindow () {
 
         configureView();
-
-        JPanel panelBackground = new JPanel(new BorderLayout());
-
 
         //CAPÇELERA
 
@@ -49,30 +58,26 @@ public class CompanyStocksWindow extends JFrame {
         buttonVendreAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
 
 
-        JPanel panelShares = new JPanel();
         panelShares.setLayout(new BoxLayout(panelShares, BoxLayout.Y_AXIS));
 
+        font = labelSaldoActual.getFont();
+        labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
+        labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
 
         panelShares.add(labelSharePrice);
 
-        JPanel panelCA = new JPanel();
         panelCA.setLayout(new BoxLayout(panelCA, BoxLayout.X_AXIS));
-
         panelCA.add(textComprarAccions);
         panelCA.add(buttonComprarAccions);
 
-        JPanel panelVA = new JPanel();
         panelVA.setLayout(new BoxLayout(panelVA, BoxLayout.X_AXIS));
-
         panelVA.add(textVendreAccions);
         panelVA.add(buttonVendreAccions);
 
         panelShares.add(panelCA);
         panelShares.add(panelVA);
 
-        JPanel panelSA = new JPanel();
         panelSA.setLayout(new BoxLayout(panelSA, BoxLayout.X_AXIS));
-
         panelSA.add(labelSaldoActual);
         panelSA.add(labelTotalSaldo);
 
@@ -88,25 +93,27 @@ public class CompanyStocksWindow extends JFrame {
         panelShares.add(buttonBack);
 
 
-        //panelGraficEspelmes - ara mateix hi ha una taula que s'haura de canviar pel gràfic
+        //panelGraficEspelmes
 
-        JPanel panelGraficEspelmes = new JPanel();
-        panelGraficEspelmes.setLayout(new BoxLayout(panelGraficEspelmes, BoxLayout.X_AXIS));
-        //panelGraficEspelmes.setBackground(Color.BLACK);
 
-        JScrollPane scrollPane = new JScrollPane(table);
-        scrollPane.getViewport().setBackground(Color.WHITE);
+        //scrollPanel
+        JScrollPane scrollPane = new JScrollPane(panelGraficEspelmes);
 
-        panelGraficEspelmes.add(scrollPane);
+        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
+        scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+        scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME");
+        title.setTitleJustification(TitledBorder.CENTER);
+        title.setTitlePosition(TitledBorder.ABOVE_TOP);
+        scrollPane.setBorder(title);
 
         //panelInfo
 
-        JPanel panelInfo = new JPanel( new FlowLayout());
-
-        //panelInfo.setBackground(Color.BLACK);
-
-        panelInfo.add(panelGraficEspelmes);
+        panelInfo.add(scrollPane);
         panelInfo.add(panelShares);
 
         //AFEGIM A BACKGROUND
@@ -115,7 +122,6 @@ public class CompanyStocksWindow extends JFrame {
 
 
         //"COLLAGE"
-
         this.add(panelBackground);
 
     }
@@ -143,7 +149,7 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public void setSaldoActualUser (float money) {
-        labelSaldoActual.setText(money + " €");
+        labelTotalSaldo.setText(money + " €");
     }
 
     public void setCompanyName (String companyName) {
@@ -151,7 +157,7 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public void updateCompany(float money, float priceShare) {
-        labelSaldoActual.setText(money + " €");
+        labelTotalSaldo.setText(money + " €");
         labelSharePrice.setText(priceShare + "€");
 
     }
