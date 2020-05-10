@@ -54,7 +54,7 @@ public class PrincipalController implements ActionListener {
                 companyStocksWindow.setSaldoActualUser(usersMoney);
 
                 myStocksWindow.setUserName(manager.getActualUser());
-                myStocksWindow.updateMyStocks(network.getUserCompanies(), network.getAllCompanies(), this);
+                myStocksWindow.updateMyStocks(manager.getUserCompanies(), manager.getCompanies(), this);
 
                 myStocksWindow.setVisible(true);
 
@@ -84,7 +84,6 @@ public class PrincipalController implements ActionListener {
 
             case "COMPRARACCIONS":
 
-                //if (sharePrice * sharesToBuy) < moneyUser
                 if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
                     UserCompany userCompany = new UserCompany(manager.getActualUser().getUserId(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsComprar(), manager.getActualCompany().getSharePrice());
                     network.buyShares(userCompany);
@@ -101,11 +100,11 @@ public class PrincipalController implements ActionListener {
                 break;
 
             case "SELL":
-
-                //if (sharesToSell < userSharesActualCompany)
-                if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompanyShares().getQuantity())) {
-                    UserCompany userCompany = new UserCompany(manager.getActualUser().getUserId(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsVendre(), manager.getActualCompany().getSharePrice());
-                    network.sellShares(userCompany);
+                int ucId = Integer.parseInt (((JButton)e.getSource()).getClientProperty("usercompany_id").toString());
+                UserCompany aux = manager.findUserCompanyById(ucId);
+                manager.setActualUserCompany(aux);
+                if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompany().getQuantity())) {
+                    network.sellShares(manager.getActualUserCompany());
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
                     manager.getActualUser().setMoney(updatedMoney);
                     network.setUpdateMoney(manager.getActualUser());
@@ -146,13 +145,17 @@ public class PrincipalController implements ActionListener {
         return manager;
     }
 
-    public void updateCompanies(ArrayList<Company> companiesList) {
+    public void updateCompanies(ArrayList<Company> companiesList, ArrayList<UserCompany> userCompanies) {
         manager.updateCompanies(companiesList);
-
+        manager.updateUserCompanies(userCompanies);
         if (companyStocksWindow.isVisible()) {
             manager.updateActualComapny();
             Company company = manager.getActualCompany();
             companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());
+        }
+        if (myStocksWindow.isVisible()) {
+            manager.updateActualUserCompany();
+            myStocksWindow.updateMyStocks(manager.getUserCompanies(), manager.getCompanies(), this);
         }
         todayStockWindow.updateTodayStock(companiesList, this);
     }

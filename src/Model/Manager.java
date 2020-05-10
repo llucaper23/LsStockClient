@@ -1,7 +1,6 @@
 package Model;
 
 import java.util.ArrayList;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Manager {
@@ -13,7 +12,8 @@ public class Manager {
     private User actualUser;
     private Company actualCompany;
     private ArrayList<Company> companies;
-    private UserCompany actualCompanyUserShares;
+    private ArrayList<UserCompany> userCompanies;
+    private UserCompany actualUserCompany;
 
     public Manager() {
 
@@ -36,7 +36,6 @@ public class Manager {
         return ok;
     }
 
-    //ActualUser -> treballem amb el usuari que ha fet el login
     public void setActualUser(User user) {
         this.actualUser = user;
     }
@@ -49,16 +48,16 @@ public class Manager {
         return companies;
     }
 
-    public void setCompanies(ArrayList<Company> companies) {
-        this.companies = companies;
+    public void setActualUserCompany(UserCompany userCompany) {
+        this.actualUserCompany = userCompany;
     }
 
-    public void setActualUserCompanyShares(UserCompany actualCompanyShares) {
-        this.actualCompanyUserShares = actualCompanyUserShares;
+    public ArrayList<UserCompany> getUserCompanies() {
+        return userCompanies;
     }
 
-    public UserCompany getActualUserCompanyShares() {
-        return actualCompanyUserShares;
+    public UserCompany getActualUserCompany() {
+        return actualUserCompany;
     }
 
     public Company getActualCompany() {
@@ -73,6 +72,11 @@ public class Manager {
         this.companies = companiesList;
     }
 
+    public void updateUserCompanies(ArrayList<UserCompany> userCompanies) {
+        this.userCompanies = userCompanies;
+    }
+
+
     public Company getCompanieFromId(int id) {
         for (Company c : companies) {
             if (c.getCompanyId() == id) {
@@ -86,6 +90,23 @@ public class Manager {
         for (Company c : companies) {
             if (c.getCompanyId() == actualCompany.getCompanyId()) {
                 actualCompany = c;
+            }
+        }
+    }
+
+    public UserCompany findUserCompanyById(int ucId) {
+        for (UserCompany uc : userCompanies) {
+            if (uc.getUserCompanyId() == ucId) {
+                return uc;
+            }
+        }
+        return null;
+    }
+
+    public void updateActualUserCompany() {
+        for (UserCompany uc : userCompanies) {
+            if (uc.getUserCompanyId() == actualUserCompany.getUserCompanyId()){
+                actualUserCompany = uc;
             }
         }
     }

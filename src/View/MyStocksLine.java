@@ -25,7 +25,7 @@ public class MyStocksLine extends JPanel {
 
     private JButton buttonSell =  new JButton("SELL");
 
-    public MyStocksLine (UserCompany company, ArrayList<Company> allCompanies) {
+    public MyStocksLine (UserCompany userCompany, ArrayList<Company> allCompanies) {
 
         JPanel panelBackground = new JPanel(new FlowLayout());
         panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
@@ -33,15 +33,15 @@ public class MyStocksLine extends JPanel {
 
 
         for (int i = 0; i < allCompanies.size(); i++) {
-            if (company.getCompanyId() == allCompanies.get(i).getCompanyId()) {
+            if (userCompany.getCompanyId() == allCompanies.get(i).getCompanyId()) {
                 labelCompanyName.setText(allCompanies.get(i).getCompanyName());
             }
         }
 
-        labelSharePrice.setText(String.valueOf(company.getBuyPrice()) + " €");
+        labelSharePrice.setText(userCompany.getBuyPrice() + " €");
         labelProfitLoss.setText("Profit/Loss: ");
         labelPLValue.setText("-11.45 hardcoded");
-        labelNumShares.setText(String.valueOf(company.getQuantity()) + " ");
+        labelNumShares.setText(userCompany.getQuantity() + " ");
 
         //panelCompanyName
         JPanel panelCompanyName = new JPanel();
@@ -69,7 +69,7 @@ public class MyStocksLine extends JPanel {
         panelNumShares.add(labelNumShares);
         panelNumShares.add(labelShares);
 
-        buttonSell.putClientProperty("company_id", company.getCompanyId());
+        buttonSell.putClientProperty("usercompany_id", userCompany.getUserCompanyId());
 
         //panelBackground
         panelBackground.add(panelCompanyName);

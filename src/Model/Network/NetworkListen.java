@@ -4,6 +4,7 @@ import Controller.LoginController;
 import Controller.PrincipalController;
 import Model.Company;
 import Model.Message;
+import Model.UserCompany;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -60,7 +61,8 @@ public class NetworkListen extends Thread {
                 switch (message.getRequestType()) {
                     case ALL_COMPANIES:
                         ArrayList<Company> updatedCompanies = message.getCompanyList();
-                        pc.updateCompanies(updatedCompanies);
+                        ArrayList<UserCompany> updatedUserCompanies = message.getUserCompanies();
+                        pc.updateCompanies(updatedCompanies, updatedUserCompanies);
                         break;
                     case LOGOUT:
                         stopClientNetwork();
