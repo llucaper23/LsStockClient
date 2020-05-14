@@ -57,8 +57,8 @@ public class CandleGraphView extends JPanel {
         Graphics2D g2 =(Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        maxAccions = getMaxAccions();
-        minAccions = getMinAccions();
+        //maxAccions = getMaxAccions();
+        //minAccions = getMinAccions();
         if (minAccions == maxAccions && minAccions !=0 && maxAccions != 10){
 
             maxAccions += 5;

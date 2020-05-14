@@ -27,6 +27,7 @@ public class Network {
     private static final int ALL_COMPANIES = 7;
     private static final int COMPANY_DETAIL = 8;
     private static final int LOGOUT = 9;
+    private static final int SELL_SOME_SHARES = 10;
 
     private int port;
     private NetworkConfiguration nc;
@@ -73,7 +74,7 @@ public class Network {
 
     public boolean registraUsuari(User user) {
         try {
-            Message message = new Message(REGISTER_REQUEST, null, user, false, null, null, null);
+            Message message = new Message(REGISTER_REQUEST, null, user, false, null, null, null, 0);
             oos.writeObject(message);
             message = (Message) ois.readObject();
             if (!message.isOk()) {
@@ -92,7 +93,7 @@ public class Network {
 
     public User loginUsuari(User user) {
         try {
-            Message message = new Message(LOGIN_REQUEST, null, user, false, null, null, null);
+            Message message = new Message(LOGIN_REQUEST, null, user, false, null, null, null, 0);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -110,7 +111,7 @@ public class Network {
 
     public void buyShares (UserCompany userCompany) {
         try {
-            Message message = new Message(BUY_SHARES, null, null, false, null, userCompany, null);
+            Message message = new Message(BUY_SHARES, null, null, false, null, userCompany, null, 0);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -126,7 +127,7 @@ public class Network {
 
     public void sellShares (UserCompany userCompany) {
         try {
-            Message message = new Message(SELL_SHARES, null, null, false, null, userCompany, null);
+            Message message = new Message(SELL_SHARES, null, null, false, null, userCompany, null, 0);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -141,7 +142,7 @@ public class Network {
 
     public ArrayList<Company> getAllCompanies(){
         try {
-            Message message = new Message(ALL_COMPANIES, null, null, false, null, null,null);
+            Message message = new Message(ALL_COMPANIES, null, null, false, null, null,null, 0);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -160,7 +161,7 @@ public class Network {
    public ArrayList<UserCompany> getUserCompanies() {
 
        try {
-           Message message = new Message(USER_COMPANIES, null, null, false, null, null,null);
+           Message message = new Message(USER_COMPANIES, null, null, false, null, null,null, 0);
            oos.writeObject(message);
            oos.flush();
            message = (Message) ois.readObject();
@@ -178,7 +179,7 @@ public class Network {
 
    public boolean setUpdateMoney (User actualUser) {
         try {
-            Message message = new Message(UPDATE_MONEY, null, actualUser, false, null, null, null);
+            Message message = new Message(UPDATE_MONEY, null, actualUser, false, null, null, null, 0);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -196,7 +197,7 @@ public class Network {
 
     public void logout() {
         try {
-            Message message = new Message(LOGOUT, null, null, false, null, null, null);
+            Message message = new Message(LOGOUT, null, null, false, null, null, null, 0);
             oos.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
@@ -205,7 +206,7 @@ public class Network {
 
     public void sellSomeShares(UserCompany userCompany, int totalAccions) {
         try {
-            Message message = new Message(SELL_SHARES, null, null, false, null, userCompany, null);
+            Message message = new Message(SELL_SOME_SHARES, null, null, false, null, userCompany, null, totalAccions);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
