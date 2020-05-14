@@ -37,7 +37,7 @@ public class CandleGraphView extends JPanel {
 
 
         //Guardem per separat el valor de les accions i el valor que anira al eix X
-        for (int i = 0; i <accions.size()/5 ; i++) {
+        for (int i = 0; i < accions.size()/5 ; i++) {
             this.accionsX[i] = accions.get(indexList);
             for (int j = 0; j < 4; j++) {
                 this.accionsValor[i][j] = Double.parseDouble(accions.get(indexList+1));
@@ -52,7 +52,7 @@ public class CandleGraphView extends JPanel {
     * pinta les dades corresponents al grafic per a la visualitzacio de l'usuari
     * */
     @Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 =(Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -78,6 +78,7 @@ public class CandleGraphView extends JPanel {
         //Guardem les posicions del punts de cada una de les barreres per tal de pintarles posteriormetn amb l'escalatge corresponent
 
         for (int i = 0; i < (accionsValor.length) ; i++) {
+
             int x1 = (int) ((i) * xScale + padding + labelPadding);
             int y1 = (int) ((maxAccions - Double.parseDouble(String.valueOf(accionsValor[i][1]))) * yScale + padding);
             int y2 = (int) ((Double.parseDouble(String.valueOf(accionsValor[i][1])) - Double.parseDouble(String.valueOf(accionsValor[i][0]))) * yScale);
@@ -87,18 +88,16 @@ public class CandleGraphView extends JPanel {
             graphPointsX.add(y2);
 
             if (accionsValor[i][2] <= accionsValor[i][3]){
-                int y3 = (int) ((maxAccions -Double.parseDouble(String.valueOf(accionsValor[i][3]))) * yScale + padding);
+                int y3 = (int) ((maxAccions - Double.parseDouble(String.valueOf(accionsValor[i][3]))) * yScale + padding);
                 graphPointsY.add(y3);
                 int y4 = (int) ((Double.parseDouble(String.valueOf(accionsValor[i][3])) - Double.parseDouble(String.valueOf(accionsValor[i][2]))) * yScale);
                 graphPointsY.add(y4);
 
             }else{
-                int y3 = (int) ((maxAccions -Double.parseDouble(String.valueOf(accionsValor[i][2]))) * yScale + padding);
+                int y3 = (int) ((maxAccions - Double.parseDouble(String.valueOf(accionsValor[i][2]))) * yScale + padding);
                 graphPointsY.add(y3);
                 int y4 = (int) ((Double.parseDouble(String.valueOf(accionsValor[i][2])) - Double.parseDouble(String.valueOf(accionsValor[i][3]))) * yScale);
                 graphPointsY.add(y4);
-
-
 
             }
 
@@ -129,95 +128,89 @@ public class CandleGraphView extends JPanel {
 
             }
         }
-            //Creem l'eix de les X
-            for (int i = 0; i < accionsValor.length; i++) {
 
-                if (accionsValor.length > 1) {
+        //Creem l'eix de les X
+        for (int i = 0; i < accionsValor.length; i++) {
 
-                    int x0 = i * (getWidth() - padding * 2 - labelPadding) / (accionsValor.length -1) + padding + labelPadding;
-                    int x1 = x0;
-                    int y0 = getHeight() - padding - labelPadding;
-                    int y1 = y0 - pointWidth;
+            if (accionsValor.length > 1) {
 
-                    if(( i % ((int)((accionsValor.length) / 20.0) + 1) + 1) == 0 ) {
-                        g2.setColor(gridColor);
-                        g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
-                        g2.setColor(Color.BLACK);
-                        String xLabel = accionsX[i];
-                        FontMetrics metrics = g2.getFontMetrics();
-                        int labelWidth = metrics.stringWidth(xLabel);
-                        g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
-                    }
+                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (accionsValor.length -1) + padding + labelPadding;
+                int x1 = x0;
+                int y0 = getHeight() - padding - labelPadding;
+                int y1 = y0 - pointWidth;
 
-                    g2.drawLine(x0, y0, x1, y1);
-
+                if(( i % ((int)((accionsValor.length) / 20.0) + 1) + 1) == 0 ) {
+                    g2.setColor(gridColor);
+                    g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
+                    g2.setColor(Color.BLACK);
+                    String xLabel = accionsX[i];
+                    FontMetrics metrics = g2.getFontMetrics();
+                    int labelWidth = metrics.stringWidth(xLabel);
+                    g2.drawString(xLabel, x0 - labelWidth / 2, y0 + metrics.getHeight() + 3);
                 }
 
-            }
-
-            g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
-
-            //Pintem les barres amb els valors de les companyies
-            int k = 0;
-
-            for(int j = 0; j < accionsValor.length; j++) {
-
-                valueQ = 0;
-
-                height = graphPointsY.get(k+1);
-                valueQ = graphPointsY.get(k);
-
-                if(accionsValor[j][2] <= accionsValor[j][3]){
-
-                    g.setColor(color[1]);
-
-                } else {
-
-                    g.setColor(color[0]);
-
-                }
-
-                g.fillRect(graphPointsX.get(j) - 1, valueQ, 2, height);
-                g.setColor(Color.BLACK);
-
-                int valueQm = 0;
-
-                if((accionsValor[j][3] - accionsValor[j][2]) > 0){
-
-                    heightm = graphPointsY.get(k+3);
-                    valueQm = graphPointsY.get(k+2);
-
-                } else {
-
-                    heightm = graphPointsY.get(k+3);
-                    valueQm = graphPointsY.get(k+2);
-
-                }
-
-                if (accionsValor[j][2] <= accionsValor[j][3]) {
-
-                    g.setColor(color[1]);
-
-                } else {
-
-                    g.setColor(color[0]);
-
-                }
-
-                g.fillRect(graphPointsX.get(j) - 4, valueQm, 8, heightm);
-                g.setColor(Color.BLACK);
-
-                k = k+4;
+                g2.drawLine(x0, y0, x1, y1);
 
             }
 
         }
 
+        g2.drawLine(padding + labelPadding, getHeight() - padding - labelPadding, getWidth() - padding, getHeight() - padding - labelPadding);
 
+        //Pintem les barres amb els valors de les companyies
+        int k = 0;
 
+        for(int j = 0; j < accionsValor.length; j++) {
 
+            valueQ = 0;
 
+            height = graphPointsY.get(k+1);
+            valueQ = graphPointsY.get(k);
 
+            if(accionsValor[j][2] <= accionsValor[j][3]){
 
+                g.setColor(color[1]);
+
+            } else {
+
+                g.setColor(color[0]);
+
+            }
+
+            g.fillRect(graphPointsX.get(j) - 1, valueQ, 2, height);
+            g.setColor(Color.BLACK);
+
+            int valueQm = 0;
+
+            if((accionsValor[j][3] - accionsValor[j][2]) > 0){
+
+                heightm = graphPointsY.get(k+3);
+                valueQm = graphPointsY.get(k+2);
+
+            } else {
+
+                heightm = graphPointsY.get(k+3);
+                valueQm = graphPointsY.get(k+2);
+
+            }
+
+            if (accionsValor[j][2] <= accionsValor[j][3]) {
+
+                g.setColor(color[1]);
+
+            } else {
+
+                g.setColor(color[0]);
+
+            }
+
+            g.fillRect(graphPointsX.get(j) - 4, valueQm, 8, heightm);
+            g.setColor(Color.BLACK);
+
+            k = k+4;
+
+        }
+
+    }
 
 }
