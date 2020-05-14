@@ -109,11 +109,12 @@ public class PrincipalController implements ActionListener {
                     }
                 }
                 if (companyStocksWindow.getNumAccionsVendre() < totalAccions) {
-                    network.sellSomeShares(manager.getActualCompany(), totalAccions);
+                    network.sellSomeShares(manager.getActualCompany(), companyStocksWindow.getNumAccionsVendre());
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
                     manager.getActualUser().setMoney(updatedMoney);
                     network.setUpdateMoney(manager.getActualUser());
                     manager.updateUserCompanies(network.getUserCompanies());
+                    companyStocksWindow.setSaldoActualUser(updatedMoney);
                 } else {
                     System.out.println("No shares");
                     companyStocksWindow.mostraMissatgeError("Error. Estàs intentant vendre més accions de les que disposes");
