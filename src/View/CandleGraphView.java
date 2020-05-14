@@ -116,7 +116,7 @@ public class CandleGraphView extends JPanel {
             int y0 = getHeight() + ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
             int y1 = y0;
 
-            if(accionsValor.length > 0) {
+            if (accionsValor.length > 0) {
                 g2.setColor(gridColor);
                 g2.drawLine(padding + labelPadding + 1 + pointWidth - 5, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
@@ -128,7 +128,7 @@ public class CandleGraphView extends JPanel {
                 g2.drawString(yLabel, x0 - labelWidth - 10, y0 + (metrics.getHeight() / 2) - 3);
 
             }
-
+        }
             //Creem l'eix de les X
             for (int i = 0; i < accionsValor.length; i++) {
 
@@ -214,7 +214,7 @@ public class CandleGraphView extends JPanel {
         }
 
 
-    }
+
 
 
 
