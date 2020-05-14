@@ -25,6 +25,10 @@ public class Message implements Serializable {
         this.numSharesToSell = numSharesToSell;
     }
 
+    public int getNumSharesToSell() {
+        return numSharesToSell;
+    }
+
     public int getRequestType() {
         return requestType;
     }
