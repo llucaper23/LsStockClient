@@ -109,21 +109,7 @@ public class PrincipalController implements ActionListener {
                     }
                 }
                 if (companyStocksWindow.getNumAccionsVendre() < totalAccions) {
-                    if (userCompanies.get(0).getQuantity() > totalAccions){
-                        network.sellSomeShares(userCompanies.get(0), totalAccions);
-                    }else{
-                        int i = 0;
-                        do {
-                            if (totalAccions > userCompanies.get(i).getQuantity()){
-                                network.sellSomeShares(userCompanies.get(i), userCompanies.get(i).getQuantity());
-                                totalAccions -= userCompanies.get(i).getQuantity();
-                            }else{
-                                network.sellSomeShares(userCompanies.get(i), totalAccions);
-                                totalAccions = 0;
-                            }
-                            i ++;
-                        }while (totalAccions != 0);
-                    }
+                    network.sellSomeShares(manager.getActualCompany(), totalAccions);
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
                     manager.getActualUser().setMoney(updatedMoney);
                     network.setUpdateMoney(manager.getActualUser());

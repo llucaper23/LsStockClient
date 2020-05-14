@@ -204,9 +204,9 @@ public class Network {
         }
     }
 
-    public void sellSomeShares(UserCompany userCompany, int totalAccions) {
+    public void sellSomeShares(Company company, int totalAccions) {
         try {
-            Message message = new Message(SELL_SOME_SHARES, null, null, false, null, userCompany, null, totalAccions);
+            Message message = new Message(SELL_SOME_SHARES, null, null, false, company, null, null, totalAccions);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
