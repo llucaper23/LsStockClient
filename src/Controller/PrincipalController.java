@@ -100,9 +100,30 @@ public class PrincipalController implements ActionListener {
                 break;
 
             case "VENDREACCIONS":
-
-                if ((companyStocksWindow.getNumAccionsVendre()) < (manager.getActualUserCompany().getQuantity())) {
-                    network.sellShares(manager.getActualUserCompany());
+                int totalAccions = 0;
+                ArrayList<UserCompany> userCompanies = new ArrayList<>();
+                for (int i = 0; i < manager.getUserCompanies().size(); i++) {
+                    if (manager.getUserCompanies().get(i).getCompanyId() == manager.getActualCompany().getCompanyId()){
+                        totalAccions += manager.getUserCompanies().get(i).getQuantity();
+                        userCompanies.add(manager.getUserCompanies().get(i));
+                    }
+                }
+                if (companyStocksWindow.getNumAccionsVendre() < totalAccions) {
+                    if (userCompanies.get(0).getQuantity() > totalAccions){
+                        network.sellSomeShares(userCompanies.get(0), totalAccions);
+                    }else{
+                        int i = 0;
+                        do {
+                            if (totalAccions > userCompanies.get(i).getQuantity()){
+                                network.sellSomeShares(userCompanies.get(i), userCompanies.get(i).getQuantity());
+                                totalAccions -= userCompanies.get(i).getQuantity();
+                            }else{
+                                network.sellSomeShares(userCompanies.get(i), totalAccions);
+                                totalAccions = 0;
+                            }
+                            i ++;
+                        }while (totalAccions != 0);
+                    }
                     float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
                     manager.getActualUser().setMoney(updatedMoney);
                     network.setUpdateMoney(manager.getActualUser());
@@ -110,7 +131,6 @@ public class PrincipalController implements ActionListener {
                 } else {
                     System.out.println("No shares");
                     companyStocksWindow.mostraMissatgeError("Error. Estàs intentant vendre més accions de les que disposes");
-
                 }
 
                 break;

@@ -137,7 +137,6 @@ public class Network {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public ArrayList<Company> getAllCompanies(){
@@ -200,6 +199,21 @@ public class Network {
             Message message = new Message(LOGOUT, null, null, false, null, null, null);
             oos.writeObject(message);
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sellSomeShares(UserCompany userCompany, int totalAccions) {
+        try {
+            Message message = new Message(SELL_SHARES, null, null, false, null, userCompany, null);
+            oos.writeObject(message);
+            oos.flush();
+            message = (Message) ois.readObject();
+            if (!message.isOk()) {
+                System.out.println("Error to sell shares");
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
