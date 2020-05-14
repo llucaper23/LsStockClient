@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
 
+
 //haurà de rebre el nom de la companya, el preu de les accions i el saldo actual
 //On hi ha la taula hi va el gràfic d'espelmes
 
@@ -177,4 +178,30 @@ public class CompanyStocksWindow extends JFrame {
     public void mostraMissatgeError(String error){
         JOptionPane.showMessageDialog(null, error);
     }
+
+    public void actualitzafinestraEspelmes(){
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
+
 }
