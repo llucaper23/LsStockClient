@@ -3,6 +3,7 @@ package Model.Network;
 import Controller.LoginController;
 import Controller.PrincipalController;
 import Model.Company;
+import Model.History;
 import Model.Message;
 import Model.UserCompany;
 
@@ -62,7 +63,8 @@ public class NetworkListen extends Thread {
                     case ALL_COMPANIES:
                         ArrayList<Company> updatedCompanies = message.getCompanyList();
                         ArrayList<UserCompany> updatedUserCompanies = message.getUserCompanies();
-                        pc.updateCompanies(updatedCompanies, updatedUserCompanies);
+                        ArrayList<History> histories = message.getHistories();
+                        pc.updateCompanies(updatedCompanies, updatedUserCompanies, histories);
                         break;
                     case LOGOUT:
                         stopClientNetwork();

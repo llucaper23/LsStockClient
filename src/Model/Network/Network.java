@@ -10,6 +10,7 @@ package Model.Network;
         import java.io.ObjectOutputStream;
         import java.net.Socket;
         import java.util.ArrayList;
+        import java.util.Collections;
 
 public class Network {
 
@@ -25,7 +26,7 @@ public class Network {
     private static final int SELL_SHARES = 5;
     private static final int USER_COMPANIES = 6;
     private static final int ALL_COMPANIES = 7;
-    private static final int COMPANY_DETAIL = 8;
+    private static final int HISTORY = 8;
     private static final int LOGOUT = 9;
     private static final int SELL_SOME_SHARES = 10;
 
@@ -74,7 +75,7 @@ public class Network {
 
     public boolean registraUsuari(User user) {
         try {
-            Message message = new Message(REGISTER_REQUEST, null, user, false, null, null, null, 0);
+            Message message = new Message(REGISTER_REQUEST, null, user, null, null, null, false, 0, null);
             oos.writeObject(message);
             message = (Message) ois.readObject();
             if (!message.isOk()) {
@@ -93,7 +94,7 @@ public class Network {
 
     public User loginUsuari(User user) {
         try {
-            Message message = new Message(LOGIN_REQUEST, null, user, false, null, null, null, 0);
+            Message message = new Message(LOGIN_REQUEST, null, user, null, null, null, false, 0, null);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -111,7 +112,7 @@ public class Network {
 
     public void buyShares (UserCompany userCompany) {
         try {
-            Message message = new Message(BUY_SHARES, null, null, false, null, userCompany, null, 0);
+            Message message = new Message(BUY_SHARES, null, null, null, userCompany, null, false, 0, null);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -127,7 +128,7 @@ public class Network {
 
     public void sellShares (UserCompany userCompany) {
         try {
-            Message message = new Message(SELL_SHARES, null, null, false, null, userCompany, null, 0);
+            Message message = new Message(SELL_SHARES, null, null, null, userCompany, null, false, 0, null);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -142,7 +143,7 @@ public class Network {
 
     public ArrayList<Company> getAllCompanies(){
         try {
-            Message message = new Message(ALL_COMPANIES, null, null, false, null, null,null, 0);
+            Message message = new Message(ALL_COMPANIES, null, null, null, null, null, false, 0, null);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -161,7 +162,7 @@ public class Network {
    public ArrayList<UserCompany> getUserCompanies() {
 
        try {
-           Message message = new Message(USER_COMPANIES, null, null, false, null, null,null, 0);
+           Message message = new Message(USER_COMPANIES, null, null, null, null, null, false, 0, null);
            oos.writeObject(message);
            oos.flush();
            message = (Message) ois.readObject();
@@ -179,7 +180,7 @@ public class Network {
 
    public boolean setUpdateMoney (User actualUser) {
         try {
-            Message message = new Message(UPDATE_MONEY, null, actualUser, false, null, null, null, 0);
+            Message message = new Message(UPDATE_MONEY, null, actualUser, null, null, null, false, 0, null);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -197,7 +198,7 @@ public class Network {
 
     public void logout() {
         try {
-            Message message = new Message(LOGOUT, null, null, false, null, null, null, 0);
+            Message message = new Message(LOGOUT, null, null, null, null, null, false, 0, null);
             oos.writeObject(message);
         } catch (IOException e) {
             e.printStackTrace();
@@ -206,7 +207,7 @@ public class Network {
 
     public void sellSomeShares(Company company, int totalAccions) {
         try {
-            Message message = new Message(SELL_SOME_SHARES, null, null, false, company, null, null, totalAccions);
+            Message message = new Message(SELL_SOME_SHARES, null, null, company, null, null, false, totalAccions, null);
             oos.writeObject(message);
             oos.flush();
             message = (Message) ois.readObject();
@@ -217,5 +218,22 @@ public class Network {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public ArrayList<History> getHistory (Company company) {
+        try {
+            Message message = new Message(HISTORY, null, null, company, null, null, false, 0, null);
+            oos.writeObject(message);
+            oos.flush();
+            message = (Message) ois.readObject();
+            if (!message.isOk()) {
+                System.out.println("Error to sell shares");
+            }
+            return message.getHistories();
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }

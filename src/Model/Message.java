@@ -13,20 +13,30 @@ public class Message implements Serializable {
     private ArrayList<UserCompany> userCompanies;
     private boolean ok;
     private int numSharesToSell;
+    private ArrayList<History> histories;
 
-    public Message(int requestType, ArrayList<Company> companyList, User user, boolean ok, Company company, UserCompany userCompany, ArrayList<UserCompany> userCompanies, int numSharesToSell) {
+    public Message(int requestType, ArrayList<Company> companyList, User user, Company company, UserCompany userCompany, ArrayList<UserCompany> userCompanies, boolean ok, int numSharesToSell, ArrayList<History> histories) {
         this.requestType = requestType;
         this.companyList = companyList;
         this.user = user;
-        this.ok = ok;
         this.company = company;
         this.userCompany = userCompany;
         this.userCompanies = userCompanies;
+        this.ok = ok;
         this.numSharesToSell = numSharesToSell;
+        this.histories = histories;
     }
 
     public int getNumSharesToSell() {
         return numSharesToSell;
+    }
+
+    public ArrayList<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(ArrayList<History> histories) {
+        this.histories = histories;
     }
 
     public int getRequestType() {

@@ -1,11 +1,8 @@
 package Controller;
 
 
-import Model.Company;
-import Model.Manager;
+import Model.*;
 import Model.Network.Network;
-import Model.User;
-import Model.UserCompany;
 import View.*;
 
 import javax.swing.*;
@@ -164,9 +161,10 @@ public class PrincipalController implements ActionListener {
         return manager;
     }
 
-    public void updateCompanies(ArrayList<Company> companiesList, ArrayList<UserCompany> userCompanies) {
+    public void updateCompanies(ArrayList<Company> companiesList, ArrayList<UserCompany> userCompanies, ArrayList<History> histories) {
         manager.updateCompanies(companiesList);
         manager.updateUserCompanies(userCompanies);
+        manager.setHistories(histories);
         if (companyStocksWindow.isVisible()) {
             manager.updateActualComapny();
             Company company = manager.getActualCompany();

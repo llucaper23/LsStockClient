@@ -14,6 +14,7 @@ public class Manager {
     private ArrayList<Company> companies;
     private ArrayList<UserCompany> userCompanies;
     private UserCompany actualUserCompany;
+    private ArrayList<History> histories;
 
     public Manager() {
 
@@ -76,6 +77,14 @@ public class Manager {
         this.userCompanies = userCompanies;
     }
 
+    public ArrayList<History> getHistories() {
+        return histories;
+    }
+
+    public void setHistories(ArrayList<History> histories) {
+        this.histories = histories;
+    }
+
 
     public Company getCompanieFromId(int id) {
         for (Company c : companies) {
@@ -110,4 +119,5 @@ public class Manager {
             }
         }
     }
+
 }
