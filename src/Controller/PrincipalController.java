@@ -149,6 +149,7 @@ public class PrincipalController implements ActionListener {
                 int auxId = Integer.parseInt (((JButton)e.getSource()).getClientProperty("company_id").toString());
                 Company company = manager.getCompanieFromId(auxId);
                 manager.setActualCompany(company);
+                manager.setHistories(network.getHistory(company)); //aqui tens tot el historial fes el que vulguis
                 companyStocksWindow.setCompanyName(company.getCompanyName());
                 companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());
                 todayStockWindow.dispose();
