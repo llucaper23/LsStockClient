@@ -47,9 +47,6 @@ public class CompanyStocksWindow extends JFrame {
 
         configureView();
 
-        //CAPÇELERA
-
-        panelBackground.add(labelCompanyName, BorderLayout.NORTH);
 
         //panelShares -> panel dreta -> compra/venta d'accions
 
@@ -107,7 +104,7 @@ public class CompanyStocksWindow extends JFrame {
         scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
-        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME");
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME" + labelCompanyName);
         title.setTitleJustification(TitledBorder.CENTER);
         title.setTitlePosition(TitledBorder.ABOVE_TOP);
         scrollPane.setBorder(title);
