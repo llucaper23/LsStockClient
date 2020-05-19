@@ -60,16 +60,22 @@ public class CandleGraphView extends JPanel {
 
         //maxAccions = getMaxAccions();
         //minAccions = getMinAccions();
+        maxAccions = 150;
+        minAccions = 0;
 
         if (minAccions == maxAccions && minAccions !=0 && maxAccions != 10){
             maxAccions += 5;
             minAccions -= 5;
         }
 
+        System.out.println(getWidth());
+        System.out.println(getHeight());
+
         // Apliquem una escala al grafic per tal d'adaptar-lo al espai que s'utilitzarà per pintar-lo.
 
         double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / ((accionsValor.length) -1 );
-        double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (maxAccions - minAccions);
+        double yScale = ((double) getHeight() - (2 * padding) - labelPadding) / (maxAccions - minAccions);
+
 
         java.util.List<Integer> graphPointsX = new ArrayList<>();
         java.util.List<Integer> graphPointsY = new ArrayList<>();
@@ -164,7 +170,7 @@ public class CandleGraphView extends JPanel {
 
             valueQ = 0;
 
-            height = graphPointsY.get(k+1);
+            height = graphPointsY.get(k); //+1
             valueQ = graphPointsY.get(k);
 
             if(accionsValor[j][2] <= accionsValor[j][3]){
