@@ -1,10 +1,13 @@
 package View;
 
 import Controller.PrincipalController;
+import Model.History;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 
 //haurà de rebre el nom de la companya, el preu de les accions i el saldo actual
@@ -43,13 +46,13 @@ public class CompanyStocksWindow extends JFrame {
     private JTextField textComprarAccions = new JTextField(10);
     private JTextField textVendreAccions = new JTextField(10);
 
+    ArrayList<String> accions = new ArrayList<>();
+
     public CompanyStocksWindow () {
 
         configureView();
 
-
         //panelShares -> panel dreta -> compra/venta d'accions
-
         textComprarAccions.setMaximumSize( textComprarAccions.getPreferredSize() );
         textVendreAccions.setMaximumSize( textVendreAccions.getPreferredSize() );
         buttonComprarAccions.setMaximumSize(buttonComprarAccions.getPreferredSize());
@@ -91,8 +94,17 @@ public class CompanyStocksWindow extends JFrame {
         panelShares.add(buttonBack);
 
 
-        //panelGraficEspelmes
+    }
 
+    public void updateCompanyStocksWindow(ArrayList<History> histories) {
+
+        panelGraficEspelmes.removeAll();
+        panelInfo.removeAll();
+
+        //panelGraficEspelmes
+        historyToString(histories);
+        CandleGraphView candlesGraph = new CandleGraphView(accions);
+        panelGraficEspelmes.add(candlesGraph);
 
         //scrollPanel
         JScrollPane scrollPane = new JScrollPane(panelGraficEspelmes);
@@ -104,8 +116,7 @@ public class CompanyStocksWindow extends JFrame {
         scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
-        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME: " + labelCompanyName);
-        title.setTitleJustification(TitledBorder.CENTER);
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME: " + this.labelCompanyName);
         title.setTitlePosition(TitledBorder.ABOVE_TOP);
         scrollPane.setBorder(title);
 
@@ -121,6 +132,8 @@ public class CompanyStocksWindow extends JFrame {
 
         //"COLLAGE"
         this.add(panelBackground);
+        this.revalidate();
+        this.repaint();
 
     }
 
@@ -172,33 +185,23 @@ public class CompanyStocksWindow extends JFrame {
         buttonVendreAccions.addActionListener(principalController);
     }
 
-    public void mostraMissatgeError(String error){
+    public void mostraMissatgeError(String error) {
         JOptionPane.showMessageDialog(null, error);
     }
 
-    public void actualitzafinestraEspelmes(){
 
+    public void historyToString(ArrayList <History> historial){
 
+        for (int i = 0; i< historial.size(); i++) {
 
+            accions.add(String.valueOf(historial.get(i).getTime()));
+            accions.add(String.valueOf(historial.get(i).getMax_share_price()));
+            accions.add(String.valueOf(historial.get(i).getMin_share_price()));
+            accions.add(String.valueOf(historial.get(i).getOpen_share_price()));
+            accions.add(String.valueOf(historial.get(i).getClose_share_price()));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        }
 
     }
-
-
-
 
 }

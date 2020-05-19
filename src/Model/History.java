@@ -11,6 +11,7 @@ public class History implements Serializable {
     private float min_share_price;
     private float open_share_price;
     private float close_share_price;
+
     private Date date;
     private Time time;
     private int companyId;
@@ -82,6 +83,22 @@ public class History implements Serializable {
 
     public void setCompanyId(int companyId) {
         this.companyId = companyId;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     @Override

@@ -2,6 +2,7 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class CandleGraphView extends JPanel {
@@ -13,7 +14,8 @@ public class CandleGraphView extends JPanel {
     private int pointWidth = 4;
     private int numberYDivisions = 10;
     private String[] accionsX;
-    private Color[] color;
+    private Color colorRed = Color.RED;
+    private Color colorGreen = Color.GREEN;
     private double[][] accionsValor;
     private int indexList;
     private int heightm;
@@ -24,19 +26,18 @@ public class CandleGraphView extends JPanel {
 
 
     /*
-    * Aquest metode separa els valors que prenen la companyia i l'imformació del eix de les X
-    *
-    * */
+     * Aquest metode separa els valors que prenen la companyia i l'informació del eix de les X
+     *
+     * */
 
-    public CandleGraphView(ArrayList<String> accions, Color[] color){
+    public CandleGraphView(ArrayList<String> accions){
 
-        this.color = color;
         indexList = 0;
         this.accionsValor = new double[accions.size()/5][4];
         this.accionsX = new String[accions.size()/5];
 
 
-        //Guardem per separat el valor de les accions i el valor que anira al eix X
+        //Guardem per separat el valor de les accions  el valor que anira al eix X
         for (int i = 0; i < accions.size()/5 ; i++) {
             this.accionsX[i] = accions.get(indexList);
             for (int j = 0; j < 4; j++) {
@@ -49,8 +50,8 @@ public class CandleGraphView extends JPanel {
     }
 
     /*
-    * pinta les dades corresponents al grafic per a la visualitzacio de l'usuari
-    * */
+     * pinta les dades corresponents al grafic per a la visualitzacio de l'usuari
+     * */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -59,11 +60,10 @@ public class CandleGraphView extends JPanel {
 
         //maxAccions = getMaxAccions();
         //minAccions = getMinAccions();
-        if (minAccions == maxAccions && minAccions !=0 && maxAccions != 10){
 
+        if (minAccions == maxAccions && minAccions !=0 && maxAccions != 10){
             maxAccions += 5;
             minAccions -= 5;
-
         }
 
         // Apliquem una escala al grafic per tal d'adaptar-lo al espai que s'utilitzarà per pintar-lo.
@@ -169,11 +169,11 @@ public class CandleGraphView extends JPanel {
 
             if(accionsValor[j][2] <= accionsValor[j][3]){
 
-                g.setColor(color[1]);
+                g.setColor(colorGreen);
 
             } else {
 
-                g.setColor(color[0]);
+                g.setColor(colorRed);
 
             }
 
@@ -196,11 +196,11 @@ public class CandleGraphView extends JPanel {
 
             if (accionsValor[j][2] <= accionsValor[j][3]) {
 
-                g.setColor(color[1]);
+                g.setColor(colorGreen);
 
             } else {
 
-                g.setColor(color[0]);
+                g.setColor(colorRed);
 
             }
 

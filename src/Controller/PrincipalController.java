@@ -150,6 +150,7 @@ public class PrincipalController implements ActionListener {
                 Company company = manager.getCompanieFromId(auxId);
                 manager.setActualCompany(company);
                 manager.setHistories(network.getHistory(company)); //aqui tens tot el historial fes el que vulguis
+                companyStocksWindow.updateCompanyStocksWindow(manager.getHistories());
                 companyStocksWindow.setCompanyName(company.getCompanyName());
                 companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());
                 todayStockWindow.dispose();
