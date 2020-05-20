@@ -74,7 +74,7 @@ public class CandleGraphView extends JPanel {
         // Apliquem una escala al grafic per tal d'adaptar-lo al espai que s'utilitzarà per pintar-lo.
 
         double xScale = ((double) getWidth() - (2 * padding) - labelPadding) / ((accionsValor.length) -1 );
-        double yScale = ((double) getHeight() - (2 * padding) - labelPadding) / (maxAccions - minAccions);
+        double yScale = ((double) getHeight() - 2 * padding - labelPadding) / (maxAccions - minAccions);
 
 
         java.util.List<Integer> graphPointsX = new ArrayList<>();
@@ -116,6 +116,7 @@ public class CandleGraphView extends JPanel {
 
         //Creem el eix de les Y
         for(int i = 0; i < numberYDivisions + 1; i++) {
+
             int x0 = padding + labelPadding;
             int x1 = pointWidth + padding + labelPadding;
             int y0 = getHeight() + ((i * (getHeight() - padding * 2 - labelPadding)) / numberYDivisions + padding + labelPadding);
@@ -126,7 +127,7 @@ public class CandleGraphView extends JPanel {
                 g2.drawLine(padding + labelPadding + 1 + pointWidth - 5, y0, getWidth() - padding, y1);
                 g2.setColor(Color.BLACK);
 
-                String yLabel = ((int) (minAccions + (maxAccions - minAccions) * ((i * 1.0) / numberYDivisions) * 100) / 100.0) + "";
+                String yLabel = (((int) ((minAccions + (maxAccions - minAccions) * ((i * 1.0) / numberYDivisions)) * 100)) / 100.0) + "";
 
                 FontMetrics metrics = g2.getFontMetrics();
                 int labelWidth = metrics.stringWidth(yLabel);
@@ -136,16 +137,16 @@ public class CandleGraphView extends JPanel {
         }
 
         //Creem l'eix de les X
-        for (int i = 0; i < accionsValor.length; i++) {
+        for (int i = 0; i < (accionsValor.length); i++) {
 
-            if (accionsValor.length > 1) {
+            if ((accionsValor.length) > 1) {
 
-                int x0 = i * (getWidth() - padding * 2 - labelPadding) / (accionsValor.length -1) + padding + labelPadding;
+                int x0 = i * (getWidth() - padding * 2 - labelPadding) / ((accionsValor.length) -1) + padding + labelPadding;
                 int x1 = x0;
                 int y0 = getHeight() - padding - labelPadding;
                 int y1 = y0 - pointWidth;
 
-                if(( i % ((int)((accionsValor.length) / 20.0) + 1) + 1) == 0 ) {
+                if(( (i) % ((int)(((accionsValor.length)) / 20.0) + 1) + 1) == 0 ) { //////////////////////////////////////////////////////
                     g2.setColor(gridColor);
                     g2.drawLine(x0, getHeight() - padding - labelPadding - 1 - pointWidth, x1, padding);
                     g2.setColor(Color.BLACK);
@@ -170,8 +171,8 @@ public class CandleGraphView extends JPanel {
 
             valueQ = 0;
 
-            height = graphPointsY.get(k); //+1
-            valueQ = graphPointsY.get(k);
+            height = 100;//graphPointsY.get(k+1);
+            valueQ = 200;//graphPointsY.get(k);
 
             if(accionsValor[j][2] <= accionsValor[j][3]){
 
@@ -190,13 +191,13 @@ public class CandleGraphView extends JPanel {
 
             if((accionsValor[j][3] - accionsValor[j][2]) > 0){
 
-                heightm = graphPointsY.get(k+3);
-                valueQm = graphPointsY.get(k+2);
+                heightm = 100;//graphPointsY.get(k+3);
+                valueQm = 300;//graphPointsY.get(k+2);
 
             } else {
 
-                heightm = graphPointsY.get(k+3);
-                valueQm = graphPointsY.get(k+2);
+                heightm = 100;//graphPointsY.get(k+3);
+                valueQm = 400;//graphPointsY.get(k+2);
 
             }
 

@@ -192,6 +192,8 @@ public class CompanyStocksWindow extends JFrame {
 
     public void historyToString(ArrayList <History> historial){
 
+        System.out.println(historial);
+
         for (int i = 0; i< historial.size(); i++) {
 
             accions.add(String.valueOf(historial.get(i).getTime()));
