@@ -2,6 +2,7 @@ package View;
 
 import Controller.PrincipalController;
 import Model.Company;
+import Model.History;
 import Model.User;
 import Model.UserCompany;
 

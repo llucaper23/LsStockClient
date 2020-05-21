@@ -101,10 +101,19 @@ public class CompanyStocksWindow extends JFrame {
         panelGraficEspelmes.removeAll();
         panelInfo.removeAll();
 
+        /*
         //panelGraficEspelmes
         historyToString(histories);
         CandleGraphView candlesGraph = new CandleGraphView(accions);
         panelGraficEspelmes.add(candlesGraph);
+
+        panelGraficEspelmes.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+        panelGraficEspelmes.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
+
+        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME: " + this.labelCompanyName);
+        title.setTitlePosition(TitledBorder.ABOVE_TOP);
+        panelGraficEspelmes.setBorder(title);
+
 
         //scrollPanel
         JScrollPane scrollPane = new JScrollPane(panelGraficEspelmes);
@@ -119,10 +128,16 @@ public class CompanyStocksWindow extends JFrame {
         TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME: " + this.labelCompanyName);
         title.setTitlePosition(TitledBorder.ABOVE_TOP);
         scrollPane.setBorder(title);
+         */
+
+        historyToString(histories);
+        HistogramPanel histogramPanel = new HistogramPanel();
+        panelGraficEspelmes.add(histogramPanel);
 
         //panelInfo
 
-        panelInfo.add(scrollPane);
+        //panelInfo.add(panelGraficEspelmes);
+        panelInfo.add(histogramPanel);
         panelInfo.add(panelShares);
 
         //AFEGIM A BACKGROUND

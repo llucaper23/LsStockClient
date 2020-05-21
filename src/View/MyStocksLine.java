@@ -2,6 +2,7 @@ package View;
 
 import Controller.PrincipalController;
 import Model.Company;
+import Model.History;
 import Model.UserCompany;
 
 import javax.swing.*;
@@ -31,16 +32,18 @@ public class MyStocksLine extends JPanel {
         panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         panelBackground.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
 
+        float profitLoss =0;
 
         for (int i = 0; i < allCompanies.size(); i++) {
             if (userCompany.getCompanyId() == allCompanies.get(i).getCompanyId()) {
                 labelCompanyName.setText(allCompanies.get(i).getCompanyName());
+                profitLoss = allCompanies.get(i).getSharePrice() - userCompany.getBuyPrice();
             }
         }
 
         labelSharePrice.setText(userCompany.getBuyPrice() + " €");
         labelProfitLoss.setText("Profit/Loss: ");
-        labelPLValue.setText("-11.45 hardcoded");
+        labelPLValue.setText(String.valueOf(profitLoss));
         labelNumShares.setText(userCompany.getQuantity() + " ");
 
         //panelCompanyName
@@ -86,5 +89,6 @@ public class MyStocksLine extends JPanel {
         buttonSell.setActionCommand(SELL);
         buttonSell.addActionListener(principalController);
     }
+
 
 }

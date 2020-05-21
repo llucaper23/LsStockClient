@@ -9,7 +9,7 @@ public class CandleGraphView extends JPanel {
 
     private int padding = 25;
     private int labelPadding = 25;
-    private Color gridColor = new Color(200,200,200,200);
+    private Color gridColor = new Color(200, 200, 200, 200);
     private static final Stroke GRAPH_STOKE = new BasicStroke(2f);
     private int pointWidth = 4;
     private int numberYDivisions = 10;
@@ -25,23 +25,24 @@ public class CandleGraphView extends JPanel {
     private double minAccions = 0;
 
 
+
     /*
      * Aquest metode separa els valors que prenen la companyia i l'informació del eix de les X
      *
      * */
 
-    public CandleGraphView(ArrayList<String> accions){
+    public CandleGraphView(ArrayList<String> accions) {
 
         indexList = 0;
-        this.accionsValor = new double[accions.size()/5][4];
-        this.accionsX = new String[accions.size()/5];
+        this.accionsValor = new double[accions.size() / 5][4];
+        this.accionsX = new String[accions.size() / 5];
 
 
         //Guardem per separat el valor de les accions  el valor que anira al eix X
-        for (int i = 0; i < accions.size()/5 ; i++) {
+        for (int i = 0; i < accions.size() / 5; i++) {
             this.accionsX[i] = accions.get(indexList);
             for (int j = 0; j < 4; j++) {
-                this.accionsValor[i][j] = Double.parseDouble(accions.get(indexList+1));
+                this.accionsValor[i][j] = Double.parseDouble(accions.get(indexList + 1));
                 indexList++;
             }
             indexList++;
@@ -49,9 +50,20 @@ public class CandleGraphView extends JPanel {
 
     }
 
+    @Override
+    protected void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setColor(new Color(255, 0, 0));
+        g2d.fillRect(300, 200, 10, 40);
+    }
+
+}
     /*
      * pinta les dades corresponents al grafic per a la visualitzacio de l'usuari
      * */
+
+
+    /*
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -221,3 +233,4 @@ public class CandleGraphView extends JPanel {
     }
 
 }
+*/
