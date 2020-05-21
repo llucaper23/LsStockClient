@@ -131,13 +131,38 @@ public class CompanyStocksWindow extends JFrame {
          */
 
         historyToString(histories);
-        HistogramPanel histogramPanel = new HistogramPanel();
-        panelGraficEspelmes.add(histogramPanel);
+
+
+        HistogramPanel panel = new HistogramPanel();
+
+        panel.setPreferredSize(new Dimension(700, 450));
+        panel.setMaximumSize(new Dimension(700, 450));
+
+        for (int i = 0; i < 10; i++) {
+
+            panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
+
+        }
+
+        panel.layoutHistogram();
+
+
+        panelGraficEspelmes.add(panel);
+        panelGraficEspelmes.setPreferredSize(new Dimension(700, 450));
+        panelGraficEspelmes.setMaximumSize(new Dimension(700, 450));
 
         //panelInfo
 
-        //panelInfo.add(panelGraficEspelmes);
-        panelInfo.add(histogramPanel);
+
+       /* JPanel panelcillo = new JPanel();
+        panelcillo.setBackground(Color.RED);
+        panelcillo.setPreferredSize(new Dimension(700, 450));
+        panelcillo.setMaximumSize(new Dimension(700, 450));
+
+        panelInfo.add(panelcillo);*/
+
+        //panelInfo.add(panel);
+        panelInfo.add(panelGraficEspelmes);
         panelInfo.add(panelShares);
 
         //AFEGIM A BACKGROUND
@@ -149,7 +174,6 @@ public class CompanyStocksWindow extends JFrame {
         this.add(panelBackground);
         this.revalidate();
         this.repaint();
-
     }
 
     private void configureView () {

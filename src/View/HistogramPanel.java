@@ -1,5 +1,7 @@
 package View;
 
+import Model.History;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -9,12 +11,13 @@ import java.util.List;
 
 public class HistogramPanel extends JPanel {            // es l'encarregat d'anr afecgint barretes , el cridarem tantes vegades com barres volguem
 
-    private int histogramHeight = 650;          // !!!el panell es redimensions segons les mides de les barres
-    private int barWidth = 110;
-    private int barGap = 10;
+    private int histogramHeight = 100 ;          // !!!el panell es redimensions segons les mides de les barres
+    private int barWidth = 35;
+    private int barGap = 8;
 
     private JPanel barPanel;
     private JPanel labelPanel;
+    private History history;
 
     private List<Bar> bars = new ArrayList<Bar>();
 
@@ -41,10 +44,21 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         add(labelPanel, BorderLayout.PAGE_END);
     }
 
-    public void addHistogramColumn(String label, float value, Color color)
+    public void addHistogramColumn(String label, float value, Color color, History history)
     {
-        Bar bar = new Bar(label, value, color);
-        bars.add( bar );
+        this.history = history;
+
+        if (history.getClose_share_price()< history.getOpen_share_price()){
+            Bar bar = new Bar(label, history.getOpen_share_price(), Color.RED);
+            bars.add( bar );
+        }else{
+            Bar bar = new Bar(label, value, Color.GREEN);
+            bars.add( bar );
+
+        }
+
+
+
     }
 
     public void layoutHistogram()
