@@ -142,7 +142,7 @@ public class MyStocksWindow extends JFrame {
 
     private ImageIcon getProfilePhoto () {
 
-        Image profilePhotoPrev = new ImageIcon("/Users/macbook/Documents/UNIVERSITAT/4T ENGINYERIA/DPO/S2 PROJECTE/PROFILE.png").getImage().getScaledInstance(100,100, Image.SCALE_SMOOTH);
+        Image profilePhotoPrev = new ImageIcon("data/PROFILE.png").getImage().getScaledInstance(100,100, Image.SCALE_SMOOTH);
 
         ImageIcon profilePhoto = new ImageIcon(profilePhotoPrev);
 
