@@ -176,10 +176,14 @@ public class PrincipalController implements ActionListener {
             manager.updateActualUserCompany();
             myStocksWindow.updateMyStocks(manager.getUserCompanies(), manager.getCompanies(), this);
         }
-        todayStockWindow.updateTodayStock(companiesList, this);
+        update5minPrice();
     }
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public void update5minPrice(){
+        todayStockWindow.updateTodayStock(manager.getCompanies(), this, network.get5MinPrice());
     }
 }

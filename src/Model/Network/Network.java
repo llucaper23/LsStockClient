@@ -29,6 +29,7 @@ public class Network {
     private static final int HISTORY = 8;
     private static final int LOGOUT = 9;
     private static final int SELL_SOME_SHARES = 10;
+    private static final int FIVE_MIN_PRICE = 11;
 
     private int port;
     private NetworkConfiguration nc;
@@ -227,10 +228,27 @@ public class Network {
             oos.flush();
             message = (Message) ois.readObject();
             if (!message.isOk()) {
-                System.out.println("Error to sell shares");
+                System.out.println("Error to get historic");
+            }else{
+                return message.getHistories();
             }
-            return message.getHistories();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
+    public ArrayList<History> get5MinPrice(){
+        try{
+            Message message = new Message(FIVE_MIN_PRICE, null, null, null, null, null, false, 0, null);
+            oos.writeObject(message);
+            oos.flush();
+            message = (Message) ois.readObject();
+            if (!message.isOk()){
+                System.out.println("Error to get 5 min price");
+            }else{
+                return message.getHistories();
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
