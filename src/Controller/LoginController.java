@@ -77,7 +77,6 @@ public class LoginController implements ActionListener {
 
             case "REGISTER":
 
-
                 User aux1 = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
                 if (comprovaUser(aux1)) {
                     ok = network.registraUsuari(aux1);
