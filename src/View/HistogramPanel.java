@@ -18,11 +18,11 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
     private JPanel barPanel;
     private JPanel labelPanel;
     private History history;
+    private float scaleHistogram;
 
     private List<Bar> bars = new ArrayList<Bar>();
 
-    public HistogramPanel()
-    {
+    public HistogramPanel() {
         setBorder( new EmptyBorder(10, 10, 10, 10) );
         setLayout( new BorderLayout() );
 
@@ -44,14 +44,14 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         add(labelPanel, BorderLayout.PAGE_END);
     }
 
-    public void addHistogramColumn(String label, float value, Color color, History history)
-    {
+    public void addHistogramColumn(String label, float value, Color color, History history, float scaleHistogram) {
         this.history = history;
+        this.scaleHistogram = scaleHistogram;
 
         if (history.getClose_share_price()< history.getOpen_share_price()){
             Bar bar = new Bar(label, history.getOpen_share_price(), Color.RED);
             bars.add( bar );
-        }else{
+        } else{
             Bar bar = new Bar(label, value, Color.GREEN);
             bars.add( bar );
 
@@ -59,8 +59,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
     }
 
-    public void layoutHistogram()
-    {
+    public void layoutHistogram() {
         barPanel.removeAll();
         labelPanel.removeAll();
 
@@ -69,8 +68,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         for (Bar bar: bars)
             maxValue = Math.max(maxValue, bar.getValue());
 
-        for (Bar bar: bars)
-        {
+        for (Bar bar: bars) {
             JLabel label = new JLabel(bar.getValue() + "");
             label.setHorizontalTextPosition(JLabel.CENTER);
             label.setHorizontalAlignment(JLabel.CENTER);
@@ -87,14 +85,13 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         }
     }
 
-    private class Bar
-    {
+    private class Bar {
+
         private String label;
         private float value;
         private Color color;
 
-        public Bar(String label, float value, Color color)
-        {
+        public Bar(String label, float value, Color color) {
             this.label = label;
             this.value = value;
             this.color = color;
@@ -116,16 +113,14 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         }
     }
 
-    private class ColorIcon implements Icon
-    {
+    private class ColorIcon implements Icon {
         private int shadow = 3;
 
         private Color color;
         private int width;
         private int height;
 
-        public ColorIcon(Color color, int width, int height)
-        {
+        public ColorIcon(Color color, int width, int height) {
             this.color = color;
             this.width = width;
             this.height = height;
@@ -141,21 +136,24 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
             return height;
         }
 
-        public void paintIcon(Component c, Graphics g, int x, int y)
-        {
+        public void paintIcon(Component c, Graphics g, int x, int y) {
 
             g.setColor(color);
             //g.fillRect(x, y, width, height);
-            g.fillRect(x, (int)history.getOpen_share_price(), width, height);
+            //g.fillRect(x, (int)history.getOpen_share_price(), width, height);
+            g.fillRect(x, (int)(history.getOpen_share_price() * scaleHistogram), width, (int) (height * scaleHistogram));
+
+            //mariconades de shadows
             //g.setColor(Color.GRAY);
             //g.fillRect(x + width - shadow, y + shadow, shadow, height - shadow);
 
             g.setColor(Color.BLACK);
             //g.drawLine(x+(width/2), y, x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
             //g.drawLine(x+(width/2), y+height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
-            g.drawLine(x+(width/2), (int)history.getOpen_share_price(), x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
-            g.drawLine(x+(width/2), (int)history.getOpen_share_price() + height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
-
+            //g.drawLine(x+(width/2), (int)history.getOpen_share_price(), x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
+            //g.drawLine(x+(width/2), (int)history.getOpen_share_price() + height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
+            g.drawLine(x+(width/2), (int)(history.getOpen_share_price() * scaleHistogram), x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
+            g.drawLine(x+(width/2), (int)((history.getOpen_share_price() + height) * scaleHistogram), x+(width/2), (int)(((y+ height) + history.getMin_share_price()) * scaleHistogram)); //linia abaix
         }
     }
 }

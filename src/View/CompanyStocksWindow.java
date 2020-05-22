@@ -130,7 +130,20 @@ public class CompanyStocksWindow extends JFrame {
         scrollPane.setBorder(title);
          */
 
-        //historyToString(histories);
+        historyToString(histories);
+        float maxA = 0, minA = 0;
+
+        for (int i = 0; i < accions.size(); i++) {
+
+            if(Float.valueOf(accions.get(i)) > maxA) {
+                maxA = Float.valueOf(accions.get(i));
+            }
+            if(Float.valueOf(accions.get(i)) < minA) {
+                minA = Float.valueOf(accions.get(i));
+            }
+        }
+
+        float scaleHistogram = (maxA-minA)/450;
 
 
         HistogramPanel panel = new HistogramPanel();
@@ -142,7 +155,7 @@ public class CompanyStocksWindow extends JFrame {
 
         for (int i = 0; i < 10; i++) {
 
-            panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  Math.abs(histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price()), Color.RED, histories.get(i));
+            panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  Math.abs(histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price()), Color.RED, histories.get(i), scaleHistogram);
             //panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
         }
 
@@ -232,7 +245,7 @@ public class CompanyStocksWindow extends JFrame {
     }
 
 
-    /*public void historyToString(ArrayList <History> historial){
+    public void historyToString(ArrayList <History> historial){
 
         System.out.println(historial);
 
@@ -246,6 +259,6 @@ public class CompanyStocksWindow extends JFrame {
 
         }
 
-    }*/
+    }
 
 }
