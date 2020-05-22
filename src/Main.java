@@ -18,15 +18,13 @@ public class Main {
 
         PrincipalController principalController = new PrincipalController(network, loginView, companyStocksView, manager, myStocksWindow, todayStockWindow);
         LoginController loginController = new LoginController(signUpWindow, loginView, todayStockWindow, manager, network, principalController);
+        principalController.setLoginController(loginController);
 
         signUpWindow.registrarControlador(loginController);
         loginView.registrarControlador(loginController);
         companyStocksView.registraControlador(principalController);
         myStocksWindow.registraControlador(principalController);
         todayStockWindow.registraControlador(principalController);
-        network.sendPort();
-        NetworkListen networkListen = new NetworkListen(principalController, loginController, network.getPort());
-        networkListen.startClientNetwork();
         loginView.setVisible(true);
 
     }

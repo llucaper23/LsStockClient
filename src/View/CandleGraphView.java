@@ -99,7 +99,7 @@ public class CandleGraphView extends JPanel {
 
             int x1 = (int) ((i) * xScale + padding + labelPadding);
             int y1 = (int) ((maxAccions - Double.parseDouble(String.valueOf(accionsValor[i][1]))) * yScale + padding);
-            int y2 = (int) ((Double.parseDouble(String.valueOf(accionsValor[i][1])) - Double.parseDouble(String.valueOf(accionsValor[i][0]))) * yScale);
+            int y2 = (int) ((accionsValor[i][1] - accionsValor[i][0]) * yScale);
 
             graphPointsX.add(x1);
             graphPointsX.add(y1);

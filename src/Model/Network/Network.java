@@ -41,18 +41,12 @@ public class Network {
         try {
             JsonReader reader = new JsonReader(new FileReader(path));
             this.nc = gson.fromJson(reader, NetworkConfiguration.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try {
             socket = new Socket(nc.getServerIp(), nc.getServerPort());
             oos = new ObjectOutputStream(socket.getOutputStream());
             ois = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
     /**
@@ -235,5 +229,15 @@ public class Network {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public void restart() {
+        try {
+            socket = new Socket(nc.getServerIp(), nc.getServerPort());
+            oos = new ObjectOutputStream(socket.getOutputStream());
+            ois = new ObjectInputStream(socket.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

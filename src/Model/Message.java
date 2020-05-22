@@ -39,7 +39,7 @@ public class Message implements Serializable {
         this.histories = histories;
     }
 
-    public int getRequestType() {
+    public synchronized int getRequestType() {
         return requestType;
     }
 

@@ -18,6 +18,7 @@ public class PrincipalController implements ActionListener {
     private Manager manager;
     private MyStocksWindow myStocksWindow;
     private TodayStockWindow todayStockWindow;
+    private LoginController loginController;
 
     public PrincipalController(Network network, LoginWindow loginView, CompanyStocksWindow companyStocksView, Manager manager, MyStocksWindow myStocksWindow, TodayStockWindow todayStockWindow) {
         this.manager = manager;
@@ -39,6 +40,8 @@ public class PrincipalController implements ActionListener {
                 companyStocksWindow.dispose();
                 myStocksWindow.dispose();
                 todayStockWindow.dispose();
+                network.restart();
+                loginController.restartNetwork();
                 loginWindow.setVisible(true);
                 break;
 
@@ -163,7 +166,7 @@ public class PrincipalController implements ActionListener {
         return manager;
     }
 
-    public void updateCompanies(ArrayList<Company> companiesList, ArrayList<UserCompany> userCompanies, ArrayList<History> histories) {
+    public synchronized void updateCompanies(ArrayList<Company> companiesList, ArrayList<UserCompany> userCompanies, ArrayList<History> histories) {
         manager.updateCompanies(companiesList);
         manager.updateUserCompanies(userCompanies);
         manager.setHistories(histories);
@@ -181,5 +184,9 @@ public class PrincipalController implements ActionListener {
 
     public void setManager(Manager manager) {
         this.manager = manager;
+    }
+
+    public void setLoginController(LoginController loginController) {
+        this.loginController = loginController;
     }
 }

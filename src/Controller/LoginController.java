@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Manager;
 import Model.Network.Network;
+import Model.Network.NetworkListen;
 import Model.User;
 import View.CompanyStocksWindow;
 import View.LoginWindow;
@@ -26,6 +27,7 @@ public class LoginController implements ActionListener {
     private Manager manager;
     private boolean ok = true;
     private PrincipalController principalController;
+    private NetworkListen networkListen;
 
     public LoginController(SignUpWindow signUpWindow, LoginWindow loginView, TodayStockWindow todayStockWindow, Manager manager, Network network, PrincipalController principalController) {
         this.signupView = signUpWindow;
@@ -34,12 +36,22 @@ public class LoginController implements ActionListener {
         this.manager = manager;
         this.network = network;
         this.principalController = principalController;
+
+        restartNetwork();
+    }
+
+    public void restartNetwork() {
+        network.sendPort();
+        networkListen = new NetworkListen(principalController, this, network.getPort());
+        networkListen.startClientNetwork();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         switch (e.getActionCommand()){
             case "LOGIN":
+
                 User aux;
                 if (loginView.isMail()){
                     aux = new User("", loginView.getName(), getMD5(loginView.getPassword()), 0, false);
@@ -48,24 +60,24 @@ public class LoginController implements ActionListener {
                 }
                 User user = network.loginUsuari(aux);
                 if (user != null) {
-                    System.out.println("entro login");
+
                     loginView.dispose();
                     todayStockWindow.setSaldoActualUser(user.getMoney());
                     manager.updateCompanies(network.getAllCompanies());
                     manager.updateUserCompanies(network.getUserCompanies());
                     todayStockWindow.updateTodayStock(manager.getCompanies(), this.principalController);
                     todayStockWindow.setVisible(true);
-
                     manager.setActualUser(user);
                     principalController.setManager(manager);
 
                 } else {
-                    System.out.println("error");
                     loginView.mostraMissatgeError("Error al fer el LogIn");
                 }
                 break;
 
             case "REGISTER":
+
+
                 User aux1 = new User(signupView.getName(), signupView.getMail(), signupView.getPassword(), 0, false);
                 if (comprovaUser(aux1)) {
                     ok = network.registraUsuari(aux1);
