@@ -193,5 +193,9 @@ public class MyStocksWindow extends JFrame {
         buttonAfegirSaldo.setActionCommand(AFEGIRSALDO);
         buttonAfegirSaldo.addActionListener(principalController);
     }
+
+    public void mostraMissatgeError(String error){
+        JOptionPane.showMessageDialog(null, error);
+    }
 }
 
