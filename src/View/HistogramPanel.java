@@ -30,7 +30,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         //Border outer = new MatteBorder(1, 1, 1, 1, Color.BLACK);
 
         TitledBorder title;
-        title = BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(), "Valor accions per Empresa");
+        title = BorderFactory.createTitledBorder(BorderFactory.createLoweredBevelBorder(), "Candlestick Chart");
         title.setTitleJustification(TitledBorder.CENTER);
 
         //Border inner = new EmptyBorder(10, 10, 0, 10);
@@ -57,8 +57,6 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
         }
 
-
-
     }
 
     public void layoutHistogram()
@@ -77,7 +75,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
             label.setHorizontalTextPosition(JLabel.CENTER);
             label.setHorizontalAlignment(JLabel.CENTER);
             label.setVerticalTextPosition(JLabel.TOP);
-            label.setVerticalAlignment(JLabel.BOTTOM);
+            label.setVerticalAlignment(JLabel.CENTER); //centrem les candeles al centre del eix x
             int barHeight = (int) ((bar.getValue() * histogramHeight) / maxValue);
             Icon icon = new ColorIcon(bar.getColor(), barWidth, barHeight);
             label.setIcon( icon );
@@ -146,11 +144,14 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         public void paintIcon(Component c, Graphics g, int x, int y)
         {
             g.setColor(color);
-            g.fillRect(x, y, width - shadow, height);
-            g.setColor(Color.GRAY);
-            g.fillRect(x + width - shadow, y + shadow, shadow, height - shadow);
+            g.fillRect(x, y, width, height);
+            //g.setColor(Color.GRAY);
+            //g.fillRect(x + width - shadow, y + shadow, shadow, height - shadow);
+
+            g.setColor(Color.BLACK);
+            g.drawLine(x+(width/2), y, x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
+            g.drawLine(x+(width/2), y+height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
+
         }
     }
-
-
 }

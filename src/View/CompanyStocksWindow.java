@@ -130,7 +130,7 @@ public class CompanyStocksWindow extends JFrame {
         scrollPane.setBorder(title);
          */
 
-        historyToString(histories);
+        //historyToString(histories);
 
 
         HistogramPanel panel = new HistogramPanel();
@@ -138,10 +138,12 @@ public class CompanyStocksWindow extends JFrame {
         panel.setPreferredSize(new Dimension(700, 450));
         panel.setMaximumSize(new Dimension(700, 450));
 
+        System.out.println(histories);
+
         for (int i = 0; i < 10; i++) {
 
+            //panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  Math.abs(histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price()), Color.RED, histories.get(i));
             panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
-
         }
 
         panel.layoutHistogram();
@@ -150,6 +152,7 @@ public class CompanyStocksWindow extends JFrame {
         panelGraficEspelmes.add(panel);
         panelGraficEspelmes.setPreferredSize(new Dimension(700, 450));
         panelGraficEspelmes.setMaximumSize(new Dimension(700, 450));
+
 
         //panelInfo
 
@@ -229,7 +232,7 @@ public class CompanyStocksWindow extends JFrame {
     }
 
 
-    public void historyToString(ArrayList <History> historial){
+    /*public void historyToString(ArrayList <History> historial){
 
         System.out.println(historial);
 
@@ -243,6 +246,6 @@ public class CompanyStocksWindow extends JFrame {
 
         }
 
-    }
+    }*/
 
 }
