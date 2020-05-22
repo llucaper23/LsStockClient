@@ -2,6 +2,7 @@ package View;
 
 import Controller.PrincipalController;
 import Model.Company;
+import Model.History;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
@@ -68,7 +69,7 @@ public class TodayStockWindow extends JFrame {
 
     }
 
-    public void updateTodayStock(ArrayList<Company> companies, PrincipalController principalController){
+    public void updateTodayStock(ArrayList<Company> companies, PrincipalController principalController, ArrayList<History> histories){
         panelShares.removeAll();
         panelLines.removeAll();
 
@@ -76,7 +77,7 @@ public class TodayStockWindow extends JFrame {
         panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
 
         for (int i = 0; i < companies.size(); i++) {
-            TodayStockLine line = new TodayStockLine(companies.get(i));
+            TodayStockLine line = new TodayStockLine(companies.get(i), histories.get(i));
             line.registraControlador(principalController);
             panelLines.add(line);
         }

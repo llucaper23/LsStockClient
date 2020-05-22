@@ -142,8 +142,8 @@ public class CompanyStocksWindow extends JFrame {
 
         for (int i = 0; i < 10; i++) {
 
-            //panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  Math.abs(histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price()), Color.RED, histories.get(i));
-            panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
+            panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  Math.abs(histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price()), Color.RED, histories.get(i));
+            //panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
         }
 
         panel.layoutHistogram();
