@@ -43,7 +43,16 @@ public class MyStocksLine extends JPanel {
 
         labelSharePrice.setText(userCompany.getBuyPrice() + " €");
         labelProfitLoss.setText("Profit/Loss: ");
-        labelPLValue.setText(String.valueOf(profitLoss));
+        labelPLValue.setText(String.format("%.2f", profitLoss) + "€");
+        if (profitLoss > 0){
+            labelPLValue.setForeground(Color.GREEN);
+        }else{
+            if (profitLoss == 0){
+                labelPLValue.setForeground(Color.GRAY);
+            }else{
+                labelPLValue.setForeground(Color.RED);
+            }
+        }
         labelNumShares.setText(userCompany.getQuantity() + " ");
 
         //panelCompanyName

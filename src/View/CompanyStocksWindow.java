@@ -133,15 +133,17 @@ public class CompanyStocksWindow extends JFrame {
         historyToString(histories);
         float maxA = 0, minA = 0;
 
-        for (int i = 0; i < accions.size(); i++) {
-
-            if(Float.valueOf(accions.get(i)) > maxA) {
-                maxA = Float.valueOf(accions.get(i));
-            }
-            if(Float.valueOf(accions.get(i)) < minA) {
-                minA = Float.valueOf(accions.get(i));
+        for (int i = 1; i < accions.size(); i++) {
+            if (!(i%5 == 0)){
+                if(Float.parseFloat(accions.get(i)) > maxA) {
+                    maxA = Float.parseFloat(accions.get(i));
+                }
+                if(Float.parseFloat(accions.get(i)) < minA) {
+                    minA = Float.parseFloat(accions.get(i));
+                }
             }
         }
+
 
         float scaleHistogram = (maxA-minA)/450;
 
