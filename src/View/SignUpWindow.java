@@ -4,10 +4,12 @@ import Controller.LoginController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.prefs.BackingStoreException;
 
 public class SignUpWindow extends JFrame {
 
     private static String REGISTER = "REGISTER";
+    private static String BACK = "BACK";
 
     private JLabel labelUsernameS = new JLabel("Username");
     private JLabel labelMailS = new JLabel("Email");
@@ -23,6 +25,7 @@ public class SignUpWindow extends JFrame {
     private JPasswordField fieldCheckPasswordS = new JPasswordField(20);
 
     private JButton buttonSignup = new JButton("Sign up");
+    private JButton buttonBack = new JButton("Back");
 
     public SignUpWindow () {
 
@@ -133,13 +136,17 @@ public class SignUpWindow extends JFrame {
         constraints.gridy = 9;
         constraints.gridwidth = 5;
         constraints.anchor = GridBagConstraints.CENTER;
-        panelSignup.add(buttonSignup, constraints);
-
+        JPanel buttons = new JPanel(new FlowLayout());
+        buttons.add(buttonSignup);
+        buttons.add(buttonBack);
+        panelSignup.add(buttons, constraints);
     }
 
     public void registrarControlador(LoginController loginController) {
         buttonSignup.setActionCommand(REGISTER);
         buttonSignup.addActionListener(loginController);
+        buttonBack.setActionCommand(BACK);
+        buttonBack.addActionListener(loginController);
     }
 
     public String getName(){

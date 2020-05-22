@@ -93,6 +93,11 @@ public class LoginController implements ActionListener {
                 loginView.dispose();
                 signupView.setVisible(true);
                 break;
+
+            case "BACK":
+                signupView.dispose();
+                loginView.setVisible(true);
+                break;
         }
     }
 
