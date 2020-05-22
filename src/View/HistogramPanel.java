@@ -143,14 +143,18 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
         public void paintIcon(Component c, Graphics g, int x, int y)
         {
+
             g.setColor(color);
-            g.fillRect(x, y, width, height);
+            //g.fillRect(x, y, width, height);
+            g.fillRect(x, (int)history.getOpen_share_price(), width, height);
             //g.setColor(Color.GRAY);
             //g.fillRect(x + width - shadow, y + shadow, shadow, height - shadow);
 
             g.setColor(Color.BLACK);
-            g.drawLine(x+(width/2), y, x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
-            g.drawLine(x+(width/2), y+height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
+            //g.drawLine(x+(width/2), y, x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
+            //g.drawLine(x+(width/2), y+height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
+            g.drawLine(x+(width/2), (int)history.getOpen_share_price(), x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
+            g.drawLine(x+(width/2), (int)history.getOpen_share_price() + height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
 
         }
     }
