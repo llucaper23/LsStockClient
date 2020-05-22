@@ -68,7 +68,7 @@ public class Network {
         return port;
     }
 
-    public boolean registraUsuari(User user) {
+    public synchronized boolean registraUsuari(User user) {
         try {
             Message message = new Message(REGISTER_REQUEST, null, user, null, null, null, false, 0, null);
             oos.writeObject(message);
@@ -87,7 +87,7 @@ public class Network {
 
     }
 
-    public User loginUsuari(User user) {
+    public synchronized User loginUsuari(User user) {
         try {
             Message message = new Message(LOGIN_REQUEST, null, user, null, null, null, false, 0, null);
             oos.writeObject(message);
@@ -105,7 +105,7 @@ public class Network {
         return null;
     }
 
-    public void buyShares (UserCompany userCompany) {
+    public synchronized void buyShares (UserCompany userCompany) {
         try {
             Message message = new Message(BUY_SHARES, null, null, null, userCompany, null, false, 0, null);
             oos.writeObject(message);
@@ -121,7 +121,7 @@ public class Network {
 
     }
 
-    public void sellShares (UserCompany userCompany) {
+    public synchronized void sellShares (UserCompany userCompany) {
         try {
             Message message = new Message(SELL_SHARES, null, null, null, userCompany, null, false, 0, null);
             oos.writeObject(message);
@@ -136,7 +136,7 @@ public class Network {
         }
     }
 
-    public ArrayList<Company> getAllCompanies(){
+    public synchronized ArrayList<Company> getAllCompanies(){
         try {
             Message message = new Message(ALL_COMPANIES, null, null, null, null, null, false, 0, null);
             oos.writeObject(message);
@@ -154,7 +154,7 @@ public class Network {
         }
     }
 
-   public ArrayList<UserCompany> getUserCompanies() {
+   public synchronized ArrayList<UserCompany> getUserCompanies() {
 
        try {
            Message message = new Message(USER_COMPANIES, null, null, null, null, null, false, 0, null);
@@ -173,7 +173,7 @@ public class Network {
        }
    }
 
-   public boolean setUpdateMoney (User actualUser) {
+   public synchronized boolean setUpdateMoney (User actualUser) {
         try {
             Message message = new Message(UPDATE_MONEY, null, actualUser, null, null, null, false, 0, null);
             oos.writeObject(message);
@@ -191,7 +191,7 @@ public class Network {
         return false;
    }
 
-    public void logout() {
+    public synchronized void logout() {
         try {
             Message message = new Message(LOGOUT, null, null, null, null, null, false, 0, null);
             oos.writeObject(message);
@@ -200,7 +200,7 @@ public class Network {
         }
     }
 
-    public void sellSomeShares(Company company, int totalAccions) {
+    public synchronized void sellSomeShares(Company company, int totalAccions) {
         try {
             Message message = new Message(SELL_SOME_SHARES, null, null, company, null, null, false, totalAccions, null);
             oos.writeObject(message);
@@ -215,7 +215,7 @@ public class Network {
         }
     }
 
-    public ArrayList<History> getHistory (Company company) {
+    public synchronized ArrayList<History> getHistory (Company company) {
         try {
             Message message = new Message(HISTORY, null, null, company, null, null, false, 0, null);
             oos.writeObject(message);
@@ -232,7 +232,7 @@ public class Network {
         return null;
     }
 
-    public ArrayList<History> get5MinPrice(){
+    public synchronized ArrayList<History> get5MinPrice(){
         try{
             Message message = new Message(FIVE_MIN_PRICE, null, null, null, null, null, false, 0, null);
             oos.writeObject(message);
