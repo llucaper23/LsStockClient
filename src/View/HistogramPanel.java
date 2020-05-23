@@ -22,13 +22,13 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
     private List<Bar> bars = new ArrayList<Bar>();
     private ArrayList<History> h = new ArrayList<>();
     private float closePrice;
-    private float maxim, minim;
+    private float candelaGran, candelaPetita, minA, maxA;
     private double scale;
 
     public HistogramPanel() {
 
         closePrice = 0;
-        minim  = maxim  = 0;
+        candelaPetita = candelaGran = 0;
 
         setBorder( new EmptyBorder(10, 10, 10, 10) );
         setLayout( new BorderLayout() );
@@ -51,9 +51,11 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         add(labelPanel, BorderLayout.PAGE_END);
     }
 
-    public void addHistogramColumn(String label, float value, Color color, History history, ArrayList<History> h) {
+    public void addHistogramColumn(String label, float value, Color color, History history, ArrayList<History> h, float minA, float maxA) {
         this.history = history;
         this.h = h;
+        this.minA = minA;
+        this.maxA = maxA;
 
         if (history.getClose_share_price()< history.getOpen_share_price()){
             Bar bar = new Bar(label, value, color); //Color.RED
@@ -77,17 +79,17 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
         for (Bar bar: bars)
             maxValue = Math.max(maxValue, bar.getValue());
-            maxim = maxValue;
+            candelaGran = maxValue;
 
         for (Bar bar: bars)
             minValue = Math.min(minValue, bar.getValue());
-            minim = minValue;
+            candelaPetita = minValue;
 
         for (Bar bar: bars) {
 
-            scale = (maxim - minim) * 0.4;
+            scale = histogramHeight / (maxA - minA);
 
-            JLabel label = new JLabel(bar.getValue() + "");
+            JLabel label = new JLabel();
             label.setHorizontalTextPosition(JLabel.CENTER);
             label.setHorizontalAlignment(JLabel.CENTER);
             label.setVerticalTextPosition(JLabel.TOP);
@@ -168,26 +170,14 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
 
-            float openPrice = 0;
-
-            if (counterAux != 0) {
-                openPrice = closePrice; //igualem el preu d'obertura al tancament de l'anterior
-
-            } else {
-                openPrice = h.get(counterAux).getOpen_share_price(); //punt 0, serà la primera candela de l'esquerra de tot.
-            }
-
-            System.out.println("OpenPrice sense escalat" + openPrice);
-
-            openPrice = openPrice / (float)scale;
-
-            System.out.println("OpenPrice amb escalat" + openPrice);
+            System.out.println(" open : " + h.get(counterAux).getOpen_share_price() + " close : " + h.get(counterAux).getClose_share_price() + " diff : " + (Math.abs(h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price())));
 
             if (color == Color.RED) { //obertura > tancament
 
                 g.setColor(Color.RED);
-                g.fillRect(x, y, width, height);
-                g.drawLine(x+(width/2), (int)openPrice, x + (width/2),  height);
+                g.fillRect(x, (int)h.get(counterAux).getClose_share_price(), width, (int)((h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price())*scale));
+                g.dispose();
+                //g.drawLine(x+(width/2), (int)openPrice, x + (width/2),  height);
 
                 //g.setColor(Color.BLACK);
                 //g.drawLine(x+(width/2), y, x + (width/2), y - (int)history.getMax_share_price()); //linia dalt
@@ -197,8 +187,9 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
             } else { //obertura < tancaments
 
                 g.setColor(Color.GREEN);
-                g.fillRect(x, y, width, height);
-                g.drawLine(x+(width/2), (int)(openPrice), x + (width/2), height); //linia dalt
+                g.fillRect(x, (int)h.get(counterAux).getOpen_share_price(), width, (int)((h.get(counterAux).getClose_share_price()-h.get(counterAux).getOpen_share_price())*scale));
+                g.dispose();
+                //g.drawLine(x+(width/2), (int)(openPrice), x + (width/2), height); //linia dalt
 
                 //g.setColor(Color.BLACK);
                 //g.drawLine(x+(width/2), y, x + (width/2), y - (int)history.getMax_share_price()); //linia dalt
@@ -207,11 +198,8 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
             }
 
 
-            closePrice = h.get(counterAux).getClose_share_price() + height;
-            System.out.println("ClosePrice" + closePrice);
-
-
         }
 
     }
+
 }
