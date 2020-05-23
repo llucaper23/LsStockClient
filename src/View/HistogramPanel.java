@@ -134,6 +134,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
             return width;
         }
 
+
         public int getIconHeight() {
             return height;
         }
