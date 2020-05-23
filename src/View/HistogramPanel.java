@@ -79,11 +79,11 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
         for (Bar bar: bars)
             maxValue = Math.max(maxValue, bar.getValue());
-            candelaGran = maxValue;
+        candelaGran = maxValue;
 
         for (Bar bar: bars)
             minValue = Math.min(minValue, bar.getValue());
-            candelaPetita = minValue;
+        candelaPetita = minValue;
 
         for (Bar bar: bars) {
 
@@ -170,12 +170,17 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
 
-            System.out.println(" open : " + h.get(counterAux).getOpen_share_price() + " close : " + h.get(counterAux).getClose_share_price() + " diff : " + (Math.abs(h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price())));
+            System.out.println(h.get(counterAux).getTime());
+            System.out.println(" open : " + h.get(counterAux).getOpen_share_price() + " close : " + h.get(counterAux).getClose_share_price() + " diff : " + (h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price()));
+
+            int open = (int)h.get(counterAux).getOpen_share_price();
+            int close = (int)h.get(counterAux).getClose_share_price();
+            int diff = (int)(Math.abs(h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price()));
 
             if (color == Color.RED) { //obertura > tancament
 
                 g.setColor(Color.RED);
-                g.fillRect(x, (int)h.get(counterAux).getClose_share_price(), width, (int)((h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price())*scale));
+                g.fillRect(x, close, width, diff);
                 g.dispose();
                 //g.drawLine(x+(width/2), (int)openPrice, x + (width/2),  height);
 
@@ -187,7 +192,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
             } else { //obertura < tancaments
 
                 g.setColor(Color.GREEN);
-                g.fillRect(x, (int)h.get(counterAux).getOpen_share_price(), width, (int)((h.get(counterAux).getClose_share_price()-h.get(counterAux).getOpen_share_price())*scale));
+                g.fillRect(x, open, width, diff);
                 g.dispose();
                 //g.drawLine(x+(width/2), (int)(openPrice), x + (width/2), height); //linia dalt
 
