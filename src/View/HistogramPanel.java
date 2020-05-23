@@ -21,10 +21,14 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
     private float scaleHistogram;
     private float maxA;
     private float minA;
+    private int yAux, closeAux, openAux, heightAux;
 
     private List<Bar> bars = new ArrayList<Bar>();
 
     public HistogramPanel() {
+
+        yAux = -1;
+
         setBorder( new EmptyBorder(10, 10, 10, 10) );
         setLayout( new BorderLayout() );
 
@@ -141,27 +145,38 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
 
-            //g.setColor(color);
-
-            System.out.println(height);
-
-            //g.fillRect(x, y, width, height);
-            if (color == Color.RED) {
-                g.setColor(Color.RED);
-                g.fillRect(x, y, width, height);
-            } else {
-                g.setColor(Color.GREEN);
-                g.fillRect(x, y, width, height);
+            if (yAux == -1) {
+                yAux = y;
+                heightAux = height;
             }
 
-            //g.fillRect(x, (int)(((history.getOpen_share_price() - minA) * 450)/(maxA-minA)), width, (int)(((height - minA) * 450)/(maxA-minA)));
+            if (color == Color.RED) { //obertura > tancament
 
-            g.setColor(Color.BLACK);
-            g.drawLine(x+(width/2), y, x + (width/2), y - (int)history.getMax_share_price()); //linia dalt
-            g.drawLine(x+(width/2),  y +height,x + (width/2), y + height + (int)history.getMin_share_price()); //linia abaix
-            //g.drawLine(x+(width/2), (int)history.getOpen_share_price(), x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
-            //g.drawLine(x+(width/2), (int)history.getOpen_share_price() + height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
+                g.setColor(Color.RED);
+                g.fillRect(x, y , width, height); //y + heightAux
 
+                g.setColor(Color.BLACK);
+                g.drawLine(x+(width/2), y, x + (width/2), y - (int)history.getMax_share_price()); //linia dalt
+                g.drawLine(x+(width/2),  y + height,x + (width/2), y + height + (int)(Math.abs(history.getMin_share_price()-history.getClose_share_price()))); //linia abaix
+
+            } else { //obertura < tancament
+
+                g.setColor(Color.GREEN);
+                g.fillRect(x, y, width, height);
+
+                g.setColor(Color.BLACK);
+                g.drawLine(x+(width/2), y, x + (width/2), y - (int)history.getMax_share_price()); //linia dalt
+                g.drawLine(x+(width/2),  y +height,x + (width/2), y + height + (int)(Math.abs(history.getMin_share_price()-history.getOpen_share_price()))); //linia abaix
+            }
+
+            System.out.println(height +"---"+ heightAux);
+            System.out.println(y +"---"+ yAux);
+
+            yAux = y;
+            openAux = (int)history.getOpen_share_price();
+            closeAux = (int)history.getClose_share_price();
+            heightAux = height;
         }
+
     }
 }
