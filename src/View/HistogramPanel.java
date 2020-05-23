@@ -11,7 +11,7 @@ import java.util.List;
 
 public class HistogramPanel extends JPanel {            // es l'encarregat d'anr afecgint barretes , el cridarem tantes vegades com barres volguem
 
-    private int histogramHeight = 100 ;          // !!!el panell es redimensions segons les mides de les barres
+    private int histogramHeight = 400 ;          // !!!el panell es redimensions segons les mides de les barres
     private int barWidth = 35;
     private int barGap = 8;
 
@@ -19,6 +19,8 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
     private JPanel labelPanel;
     private History history;
     private float scaleHistogram;
+    private float maxA;
+    private float minA;
 
     private List<Bar> bars = new ArrayList<Bar>();
 
@@ -44,9 +46,8 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         add(labelPanel, BorderLayout.PAGE_END);
     }
 
-    public void addHistogramColumn(String label, float value, Color color, History history, float scaleHistogram) {
+    public void addHistogramColumn(String label, float value, Color color, History history) {
         this.history = history;
-        this.scaleHistogram = scaleHistogram;
 
         if (history.getClose_share_price()< history.getOpen_share_price()){
             Bar bar = new Bar(label, history.getOpen_share_price(), Color.RED);
@@ -59,9 +60,12 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
     }
 
-    public void layoutHistogram() {
+    public void layoutHistogram(float maxA, float minA) {
         barPanel.removeAll();
         labelPanel.removeAll();
+
+        this.maxA = maxA;
+        this.minA = minA;
 
         float maxValue = 0;
 
@@ -126,34 +130,37 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
             this.height = height;
         }
 
-        public int getIconWidth()
-        {
+        public int getIconWidth() {
             return width;
         }
 
-        public int getIconHeight()
-        {
+        public int getIconHeight() {
             return height;
         }
 
         public void paintIcon(Component c, Graphics g, int x, int y) {
 
-            g.setColor(color);
-            //g.fillRect(x, y, width, height);
-            //g.fillRect(x, (int)history.getOpen_share_price(), width, height);
-            g.fillRect(x, (int)(history.getOpen_share_price() * scaleHistogram), width, (int) (height * scaleHistogram));
+            //g.setColor(color);
 
-            //mariconades de shadows
-            //g.setColor(Color.GRAY);
-            //g.fillRect(x + width - shadow, y + shadow, shadow, height - shadow);
+            System.out.println(height);
+
+            //g.fillRect(x, y, width, height);
+            if (color == Color.RED) {
+                g.setColor(Color.RED);
+                g.fillRect(x, y, width, height);
+            } else {
+                g.setColor(Color.GREEN);
+                g.fillRect(x, y, width, height);
+            }
+
+            //g.fillRect(x, (int)(((history.getOpen_share_price() - minA) * 450)/(maxA-minA)), width, (int)(((height - minA) * 450)/(maxA-minA)));
 
             g.setColor(Color.BLACK);
-            //g.drawLine(x+(width/2), y, x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
-            //g.drawLine(x+(width/2), y+height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
+            g.drawLine(x+(width/2), y, x + (width/2), y - (int)history.getMax_share_price()); //linia dalt
+            g.drawLine(x+(width/2),  y +height,x + (width/2), y + height + (int)history.getMin_share_price()); //linia abaix
             //g.drawLine(x+(width/2), (int)history.getOpen_share_price(), x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
             //g.drawLine(x+(width/2), (int)history.getOpen_share_price() + height, x+(width/2), y+ height + (int)history.getMin_share_price()); //linia abaix
-            g.drawLine(x+(width/2), (int)(history.getOpen_share_price() * scaleHistogram), x+(width/2), y - (int)history.getMax_share_price()); //linia dalt
-            g.drawLine(x+(width/2), (int)((history.getOpen_share_price() + height) * scaleHistogram), x+(width/2), (int)(((y+ height) + history.getMin_share_price()) * scaleHistogram)); //linia abaix
+
         }
     }
 }

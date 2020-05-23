@@ -144,10 +144,6 @@ public class CompanyStocksWindow extends JFrame {
             }
         }
 
-
-        float scaleHistogram = (maxA-minA)/450;
-
-
         HistogramPanel panel = new HistogramPanel();
 
         panel.setPreferredSize(new Dimension(700, 450));
@@ -156,21 +152,17 @@ public class CompanyStocksWindow extends JFrame {
         System.out.println(histories);
 
         for (int i = 0; i < 10; i++) {
-
-            panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  Math.abs(histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price()), Color.RED, histories.get(i), scaleHistogram);
+            panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  Math.abs(histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price()), Color.RED, histories.get(i));
             //panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
         }
 
-        panel.layoutHistogram();
-
+        panel.layoutHistogram(maxA, minA);
 
         panelGraficEspelmes.add(panel);
         panelGraficEspelmes.setPreferredSize(new Dimension(700, 450));
         panelGraficEspelmes.setMaximumSize(new Dimension(700, 450));
 
-
         //panelInfo
-
 
        /* JPanel panelcillo = new JPanel();
         panelcillo.setBackground(Color.RED);
