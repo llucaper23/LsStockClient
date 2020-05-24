@@ -6,75 +6,75 @@ import java.util.Date;
 
 public class History implements Serializable {
     private static final long serialVersionUID = 12345L;
-    private int history_id;
-    private float max_share_price;
-    private float min_share_price;
-    private float open_share_price;
-    private float close_share_price;
+    private int historyId;
+    private float maxSharePrice;
+    private float minSharePrice;
+    private float openSharePrice;
+    private float closeSharePrice;
 
     private Date date;
     private Time time;
     private int companyId;
 
-    public History(int history_id, float max_share_price, float min_share_price, float open_share_price, float close_share_price, Date date, Time time, int companyId) {
-        this.history_id = history_id;
-        this.max_share_price = max_share_price;
-        this.min_share_price = min_share_price;
-        this.open_share_price = open_share_price;
-        this.close_share_price = close_share_price;
+    public History(int historyId, float maxSharePrice, float minSharePrice, float openSharePrice, float closeSharePrice, Date date, Time time, int companyId) {
+        this.historyId = historyId;
+        this.maxSharePrice = maxSharePrice;
+        this.minSharePrice = minSharePrice;
+        this.openSharePrice = openSharePrice;
+        this.closeSharePrice = closeSharePrice;
         this.date = date;
         this.time = time;
         this.companyId = companyId;
     }
 
-    public History(float max_share_price, float min_share_price, float open_share_price, float close_share_price, Date date, Time time, int companyId) {
-        this.max_share_price = max_share_price;
-        this.min_share_price = min_share_price;
-        this.open_share_price = open_share_price;
-        this.close_share_price = close_share_price;
+    public History(float maxSharePrice, float minSharePrice, float openSharePrice, float closeSharePrice, Date date, Time time, int companyId) {
+        this.maxSharePrice = maxSharePrice;
+        this.minSharePrice = minSharePrice;
+        this.openSharePrice = openSharePrice;
+        this.closeSharePrice = closeSharePrice;
         this.date = date;
         this.time = time;
         this.companyId = companyId;
     }
 
-    public int getHistory_id() {
-        return history_id;
+    public int getHistoryId() {
+        return historyId;
     }
 
-    public void setHistory_id(int history_id) {
-        this.history_id = history_id;
+    public void setHistoryId(int historyId) {
+        this.historyId = historyId;
     }
 
-    public float getMax_share_price() {
-        return max_share_price;
+    public float getMaxSharePrice() {
+        return maxSharePrice;
     }
 
-    public void setMax_share_price(float max_share_price) {
-        this.max_share_price = max_share_price;
+    public void setMaxSharePrice(float maxSharePrice) {
+        this.maxSharePrice = maxSharePrice;
     }
 
-    public float getMin_share_price() {
-        return min_share_price;
+    public float getMinSharePrice() {
+        return minSharePrice;
     }
 
-    public void setMin_share_price(float min_share_price) {
-        this.min_share_price = min_share_price;
+    public void setMinSharePrice(float minSharePrice) {
+        this.minSharePrice = minSharePrice;
     }
 
-    public float getOpen_share_price() {
-        return open_share_price;
+    public float getOpenSharePrice() {
+        return openSharePrice;
     }
 
-    public void setOpen_share_price(float open_share_price) {
-        this.open_share_price = open_share_price;
+    public void setOpenSharePrice(float openSharePrice) {
+        this.openSharePrice = openSharePrice;
     }
 
-    public float getClose_share_price() {
-        return close_share_price;
+    public float getCloseSharePrice() {
+        return closeSharePrice;
     }
 
-    public void setClose_share_price(float close_share_price) {
-        this.close_share_price = close_share_price;
+    public void setCloseSharePrice(float closeSharePrice) {
+        this.closeSharePrice = closeSharePrice;
     }
 
     public int getCompanyId() {
@@ -103,10 +103,10 @@ public class History implements Serializable {
 
     @Override
     public String toString() {
-        return max_share_price +
-                ", " + min_share_price +
-                ", " + open_share_price +
-                ", " + close_share_price +
+        return maxSharePrice +
+                ", " + minSharePrice +
+                ", " + openSharePrice +
+                ", " + closeSharePrice +
                 ", '" + date + '\'' +
                 ", '" + time + '\'' +
                 ", " + companyId;

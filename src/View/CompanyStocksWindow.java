@@ -4,9 +4,7 @@ import Controller.PrincipalController;
 import Model.History;
 
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -153,11 +151,11 @@ public class CompanyStocksWindow extends JFrame {
 
         for (int i = 0; i < 10; i++) {
 
-            if (histories.get(i).getOpen_share_price() > histories.get(i).getClose_share_price()) {
-                panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  histories.get(i).getOpen_share_price()-histories.get(i).getClose_share_price(), Color.RED, histories.get(i), histories, minA, maxA);
+            if (histories.get(i).getOpenSharePrice() > histories.get(i).getCloseSharePrice()) {
+                panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  histories.get(i).getOpenSharePrice()-histories.get(i).getCloseSharePrice(), Color.RED, histories.get(i), histories, minA, maxA);
 
             } else {
-                panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  histories.get(i).getClose_share_price() - histories.get(i).getOpen_share_price(), Color.GREEN, histories.get(i), histories, minA, maxA);
+                panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  histories.get(i).getCloseSharePrice() - histories.get(i).getOpenSharePrice(), Color.GREEN, histories.get(i), histories, minA, maxA);
             }
 
             //panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
@@ -253,10 +251,10 @@ public class CompanyStocksWindow extends JFrame {
         for (int i = 0; i< historial.size(); i++) {
 
             accions.add(String.valueOf(historial.get(i).getTime()));
-            accions.add(String.valueOf(historial.get(i).getMax_share_price()));
-            accions.add(String.valueOf(historial.get(i).getMin_share_price()));
-            accions.add(String.valueOf(historial.get(i).getOpen_share_price()));
-            accions.add(String.valueOf(historial.get(i).getClose_share_price()));
+            accions.add(String.valueOf(historial.get(i).getMaxSharePrice()));
+            accions.add(String.valueOf(historial.get(i).getMinSharePrice()));
+            accions.add(String.valueOf(historial.get(i).getOpenSharePrice()));
+            accions.add(String.valueOf(historial.get(i).getCloseSharePrice()));
 
         }
 

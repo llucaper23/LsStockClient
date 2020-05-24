@@ -29,15 +29,15 @@ public class TodayStockLine extends JPanel {
 
         labelCompanyName.setText(company.getCompanyName());
         labelSharePrice.setText(company.getSharePrice() + " €");
-        labelChange.setText(String.format("%.2f", company.getSharePrice() - history.getOpen_share_price()) + "€  ");
-        labelChangePercentage.setText(String.format("%.2f", (((company.getSharePrice() * 100) / history.getOpen_share_price()) - 100)) + "%");
+        labelChange.setText(String.format("%.2f", company.getSharePrice() - history.getOpenSharePrice()) + "€  ");
+        labelChangePercentage.setText(String.format("%.2f", (((company.getSharePrice() * 100) / history.getOpenSharePrice()) - 100)) + "%");
 
-        if (company.getSharePrice() - history.getOpen_share_price() < 0){
+        if (company.getSharePrice() - history.getOpenSharePrice() < 0){
             labelSharePrice.setForeground(Color.RED);
             labelChange.setForeground(Color.RED);
             labelChangePercentage.setForeground(Color.RED);
         }else{
-            if (company.getSharePrice() - history.getOpen_share_price() == 0){
+            if (company.getSharePrice() - history.getOpenSharePrice() == 0){
                 labelSharePrice.setForeground(Color.GRAY);
                 labelChange.setForeground(Color.GRAY);
                 labelChangePercentage.setForeground(Color.GRAY);

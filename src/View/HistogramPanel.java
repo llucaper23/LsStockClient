@@ -57,7 +57,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         this.minA = minA;
         this.maxA = maxA;
 
-        if (history.getClose_share_price()< history.getOpen_share_price()){
+        if (history.getCloseSharePrice()< history.getOpenSharePrice()){
             Bar bar = new Bar(label, value, color); //Color.RED
             bars.add( bar );
         } else{
@@ -171,11 +171,11 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         public void paintIcon(Component c, Graphics g, int x, int y) {
 
             System.out.println(h.get(counterAux).getTime());
-            System.out.println(" open : " + h.get(counterAux).getOpen_share_price() + " close : " + h.get(counterAux).getClose_share_price() + " diff : " + (h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price()));
+            System.out.println(" open : " + h.get(counterAux).getOpenSharePrice() + " close : " + h.get(counterAux).getCloseSharePrice() + " diff : " + (h.get(counterAux).getOpenSharePrice()-h.get(counterAux).getCloseSharePrice()));
 
-            int open = (int)h.get(counterAux).getOpen_share_price();
-            int close = (int)h.get(counterAux).getClose_share_price();
-            int diff = (int)(Math.abs(h.get(counterAux).getOpen_share_price()-h.get(counterAux).getClose_share_price()));
+            int open = (int)h.get(counterAux).getOpenSharePrice();
+            int close = (int)h.get(counterAux).getCloseSharePrice();
+            int diff = (int)(Math.abs(h.get(counterAux).getOpenSharePrice()-h.get(counterAux).getCloseSharePrice()));
 
             if (color == Color.RED) { //obertura > tancament
 
