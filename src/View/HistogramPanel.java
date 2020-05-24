@@ -42,12 +42,12 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         float scale = 380/(maxA-minA);
         if (history != null){
             if (history.getCloseSharePrice() > history.getOpenSharePrice()){
-                candela = new Candela(5, Math.round(history.getCloseSharePrice()*scale), Math.round((history.getCloseSharePrice()-history.getOpenSharePrice()*scale)), 50, Math.round(history.getMinSharePrice()*scale), Math.round(history.getMaxSharePrice()*scale),Math.round(history.getOpenSharePrice()*scale),Math.round(history.getCloseSharePrice()*scale), String.valueOf(history.getTime()), Math.round(maxA * scale), Math.round(minA*scale));
+                candela = new Candela(5, Math.round(history.getMinSharePrice()*scale), Math.round(history.getMaxSharePrice()*scale),Math.round(history.getOpenSharePrice()*scale),Math.round(history.getCloseSharePrice()*scale), String.valueOf(history.getTime()), Math.round(maxA * scale));
             }else{
-                candela = new Candela(5, Math.round(history.getOpenSharePrice()*scale), Math.round((history.getOpenSharePrice()-history.getCloseSharePrice()*scale)), 50, Math.round(history.getMinSharePrice()*scale), Math.round(history.getMaxSharePrice()*scale),Math.round(history.getOpenSharePrice()*scale),Math.round(history.getCloseSharePrice()*scale), String.valueOf(history.getTime()), Math.round(maxA * scale), Math.round(minA*scale));
+                candela = new Candela(5 , Math.round(history.getMinSharePrice()*scale), Math.round(history.getMaxSharePrice()*scale),Math.round(history.getOpenSharePrice()*scale),Math.round(history.getCloseSharePrice()*scale), String.valueOf(history.getTime()), Math.round(maxA * scale));
             }
         }else{
-            candela = new Candela(5, 0, 0, 50, 0, 0,0,0, "No info", 0, 0);
+            candela = new Candela(5,0, 0,0,0, "No info", 0);
         }
         candelas.add(candela);
 

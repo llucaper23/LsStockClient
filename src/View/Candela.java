@@ -4,29 +4,22 @@ import java.awt.*;
 
 public class Candela extends JPanel {
     private int x;
-    private int y;
-    private int height;
-    private int weight;
     private int min;
     private int max;
     private int open;
     private int close;
     private String time;
     private int maxim;
-    private int minim;
 
-    public Candela(int x, int y, int height, int weight, int min, int max, int open, int close, String time, int maxim, int minim) {
+    public Candela(int x, int min, int max, int open, int close, String time, int maxim) {
         this.x = x;
-        this.y = y;
-        this.height = height;
-        this.weight = weight;
         this.min = min;
         this.max = max;
         this.open = open;
         this.close = close;
         this.time = time;
         this.maxim = maxim;
-        this.minim = minim;
+
     }
 
     @Override
