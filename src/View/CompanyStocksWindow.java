@@ -4,7 +4,9 @@ import Controller.PrincipalController;
 import Model.History;
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 
@@ -129,7 +131,7 @@ public class CompanyStocksWindow extends JFrame {
          */
 
         historyToString(histories);
-        float maxA = 0, minA = 0;
+        float maxA = 0, minA = 10000;
 
         for (int i = 1; i < accions.size(); i++) {
             if (!(i%5 == 0)){
@@ -143,43 +145,23 @@ public class CompanyStocksWindow extends JFrame {
         }
 
         HistogramPanel panel = new HistogramPanel();
-
         panel.setPreferredSize(new Dimension(700, 450));
         panel.setMaximumSize(new Dimension(700, 450));
-
-        System.out.println(histories);
-
         for (int i = 0; i < 10; i++) {
 
             if (histories.get(i).getOpenSharePrice() > histories.get(i).getCloseSharePrice()) {
-                panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  histories.get(i).getOpenSharePrice()-histories.get(i).getCloseSharePrice(), Color.RED, histories.get(i), histories, minA, maxA);
-
+                panel.addHistogramColumn(histories.get(i), minA, maxA, i);
             } else {
-                panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  histories.get(i).getCloseSharePrice() - histories.get(i).getOpenSharePrice(), Color.GREEN, histories.get(i), histories, minA, maxA);
+                panel.addHistogramColumn(histories.get(i), minA, maxA, i);
             }
-
-            //panel.addHistogramColumn(String.valueOf(histories.get(i).getTime()),  12, Color.RED, histories.get(i));
         }
 
         panel.layoutHistogram();
-
         panelGraficEspelmes.add(panel);
         panelGraficEspelmes.setPreferredSize(new Dimension(700, 450));
         panelGraficEspelmes.setMaximumSize(new Dimension(700, 450));
-
-        //panelInfo
-
-       /* JPanel panelcillo = new JPanel();
-        panelcillo.setBackground(Color.RED);
-        panelcillo.setPreferredSize(new Dimension(700, 450));
-        panelcillo.setMaximumSize(new Dimension(700, 450));
-
-        panelInfo.add(panelcillo);*/
-
-        //panelInfo.add(panel);
         panelInfo.add(panelGraficEspelmes);
         panelInfo.add(panelShares);
-
         //AFEGIM A BACKGROUND
 
         panelBackground.add(panelInfo, BorderLayout.CENTER);
@@ -247,15 +229,13 @@ public class CompanyStocksWindow extends JFrame {
     public void historyToString(ArrayList <History> historial){
 
         System.out.println(historial);
-
+        accions.clear();
         for (int i = 0; i< historial.size(); i++) {
-
             accions.add(String.valueOf(historial.get(i).getTime()));
             accions.add(String.valueOf(historial.get(i).getMaxSharePrice()));
             accions.add(String.valueOf(historial.get(i).getMinSharePrice()));
             accions.add(String.valueOf(historial.get(i).getOpenSharePrice()));
             accions.add(String.valueOf(historial.get(i).getCloseSharePrice()));
-
         }
 
     }
