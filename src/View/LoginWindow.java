@@ -50,9 +50,6 @@ public class LoginWindow extends JFrame {
         //LOGIN
         login(constraints, panelLogin);
 
-
-        //########################################################################
-
         // add the panels to this frame
         Container contentBackground = getContentPane();
 
@@ -109,7 +106,6 @@ public class LoginWindow extends JFrame {
 
         constraints.gridx = 0;
         constraints.gridy = 4;
-        //constraints.gridwidth = 2;
         panelLogin.add(buttonLogin, constraints);
 
         constraints.gridx = 0;

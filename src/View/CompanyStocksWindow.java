@@ -64,6 +64,7 @@ public class CompanyStocksWindow extends JFrame {
         font = labelSaldoActual.getFont();
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
+        labelSharePrice.setFont(font.deriveFont(Font.BOLD, 17));
 
         panelShares.add(labelSharePrice);
 
@@ -90,9 +91,9 @@ public class CompanyStocksWindow extends JFrame {
         panelShares.add(Box.createRigidArea(new Dimension(10,30)));
 
         panelShares.add(panelSA);
-        panelShares.add(buttonLogOut);
+        panelShares.add(Box.createRigidArea(new Dimension(10,40)));
         panelShares.add(buttonBack);
-
+        panelShares.add(buttonLogOut);
 
     }
 
@@ -100,35 +101,6 @@ public class CompanyStocksWindow extends JFrame {
 
         panelGraficEspelmes.removeAll();
         panelInfo.removeAll();
-
-        /*
-        //panelGraficEspelmes
-        historyToString(histories);
-        CandleGraphView candlesGraph = new CandleGraphView(accions);
-        panelGraficEspelmes.add(candlesGraph);
-
-        panelGraficEspelmes.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
-        panelGraficEspelmes.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
-
-        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME: " + this.labelCompanyName);
-        title.setTitlePosition(TitledBorder.ABOVE_TOP);
-        panelGraficEspelmes.setBorder(title);
-
-
-        //scrollPanel
-        JScrollPane scrollPane = new JScrollPane(panelGraficEspelmes);
-
-        scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-        scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
-        scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
-        scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
-
-        TitledBorder title = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), "COMPANY NAME: " + this.labelCompanyName);
-        title.setTitlePosition(TitledBorder.ABOVE_TOP);
-        scrollPane.setBorder(title);
-         */
 
         historyToString(histories);
         float maxA = 0, minA = 10000;
@@ -178,7 +150,7 @@ public class CompanyStocksWindow extends JFrame {
         setSize(1100,500);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }

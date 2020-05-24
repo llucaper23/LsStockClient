@@ -31,7 +31,6 @@ public class TodayStockWindow extends JFrame {
 
     private JButton buttonMevaBorsa = new JButton("LA MEVA BORSA");
     private JButton buttonLogOut = new JButton("LOG OUT");
-    //private JButton buttonBack = new JButton("BACK");
 
     public TodayStockWindow () {
 
@@ -39,14 +38,12 @@ public class TodayStockWindow extends JFrame {
 
         //panelSaldo
         panelSaldo.setLayout(new BoxLayout(panelSaldo, BoxLayout.X_AXIS));
-        //panelSaldo.setBackground(Color.BLACK);
 
         Font font = labelTotalSaldo.getFont();
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 16));
         labelTotalSaldo.setForeground (Color.BLACK);
         labelTotalSaldo.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        //Font font = labelSaldoActual.getFont();
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
         labelSaldoActual.setForeground (Color.GRAY);
         labelSaldoActual.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -64,7 +61,7 @@ public class TodayStockWindow extends JFrame {
         setSize(1100,500);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }
@@ -73,7 +70,6 @@ public class TodayStockWindow extends JFrame {
         panelShares.removeAll();
         panelLines.removeAll();
 
-        //panelShares.setBackground(Color.BLACK);
         panelLines.setLayout(new BoxLayout(panelLines, BoxLayout.Y_AXIS));
 
         for (int i = 0; i < companies.size(); i++) {
@@ -87,7 +83,6 @@ public class TodayStockWindow extends JFrame {
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        //scrollPane.setBackground(Color.BLACK);
         scrollPane.setAlignmentX(Component.RIGHT_ALIGNMENT);
         scrollPane.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         scrollPane.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
@@ -101,7 +96,6 @@ public class TodayStockWindow extends JFrame {
 
         //panelCentral
         panelCentral.setLayout(new BoxLayout(panelCentral, BoxLayout.Y_AXIS));
-        //panelCentral.setBackground(Color.BLACK);
 
         panelCentral.add(panelShares);
         panelCentral.add(buttonMevaBorsa);
@@ -109,6 +103,7 @@ public class TodayStockWindow extends JFrame {
         panelCentral.add(panelSaldo);
         panelCentral.revalidate();
         panelCentral.repaint();
+
         //"COLLAGE"
         this.add(panelCentral);
         this.revalidate();

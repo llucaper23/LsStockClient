@@ -21,7 +21,7 @@ public class MyStocksWindow extends JFrame {
     private float actualUserMoney;
 
     final int MAX_HEIGHT_SHARES = 700;
-    final int MAX_WIDTH_SHARES = 400;
+    final int MAX_WIDTH_SHARES = 450;
 
     JPanel panelProfile = new JPanel();
     JPanel panelMevaBorsa = new JPanel(new BorderLayout());
@@ -33,7 +33,6 @@ public class MyStocksWindow extends JFrame {
 
     Font font;
 
-    //private JLabel labelTitleMB = new JLabel("LA MEVA BORSA");
     private JLabel labelProfilePhoto;
     private JLabel labelProfileName = new JLabel(" ");
     private JLabel labelSaldoActual = new JLabel("Saldo actual : ");
@@ -91,9 +90,6 @@ public class MyStocksWindow extends JFrame {
         //Afegim al panelProfile
         panelProfile.add(panelAfegirS);
         panelProfile.add(buttonAfegirSaldo);
-        panelProfile.add(buttonBack);
-        panelProfile.add(buttonLogOut);
-
 
     }
 
@@ -128,7 +124,6 @@ public class MyStocksWindow extends JFrame {
         panelInfo.add(panelShares);
         panelInfo.add(panelProfile);
 
-        //panelMevaBorsa.add(labelTitleMB, BorderLayout.NORTH);
         panelMevaBorsa.add(panelInfo, BorderLayout.CENTER);
         panelMevaBorsa.revalidate();
         panelMevaBorsa.repaint();
@@ -169,6 +164,9 @@ public class MyStocksWindow extends JFrame {
 
         panelProfile.add(panelSaldoAct);
         textAfegirSaldo.setText("");
+
+        panelProfile.add(buttonBack);
+        panelProfile.add(buttonLogOut);
     }
 
     public void setUserName (User user) {
@@ -180,7 +178,7 @@ public class MyStocksWindow extends JFrame {
         setSize(1100,500);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
-        setResizable(true);
+        setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     }

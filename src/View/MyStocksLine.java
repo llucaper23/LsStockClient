@@ -89,6 +89,8 @@ public class MyStocksLine extends JPanel {
         panelBackground.add(panelNumShares);
         panelBackground.add(buttonSell);
 
+        panelBackground.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
         //"COLLAGE"
         this.add(panelBackground);
 
