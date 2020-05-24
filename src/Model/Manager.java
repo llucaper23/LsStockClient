@@ -21,16 +21,20 @@ public class Manager {
     }
 
     /**
-     * Funcio que comprova si el password compleix els requeriments
+     * Funcio que comprova si el password compleix els requeriments.
      * @param password es el password a comprovar
      */
-
     public boolean checkPassword(String password) {
         patterPass = Pattern.compile(regexPass);
         boolean ok = patterPass.matcher(password).matches();
         return ok;
     }
 
+    /**
+     * Funcio que comprova si el email compleix els requeriments.
+     * @param email es el mail a comprovar
+     * @return
+     */
     public boolean checkEmail(String email) {
         patternMail = Pattern.compile(regexMail);
         boolean ok = patternMail.matcher(email).matches();
@@ -85,7 +89,11 @@ public class Manager {
         this.histories = histories;
     }
 
-
+    /**
+     * Funcio que busca una companyia segons el ID.
+     * @param id Int amb el id de la companyia
+     * @return Companyia amb el id
+     */
     public Company getCompanieFromId(int id) {
         for (Company c : companies) {
             if (c.getCompanyId() == id) {
@@ -95,6 +103,9 @@ public class Manager {
         return null;
     }
 
+    /**
+     * Procediment que fa el update de una companyia.
+     */
     public void updateActualComapny() {
         for (Company c : companies) {
             if (c.getCompanyId() == actualCompany.getCompanyId()) {
@@ -103,6 +114,11 @@ public class Manager {
         }
     }
 
+    /**
+     * Funcio que busca una companyia de l'usuari segons el id.
+     * @param ucId
+     * @return
+     */
     public UserCompany findUserCompanyById(int ucId) {
         for (UserCompany uc : userCompanies) {
             if (uc.getUserCompanyId() == ucId) {
@@ -112,6 +128,9 @@ public class Manager {
         return null;
     }
 
+    /**
+     * Procediment que fa el update de una companyia de l'usuari.
+     */
     public void updateActualUserCompany() {
         for (UserCompany uc : userCompanies) {
             if (uc.getUserCompanyId() == actualUserCompany.getUserCompanyId()){

@@ -53,7 +53,6 @@ public class Network {
     /**
      * Funcio que envia el port que usara l'usuari
      */
-
     public void sendPort() {
         try {
             port = 10000 + (int)(Math.random() * ((65535 - 10000) + 1));
@@ -68,6 +67,11 @@ public class Network {
         return port;
     }
 
+    /**
+     * Funcio que envia una peticio de registre al servidor.
+     * @param user User que enviem al servidor per registrar
+     * @return boolean per si s'ha registrat correctament
+     */
     public synchronized boolean registraUsuari(User user) {
         try {
             Message message = new Message(REGISTER_REQUEST, null, user, null, null, null, false, 0, null);
@@ -87,6 +91,11 @@ public class Network {
 
     }
 
+    /**
+     * Funcio que envia una peticio de login al servidor.
+     * @param user User que enviem al servidor per fer login
+     * @return User que retorna logged
+     */
     public synchronized User loginUsuari(User user) {
         try {
             Message message = new Message(LOGIN_REQUEST, null, user, null, null, null, false, 0, null);
@@ -105,6 +114,10 @@ public class Network {
         return null;
     }
 
+    /**
+     * Procediment que envia la compra al servidor.
+     * @param userCompany Companyia a comprar per l'usuari
+     */
     public synchronized void buyShares (UserCompany userCompany) {
         try {
             Message message = new Message(BUY_SHARES, null, null, null, userCompany, null, false, 0, null);
@@ -121,6 +134,10 @@ public class Network {
 
     }
 
+    /**
+     * Procediment que envia la venta al servidor.
+     * @param userCompany Companyia a vendre per l'usuari
+     */
     public synchronized void sellShares (UserCompany userCompany) {
         try {
             Message message = new Message(SELL_SHARES, null, null, null, userCompany, null, false, 0, null);
@@ -136,6 +153,10 @@ public class Network {
         }
     }
 
+    /**
+     * Funcio que retorna ArrayList amb totes les companyies
+     * @return ArrayList de companyies
+     */
     public synchronized ArrayList<Company> getAllCompanies(){
         try {
             Message message = new Message(ALL_COMPANIES, null, null, null, null, null, false, 0, null);
@@ -154,7 +175,11 @@ public class Network {
         }
     }
 
-   public synchronized ArrayList<UserCompany> getUserCompanies() {
+    /**
+     * Funcio que retorna ArrayList amb totes les companyies de l'usuari.
+     * @return ArrayList de companyies de l'usuari
+     */
+    public synchronized ArrayList<UserCompany> getUserCompanies() {
 
        try {
            Message message = new Message(USER_COMPANIES, null, null, null, null, null, false, 0, null);
@@ -173,7 +198,12 @@ public class Network {
        }
    }
 
-   public synchronized boolean setUpdateMoney (User actualUser) {
+    /**
+     * Funcio que envia una actualitzacio de diners de l'usuari.
+     * @param actualUser User actual amb les dades canviades
+     * @return boolean per si el update s'ha fet be.
+     */
+    public synchronized boolean setUpdateMoney (User actualUser) {
         try {
             Message message = new Message(UPDATE_MONEY, null, actualUser, null, null, null, false, 0, null);
             oos.writeObject(message);
@@ -191,6 +221,9 @@ public class Network {
         return false;
    }
 
+    /**
+     * Procediment que avisa al servidor que l'usuari ha fet logout.
+     */
     public synchronized void logout() {
         try {
             Message message = new Message(LOGOUT, null, null, null, null, null, false, 0, null);
@@ -200,6 +233,11 @@ public class Network {
         }
     }
 
+    /**
+     * Procediment que envia la venta parcial al servidor.
+     * @param company Companyia a vendre per l'usuari
+     * @param totalAccions Int amb el nombre de accions
+     */
     public synchronized void sellSomeShares(Company company, int totalAccions) {
         try {
             Message message = new Message(SELL_SOME_SHARES, null, null, company, null, null, false, totalAccions, null);
@@ -215,6 +253,11 @@ public class Network {
         }
     }
 
+    /**
+     * Funcio que demana l'historial d'una companyia
+     * @param company Comapnyia ha demanar
+     * @return ArryList amb l'historial
+     */
     public synchronized ArrayList<History> getHistory (Company company) {
         try {
             Message message = new Message(HISTORY, null, null, company, null, null, false, 0, null);
@@ -232,6 +275,10 @@ public class Network {
         return null;
     }
 
+    /**
+     * Funcio que demana el preu historic de la companyia
+     * @return ArrayList amb l'historial
+     */
     public synchronized ArrayList<History> get5MinPrice(){
         try{
             Message message = new Message(FIVE_MIN_PRICE, null, null, null, null, null, false, 0, null);
@@ -249,6 +296,9 @@ public class Network {
         return null;
     }
 
+    /**
+     * Restart del Network
+     */
     public void restart() {
         try {
             socket = new Socket(nc.getServerIp(), nc.getServerPort());

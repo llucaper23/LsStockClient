@@ -175,11 +175,16 @@ public class PrincipalController implements ActionListener {
         }
     }
 
-
     public Manager getManager() {
         return manager;
     }
 
+    /**
+     * Procediment que fa un update de les companyies que tenim a la vista actual
+     * @param companiesList ArrayList de companyies
+     * @param userCompanies ArrayList de companyies que te l'usuari
+     * @param histories ArrayList de History amb l'historial
+     */
     public void updateCompanies(ArrayList<Company> companiesList, ArrayList<UserCompany> userCompanies, ArrayList<History> histories) {
         manager.updateCompanies(companiesList);
         manager.updateUserCompanies(userCompanies);
@@ -200,6 +205,9 @@ public class PrincipalController implements ActionListener {
         this.manager = manager;
     }
 
+    /**
+     * Procediment que crida el update de la vista TodayStockWindow
+     */
     public void update5minPrice(){
         todayStockWindow.updateTodayStock(manager.getCompanies(), this, network.get5MinPrice());
     }

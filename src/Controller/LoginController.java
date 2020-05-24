@@ -40,6 +40,9 @@ public class LoginController implements ActionListener {
         restartNetwork();
     }
 
+    /**
+     * Procediment que reseteja la classe Network i inicia una nova connexió.
+     */
     public void restartNetwork() {
         network.sendPort();
         networkListen = new NetworkListen(principalController, this, network.getPort());
@@ -101,6 +104,11 @@ public class LoginController implements ActionListener {
         }
     }
 
+    /**
+     * Funcio que comprova l'usuari entrat al Sign In
+     * @param user User a comprovar
+     * @return boolean que ens diu si l'usuari existeix o no
+     */
     public boolean comprovaUser(User user) {
 
         boolean check = true;
@@ -127,6 +135,11 @@ public class LoginController implements ActionListener {
         return check;
     }
 
+    /**
+     * Funcio que calcula el hash del password.
+     * @param input String amb el password
+     * @return String amb el hash en MD5
+     */
     public static String getMD5(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");

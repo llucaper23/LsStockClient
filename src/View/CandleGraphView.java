@@ -25,12 +25,10 @@ public class CandleGraphView extends JPanel {
     private double minAccions = 0;
 
 
-
-    /*
-     * Aquest metode separa els valors que prenen la companyia i l'informació del eix de les X
-     *
-     * */
-
+    /**
+     * Aquest metode separa els valors que prenen la companyia i l'informació del eix de les X.
+     * @param accions
+     */
     public CandleGraphView(ArrayList<String> accions) {
 
         indexList = 0;

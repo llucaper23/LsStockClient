@@ -43,18 +43,27 @@ public class NetworkListen extends Thread {
         }
     }
 
+    /**
+     * Procediment que inicia el Network
+     */
     public void startClientNetwork() {
         // iniciem la comunicacio amb el servidor
         isOn = true;
         this.start();
     }
 
+    /**
+     * Procediment que atura el Network
+     */
     public void stopClientNetwork() {
         // aturem la comunicacio amb el servidor
         this.isOn = false;
         this.interrupt();
     }
 
+    /**
+     * Procediment run del Network que escolta els updates de totes les companyies.
+     */
     public void run() {
         while (isOn) {
             try {

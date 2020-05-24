@@ -7,6 +7,9 @@ public class FiveMinThread extends Thread{
         this.principalController = principalController;
     }
 
+    /**
+     * Procedimetn run del thread que mira el preu de fa 5min d'un companyia
+     */
     public void run(){
         while (isAlive()){
             principalController.update5minPrice();
