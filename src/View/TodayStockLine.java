@@ -26,27 +26,35 @@ public class TodayStockLine extends JPanel {
         JPanel panelBackground = new JPanel(new FlowLayout());
         panelBackground.setPreferredSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
         panelBackground.setMaximumSize(new Dimension(MAX_HEIGHT_SHARES, MAX_WIDTH_SHARES));
-
         labelCompanyName.setText(company.getCompanyName());
         labelSharePrice.setText(company.getSharePrice() + " €");
-        labelChange.setText(String.format("%.2f", company.getSharePrice() - history.getOpenSharePrice()) + "€  ");
-        labelChangePercentage.setText(String.format("%.2f", (((company.getSharePrice() * 100) / history.getOpenSharePrice()) - 100)) + "%");
+        if (history != null){
+            labelChange.setText(String.format("%.2f", company.getSharePrice() - history.getOpenSharePrice()) + "€  ");
+            labelChangePercentage.setText(String.format("%.2f", (((company.getSharePrice() * 100) / history.getOpenSharePrice()) - 100)) + "%");
 
-        if (company.getSharePrice() - history.getOpenSharePrice() < 0){
-            labelSharePrice.setForeground(Color.RED);
-            labelChange.setForeground(Color.RED);
-            labelChangePercentage.setForeground(Color.RED);
-        }else{
-            if (company.getSharePrice() - history.getOpenSharePrice() == 0){
-                labelSharePrice.setForeground(Color.GRAY);
-                labelChange.setForeground(Color.GRAY);
-                labelChangePercentage.setForeground(Color.GRAY);
+            if (company.getSharePrice() - history.getOpenSharePrice() < 0){
+                labelSharePrice.setForeground(Color.RED);
+                labelChange.setForeground(Color.RED);
+                labelChangePercentage.setForeground(Color.RED);
             }else{
-                labelSharePrice.setForeground(Color.GREEN);
-                labelChange.setForeground(Color.GREEN);
-                labelChangePercentage.setForeground(Color.GREEN);
+                if (company.getSharePrice() - history.getOpenSharePrice() == 0){
+                    labelSharePrice.setForeground(Color.GRAY);
+                    labelChange.setForeground(Color.GRAY);
+                    labelChangePercentage.setForeground(Color.GRAY);
+                }else{
+                    labelSharePrice.setForeground(Color.GREEN);
+                    labelChange.setForeground(Color.GREEN);
+                    labelChangePercentage.setForeground(Color.GREEN);
+                }
             }
+        }else{
+            labelChange.setText("0€  ");
+            labelChangePercentage.setText("0%");
+            labelSharePrice.setForeground(Color.GRAY);
+            labelChange.setForeground(Color.GRAY);
+            labelChangePercentage.setForeground(Color.GRAY);
         }
+
 
         //panelCompanyName
         JPanel panelCompanyName = new JPanel();

@@ -83,24 +83,22 @@ public class PrincipalController implements ActionListener {
                 break;
 
             case "COMPRARACCIONS":
-                if (companyStocksWindow.getNumAccionsComprar() > 0){
-                    if ((manager.getActualCompany().getSharePrice()) * (companyStocksWindow.getNumAccionsComprar()) < (manager.getActualUser().getMoney())) {
-                        UserCompany userCompany = new UserCompany(manager.getActualUser().getUserId(), manager.getActualCompany().getCompanyId(),companyStocksWindow.getNumAccionsComprar(), manager.getActualCompany().getSharePrice());
+                int numAccions = companyStocksWindow.getNumAccionsComprar();
+                if (numAccions > 0){
+                    if ((manager.getActualCompany().getSharePrice()) * (numAccions) < (manager.getActualUser().getMoney())) {
+                        UserCompany userCompany = new UserCompany(manager.getActualUser().getUserId(), manager.getActualCompany().getCompanyId(),numAccions, manager.getActualCompany().getSharePrice());
                         network.buyShares(userCompany);
-                        float updatedMoney = manager.getActualUser().getMoney() - (companyStocksWindow.getNumAccionsComprar()*manager.getActualCompany().getSharePrice());
+                        float updatedMoney = manager.getActualUser().getMoney() - (numAccions*manager.getActualCompany().getSharePrice());
                         manager.getActualUser().setMoney(updatedMoney);
                         network.setUpdateMoney(manager.getActualUser());
 
                     } else {
                         System.out.println("Not enough money");
                         companyStocksWindow.mostraMissatgeError("Error. No es disposa de sufient saldo");
-
                     }
                 }else{
-                    companyStocksWindow.mostraMissatgeError("Error, s'ha de comprar un número positiu d'accions");
+                    companyStocksWindow.mostraMissatgeError("Error, s'ha de comprar un número enter positiu d'accions");
                 }
-
-
                 break;
 
             case "VENDREACCIONS":
@@ -112,10 +110,11 @@ public class PrincipalController implements ActionListener {
                         userCompanies.add(manager.getUserCompanies().get(i));
                     }
                 }
-                if (companyStocksWindow.getNumAccionsVendre() > 0){
-                    if (companyStocksWindow.getNumAccionsVendre() < totalAccions) {
-                        network.sellSomeShares(manager.getActualCompany(), companyStocksWindow.getNumAccionsVendre());
-                        float updatedMoney = manager.getActualUser().getMoney() + (companyStocksWindow.getNumAccionsVendre() * manager.getActualCompany().getSharePrice());
+                int numVendre = companyStocksWindow.getNumAccionsVendre();
+                if (numVendre > 0){
+                    if (numVendre < totalAccions) {
+                        network.sellSomeShares(manager.getActualCompany(), numVendre);
+                        float updatedMoney = manager.getActualUser().getMoney() + (numVendre * manager.getActualCompany().getSharePrice());
                         manager.getActualUser().setMoney(updatedMoney);
                         network.setUpdateMoney(manager.getActualUser());
                         manager.updateUserCompanies(network.getUserCompanies());
@@ -125,10 +124,8 @@ public class PrincipalController implements ActionListener {
                         companyStocksWindow.mostraMissatgeError("Error. Estàs intentant vendre més accions de les que disposes");
                     }
                 }else{
-                    companyStocksWindow.mostraMissatgeError("Error, s'ha de vendre un número positiu d'accions");
+                    companyStocksWindow.mostraMissatgeError("Error, s'ha de vendre un número enter positiu d'accions");
                 }
-
-
                 break;
 
             case "SELL":
@@ -157,7 +154,7 @@ public class PrincipalController implements ActionListener {
                         myStocksWindow.setSaldoActualUser(manager.getActualUser().getMoney());
                     }
                 }else{
-                    myStocksWindow.mostraMissatgeError("Error, no es pot posar saldo negatiu!");
+                    myStocksWindow.mostraMissatgeError("Error al afegir saldo");
                 }
 
                 break;
@@ -167,6 +164,7 @@ public class PrincipalController implements ActionListener {
                 Company company = manager.getCompanieFromId(auxId);
                 manager.setActualCompany(company);
                 manager.setHistories(network.getHistory(company)); //aqui tens tot el historial fes el que vulguis
+                companyStocksWindow.setName(manager.getActualCompany().getCompanyName());
                 companyStocksWindow.updateCompanyStocksWindow(manager.getHistories());
                 companyStocksWindow.setCompanyName(company.getCompanyName());
                 companyStocksWindow.updateCompany(manager.getActualUser().getMoney(), company.getSharePrice());

@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-//A aquesta classe se li passara tota la info, i crearà una "línia" cada cop que se la cridi
+
 public class MyStocksLine extends JPanel {
 
     private static String SELL = "SELL";

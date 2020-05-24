@@ -132,9 +132,11 @@ public class Manager {
      * Procediment que fa el update de una companyia de l'usuari.
      */
     public void updateActualUserCompany() {
-        for (UserCompany uc : userCompanies) {
-            if (uc.getUserCompanyId() == actualUserCompany.getUserCompanyId()){
-                actualUserCompany = uc;
+        if (actualUserCompany != null){
+            for (UserCompany uc : userCompanies) {
+                if (uc.getUserCompanyId() == actualUserCompany.getUserCompanyId()){
+                    actualUserCompany = uc;
+                }
             }
         }
     }

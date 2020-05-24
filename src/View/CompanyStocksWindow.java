@@ -15,9 +15,7 @@ import java.util.ArrayList;
 
 public class CompanyStocksWindow extends JFrame {
 
-    final int MAX_HEIGHT_SHARES = 700;
-    final int MAX_WIDTH_SHARES = 400;
-
+    private String name = "";
     private static String LOGOUT = "LOGOUT";
     private static String BACK = "BACKCOMPANY";
     private static String COMPRARACCIONS = "COMPRARACCIONS";
@@ -116,16 +114,24 @@ public class CompanyStocksWindow extends JFrame {
             }
         }
 
-        HistogramPanel panel = new HistogramPanel();
+        HistogramPanel panel = new HistogramPanel(name);
         panel.setPreferredSize(new Dimension(700, 450));
         panel.setMaximumSize(new Dimension(700, 450));
         for (int i = 0; i < 10; i++) {
-
-            if (histories.get(i).getOpenSharePrice() > histories.get(i).getCloseSharePrice()) {
-                panel.addHistogramColumn(histories.get(i), minA, maxA, i);
-            } else {
-                panel.addHistogramColumn(histories.get(i), minA, maxA, i);
+            if (histories != null){
+                if (histories.size() >= i + 1){
+                    if (histories.get(i).getOpenSharePrice() > histories.get(i).getCloseSharePrice()) {
+                        panel.addHistogramColumn(histories.get(i), minA, maxA, i);
+                    } else {
+                        panel.addHistogramColumn(histories.get(i), minA, maxA, i);
+                    }
+                }else{
+                    panel.addHistogramColumn(null, minA, maxA, i);
+                }
+            }else{
+                panel.addHistogramColumn(null, minA, maxA, i);
             }
+
         }
 
         panel.layoutHistogram();
@@ -156,14 +162,29 @@ public class CompanyStocksWindow extends JFrame {
     }
 
     public int getNumAccionsComprar() {
-        return Integer.parseInt(textComprarAccions.getText());
+        try{
+            int numBuy = Integer.parseInt(textComprarAccions.getText());
+            textComprarAccions.setText("");
+            return numBuy;
+        }catch (NumberFormatException e){
+            textComprarAccions.setText("");
+            return 0;
+        }
     }
 
     public int getNumAccionsVendre() {
         if (textVendreAccions.getText().equalsIgnoreCase("")){
+            textVendreAccions.setText("");
             return 0;
         }else{
-            return Integer.parseInt(textVendreAccions.getText());
+            try{
+                int numVendre = Integer.parseInt(textVendreAccions.getText());
+                textVendreAccions.setText("");
+                return numVendre;
+            }catch (NumberFormatException e){
+                textVendreAccions.setText("");
+                return 0;
+            }
         }
     }
 
@@ -212,4 +233,8 @@ public class CompanyStocksWindow extends JFrame {
 
     }
 
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
 }
