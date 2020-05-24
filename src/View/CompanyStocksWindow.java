@@ -2,16 +2,9 @@ package View;
 
 import Controller.PrincipalController;
 import Model.History;
-
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-
-//haurà de rebre el nom de la companya, el preu de les accions i el saldo actual
-//On hi ha la taula hi va el gràfic d'espelmes
 
 public class CompanyStocksWindow extends JFrame {
 
@@ -32,7 +25,6 @@ public class CompanyStocksWindow extends JFrame {
     Font font;
 
     private JLabel labelCompanyName = new JLabel(" ");
-    private JLabel labelSaldoActual = new JLabel("Saldo actual : ");
     private JLabel labelTotalSaldo = new JLabel(" ");
     private JLabel labelSharePrice = new JLabel(" ");
 
@@ -59,6 +51,7 @@ public class CompanyStocksWindow extends JFrame {
 
         panelShares.setLayout(new BoxLayout(panelShares, BoxLayout.Y_AXIS));
 
+        JLabel labelSaldoActual = new JLabel("Saldo actual : ");
         font = labelSaldoActual.getFont();
         labelTotalSaldo.setFont(font.deriveFont(Font.BOLD, 15));
         labelSaldoActual.setFont(font.deriveFont(Font.BOLD, 12));
@@ -121,17 +114,16 @@ public class CompanyStocksWindow extends JFrame {
             if (histories != null){
                 if (histories.size() >= i + 1){
                     if (histories.get(i).getOpenSharePrice() > histories.get(i).getCloseSharePrice()) {
-                        panel.addHistogramColumn(histories.get(i), minA, maxA, i);
+                        panel.addHistogramColumn(histories.get(i), minA, maxA);
                     } else {
-                        panel.addHistogramColumn(histories.get(i), minA, maxA, i);
+                        panel.addHistogramColumn(histories.get(i), minA, maxA);
                     }
                 }else{
-                    panel.addHistogramColumn(null, minA, maxA, i);
+                    panel.addHistogramColumn(null, minA, maxA);
                 }
             }else{
-                panel.addHistogramColumn(null, minA, maxA, i);
+                panel.addHistogramColumn(null, minA, maxA);
             }
-
         }
 
         panel.layoutHistogram();
@@ -221,7 +213,6 @@ public class CompanyStocksWindow extends JFrame {
 
     public void historyToString(ArrayList <History> historial){
 
-        System.out.println(historial);
         accions.clear();
         for (int i = 0; i< historial.size(); i++) {
             accions.add(String.valueOf(historial.get(i).getTime()));

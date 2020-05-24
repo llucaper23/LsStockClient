@@ -44,7 +44,6 @@ public class LoginWindow extends JFrame {
         JPanel panelLogin = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
-        //constraints.insets = new Insets(10, 15, 10, 15);
 
 
         //LOGIN
@@ -63,8 +62,6 @@ public class LoginWindow extends JFrame {
     }
 
     private void configureWindow (){
-
-        //setSize(500,500);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(false);

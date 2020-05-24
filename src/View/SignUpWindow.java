@@ -4,7 +4,6 @@ import Controller.LoginController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.prefs.BackingStoreException;
 
 public class SignUpWindow extends JFrame {
 
@@ -48,7 +47,6 @@ public class SignUpWindow extends JFrame {
         JPanel panelSignup = new JPanel(new GridBagLayout());
         GridBagConstraints constraints = new GridBagConstraints();
 
-        //constraints.insets = new Insets(10, 15, 10, 15);
 
         //SIGN UP
         signUp(constraints, panelSignup);
@@ -69,13 +67,10 @@ public class SignUpWindow extends JFrame {
     }
 
     private void configureWindow (){
-
-        //setSize(500,500);
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
     }
 
     public void signUp (GridBagConstraints constraints, JPanel panelSignup) {

@@ -35,7 +35,7 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         add(labelYPannel, BorderLayout.WEST);
     }
 
-    public void addHistogramColumn(History history, float minA, float maxA, int numCandela) {
+    public void addHistogramColumn(History history, float minA, float maxA) {
         this.minA = minA;
         this.maxA = maxA;
         Candela candela;

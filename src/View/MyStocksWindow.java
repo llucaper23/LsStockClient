@@ -2,7 +2,6 @@ package View;
 
 import Controller.PrincipalController;
 import Model.Company;
-import Model.History;
 import Model.User;
 import Model.UserCompany;
 
@@ -11,7 +10,6 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
 
-//haurà de rebre el nom del usuari, el saldo actual i les accions que té de totes les empreses
 public class MyStocksWindow extends JFrame {
 
     private static String LOGOUT = "LOGOUT";
