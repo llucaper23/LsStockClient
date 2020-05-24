@@ -88,6 +88,10 @@ public class CompanyStocksWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que actualitza
+     * @param histories ArrayList amb el historic d'una companyia.
+     */
     public void updateCompanyStocksWindow(ArrayList<History> histories) {
 
         panelGraficEspelmes.removeAll();
@@ -143,6 +147,9 @@ public class CompanyStocksWindow extends JFrame {
         this.repaint();
     }
 
+    /**
+     * Procediment que configura la vista.
+     */
     private void configureView () {
 
         setSize(1100,500);
@@ -153,6 +160,10 @@ public class CompanyStocksWindow extends JFrame {
 
     }
 
+    /**
+     * Funcio que agafa les accions a comprar.
+     * @return int amb les accions.
+     */
     public int getNumAccionsComprar() {
         try{
             int numBuy = Integer.parseInt(textComprarAccions.getText());
@@ -164,6 +175,10 @@ public class CompanyStocksWindow extends JFrame {
         }
     }
 
+    /**
+     * Funcio que agafa les accions a vendre
+     * @return int amb les accions a vendre
+     */
     public int getNumAccionsVendre() {
         if (textVendreAccions.getText().equalsIgnoreCase("")){
             textVendreAccions.setText("");
@@ -180,20 +195,37 @@ public class CompanyStocksWindow extends JFrame {
         }
     }
 
+    /**
+     * Procediment que acutalitza el saldo de l'usuari per pantalla.
+     * @param money float amb la quantitat de diners.
+     */
     public void setSaldoActualUser (float money) {
         labelTotalSaldo.setText(money + " €");
     }
 
+    /**
+     * Procediment que posa el nom de la companyia
+     * @param companyName String amb el nom de la companyia
+     */
     public void setCompanyName (String companyName) {
         labelCompanyName.setText(companyName);
     }
 
+    /**
+     * Procediment que actualitza una companyia.
+     * @param money float amb els diners
+     * @param priceShare float amb el preu per accio
+     */
     public void updateCompany(float money, float priceShare) {
         labelTotalSaldo.setText(money + " €");
         labelSharePrice.setText(priceShare + "€");
 
     }
 
+    /**
+     * Procediment que registra el controlador
+     * @param principalController Controlador corresponent
+     */
     public void registraControlador(PrincipalController principalController) {
 
         buttonLogOut.setActionCommand(LOGOUT);
@@ -206,11 +238,18 @@ public class CompanyStocksWindow extends JFrame {
         buttonVendreAccions.addActionListener(principalController);
     }
 
+    /**
+     * Procediment que mostra el missatge d'error
+     * @param error String amb el tipus d'error
+     */
     public void mostraMissatgeError(String error) {
         JOptionPane.showMessageDialog(null, error);
     }
 
-
+    /**
+     * Procediment que passa a String el historic
+     * @param historial ArraList amb els historics d'una companyia
+     */
     public void historyToString(ArrayList <History> historial){
 
         accions.clear();

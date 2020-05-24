@@ -35,6 +35,12 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
         add(labelYPannel, BorderLayout.WEST);
     }
 
+    /**
+     * Procediment que afegeix una columna al grafic
+     * @param history History amb el historic de la companyia
+     * @param minA float amb el valor minim
+     * @param maxA float amb el malor maxim
+     */
     public void addHistogramColumn(History history, float minA, float maxA) {
         this.minA = minA;
         this.maxA = maxA;
@@ -53,6 +59,9 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
 
     }
 
+    /**
+     * Procediment que printa el layout del grafic
+     */
     public void layoutHistogram() {
         barPanel.removeAll();
         labelPanel.removeAll();

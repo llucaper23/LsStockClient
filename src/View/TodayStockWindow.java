@@ -47,12 +47,19 @@ public class TodayStockWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que actualitza el saldo del usuari
+     * @param actualUserMoney float amb els diners
+     */
     public void setSaldoActualUser (float actualUserMoney) {
         labelTotalSaldo.setText(actualUserMoney + " €");
         panelSaldo.add(labelSaldoActual);
         panelSaldo.add(labelTotalSaldo);
     }
 
+    /**
+     * Funcio que configura la vista
+     */
     private void configureView () {
 
         setSize(1100,500);
@@ -63,6 +70,12 @@ public class TodayStockWindow extends JFrame {
 
     }
 
+    /**
+     * Prcediment que actualitza la vista
+     * @param companies ArrayList amb les companyies
+     * @param principalController Controlador de la vista
+     * @param histories ArrayList amb el historic
+     */
     public void updateTodayStock(ArrayList<Company> companies, PrincipalController principalController, ArrayList<History> histories){
         panelShares.removeAll();
         panelLines.removeAll();
@@ -118,6 +131,10 @@ public class TodayStockWindow extends JFrame {
         this.repaint();
     }
 
+    /**
+     * Procediment que registra el controlador
+     * @param principalController Controlador corresponent
+     */
     public void registraControlador(PrincipalController principalController) {
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);

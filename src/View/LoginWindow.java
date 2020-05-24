@@ -61,6 +61,9 @@ public class LoginWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que configura la vista.
+     */
     private void configureWindow (){
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
@@ -69,6 +72,11 @@ public class LoginWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que construeix part de la vista.
+     * @param constraints GridBag del panell
+     * @param panelLogin JPanel amb el login
+     */
     public void login (GridBagConstraints constraints, JPanel panelLogin) {
 
         constraints.insets = new Insets(20, 15, 10, 15);
@@ -117,6 +125,10 @@ public class LoginWindow extends JFrame {
 
     }
 
+    /**
+     * Funcio que comprova el format del mail.
+     * @return boolean si es format corresponent.
+     */
     public boolean isMail(){
         if(textUsernameL.getText().contains("@")){
             return true;
@@ -125,14 +137,26 @@ public class LoginWindow extends JFrame {
         }
     }
 
+    /**
+     * Funcio que agafa el nom del login.
+     * @return String amb el nom
+     */
     public String getName(){
         return textUsernameL.getText();
     }
 
+    /**
+     * Funcio que agafa el password
+     * @return String amb el password
+     */
     public String getPassword(){
         return String.valueOf(fieldPasswordL.getPassword());
     }
 
+    /**
+     * Funcio que registra el controlador de la vista.
+     * @param loginController Controlador corresponent
+     */
     public void registrarControlador(LoginController loginController) {
         buttonLogin.setActionCommand(LOGIN);
         buttonLogin.addActionListener(loginController);
@@ -140,6 +164,10 @@ public class LoginWindow extends JFrame {
         buttonSignUp.addActionListener(loginController);
     }
 
+    /**
+     * Procediment que mostra el missatge d'error.
+     * @param error String amb el error
+     */
     public void mostraMissatgeError(String error){
         JOptionPane.showMessageDialog(null, error);
     }

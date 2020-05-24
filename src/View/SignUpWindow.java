@@ -66,6 +66,9 @@ public class SignUpWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que configura la vista
+     */
     private void configureWindow (){
         setTitle("LS_STOCK");
         setLocationRelativeTo(null);
@@ -73,6 +76,11 @@ public class SignUpWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
+    /**
+     * Procediment que construeix part de la vista
+     * @param constraints GridBag que forma la vista
+     * @param panelSignup JPanel que forma la vista
+     */
     public void signUp (GridBagConstraints constraints, JPanel panelSignup) {
 
         constraints.insets = new Insets(20, 15, 10, 15);
@@ -137,6 +145,10 @@ public class SignUpWindow extends JFrame {
         panelSignup.add(buttons, constraints);
     }
 
+    /**
+     * Procediment que registra el controlador
+     * @param loginController Controlador corresponent
+     */
     public void registrarControlador(LoginController loginController) {
         buttonSignup.setActionCommand(REGISTER);
         buttonSignup.addActionListener(loginController);
@@ -144,19 +156,42 @@ public class SignUpWindow extends JFrame {
         buttonBack.addActionListener(loginController);
     }
 
+    /**
+     * Funcio que agafa el nom
+     * @return String amb el nom
+     */
     public String getName(){
         return textUsernameS.getText();
     }
+
+    /**
+     * Funcio que agafa el mail
+     * @return String amb el mail
+     */
     public String getMail(){
         return textMailS.getText();
     }
+
+    /**
+     * Funcio que agafa el password
+     * @return String amb el password
+     */
     public String getPassword(){
         return String.valueOf(fieldPasswordS.getPassword());
     }
+
+    /**
+     * Funcio que agafa el password repetit
+     * @return String amb el password repetit
+     */
     public String getPasswordCheck(){
         return String.valueOf(fieldCheckPasswordS.getPassword());
     }
 
+    /**
+     * Funcio que mostra l'error
+     * @param error String amb el error
+     */
     public void mostraMissatgeError(String error){
         JOptionPane.showMessageDialog(null, error);
     }

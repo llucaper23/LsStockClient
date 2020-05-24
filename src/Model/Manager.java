@@ -22,7 +22,13 @@ public class Manager {
 
     /**
      * Funcio que comprova si el password compleix els requeriments.
-     * @param password es el password a comprovar
+     * @param password
+     */
+
+    /**
+     * Funcio que comprova si el password compleix els requeriments.
+     * @param password String es el password a comprovar
+     * @return boolean que diu si el password es OK
      */
     public boolean checkPassword(String password) {
         patterPass = Pattern.compile(regexPass);
@@ -33,7 +39,7 @@ public class Manager {
     /**
      * Funcio que comprova si el email compleix els requeriments.
      * @param email es el mail a comprovar
-     * @return
+     * @return boolean que diu si es correcte
      */
     public boolean checkEmail(String email) {
         patternMail = Pattern.compile(regexMail);
@@ -116,8 +122,8 @@ public class Manager {
 
     /**
      * Funcio que busca una companyia de l'usuari segons el id.
-     * @param ucId
-     * @return
+     * @param ucId int amb el id
+     * @return Usercompany amb el id que ens passen
      */
     public UserCompany findUserCompanyById(int ucId) {
         for (UserCompany uc : userCompanies) {

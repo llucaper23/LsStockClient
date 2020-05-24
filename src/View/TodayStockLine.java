@@ -87,6 +87,10 @@ public class TodayStockLine extends JPanel {
 
     }
 
+    /**
+     * Procediment que registra el controlador
+     * @param principalController Controlador corresponent
+     */
     public void registraControlador(PrincipalController principalController) {
         buttonSee.setActionCommand(SEE);
         buttonSee.addActionListener(principalController);

@@ -91,6 +91,12 @@ public class MyStocksWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que actualitza la vista
+     * @param companies ArrayList amb les comapnyies comprades
+     * @param allCompanies Arraylist amb totes les companyies
+     * @param principalController Controlador de la vista
+     */
     public void updateMyStocks(ArrayList<UserCompany> companies, ArrayList<Company> allCompanies, PrincipalController principalController){
         panelShares.removeAll();
         panelLines.removeAll();
@@ -133,7 +139,10 @@ public class MyStocksWindow extends JFrame {
 
     }
 
-
+    /**
+     * Funcio que agafa la imatge de perfil
+     * @return ImageIcon amb la imatge
+     */
     private ImageIcon getProfilePhoto () {
 
         Image profilePhotoPrev = new ImageIcon("data/PROFILE.png").getImage().getScaledInstance(100,100, Image.SCALE_SMOOTH);
@@ -144,6 +153,10 @@ public class MyStocksWindow extends JFrame {
 
     }
 
+    /**
+     * Funcio que agafa el saldo a afegir.
+     * @return float amb el saldo
+     */
     public float getSaldoAfegir(){
         if (textAfegirSaldo.getText().equalsIgnoreCase("")){
             textAfegirSaldo.setText("");
@@ -162,6 +175,10 @@ public class MyStocksWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que actualitza el saldo de l'usuari
+     * @param money float amb els diners
+     */
     public void setSaldoActualUser (float money) {
         actualUserMoney = money;
         labelTotalSaldo.setText(actualUserMoney + " €");
@@ -176,10 +193,17 @@ public class MyStocksWindow extends JFrame {
         panelProfile.add(buttonLogOut);
     }
 
+    /**
+     * Procediment que printa el nom de l'usuari logged
+     * @param user User amb el usuari
+     */
     public void setUserName (User user) {
         labelProfileName.setText(user.getNickName());
     }
 
+    /**
+     * Procediment que configura la vista
+     */
     private void configureView () {
 
         setSize(1100,500);
@@ -190,6 +214,10 @@ public class MyStocksWindow extends JFrame {
 
     }
 
+    /**
+     * Procediment que registra el controlador a la vita
+     * @param principalController Controlador corresponent
+     */
     public void registraControlador(PrincipalController principalController) {
         buttonLogOut.setActionCommand(LOGOUT);
         buttonLogOut.addActionListener(principalController);
@@ -199,6 +227,10 @@ public class MyStocksWindow extends JFrame {
         buttonAfegirSaldo.addActionListener(principalController);
     }
 
+    /**
+     * Procediment que mostra el missatge d'error
+     * @param error String amb el error a mostrar
+     */
     public void mostraMissatgeError(String error){
         JOptionPane.showMessageDialog(null, error);
     }

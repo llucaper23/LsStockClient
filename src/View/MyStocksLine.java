@@ -96,6 +96,10 @@ public class MyStocksLine extends JPanel {
 
     }
 
+    /**
+     * Procediment que registra el controlador
+     * @param principalController Controlador corresponent
+     */
     public void registraControlador(PrincipalController principalController) {
         buttonSell.setActionCommand(SELL);
         buttonSell.addActionListener(principalController);
