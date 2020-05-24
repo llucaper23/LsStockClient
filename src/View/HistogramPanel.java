@@ -15,7 +15,6 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
     private JPanel barPanel;
     private JPanel labelPanel;
     private JPanel labelYPannel;
-    private History history;
     private List<Candela> candelas = new ArrayList<>();
     private float minA, maxA;
 
@@ -37,7 +36,6 @@ public class HistogramPanel extends JPanel {            // es l'encarregat d'anr
     }
 
     public void addHistogramColumn(History history, float minA, float maxA, int numCandela) {
-        this.history = history;
         this.minA = minA;
         this.maxA = maxA;
         Candela candela;

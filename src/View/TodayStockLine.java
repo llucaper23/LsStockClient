@@ -14,7 +14,6 @@ public class TodayStockLine extends JPanel {
 
     private JLabel labelCompanyName = new JLabel(" ");
     private JLabel labelSharePrice = new JLabel(" ");
-    private JLabel labelProfitLoss = new JLabel(" ");
     private JLabel labelChange = new JLabel(" ");
     private JLabel labelChangePercentage = new JLabel(" ");
 

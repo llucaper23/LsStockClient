@@ -18,7 +18,6 @@ public class Network {
     private ObjectInputStream ois;
     private ObjectOutputStream oos;
 
-
     private static final int REGISTER_REQUEST = 1;
     private static final int LOGIN_REQUEST = 2;
     private static final int UPDATE_MONEY = 3;
